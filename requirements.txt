@@ -1,0 +1,8 @@
+Django==3.0.5
+djangorestframework==3.11.0
+djangorestframework-camel-case==1.1.2
+entrypoints==0.3
+requests
+psycopg2
+gunicorn
+django-cors-headers
