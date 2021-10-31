@@ -1,4 +1,4 @@
-# digest-backend
+# Digest-web Backend service
 Django based backend service for the DiGeST web-app.
 
 ## Rebuild
