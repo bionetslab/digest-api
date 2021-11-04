@@ -1,19 +1,6 @@
 version: '3.3'
 
 services:
-  app:
-    image: digest_backend
-    container_name: digest_backend
-    build: .
-    env_file:
-      - 'docker-django.env'
-    restart: always
-    ports:
-      - 8001:8000
-    networks:
-      - digest_net
-    depends_on:
-      - db
   db:
     image: postgres
     restart: always
@@ -24,7 +11,7 @@ services:
     networks:
       - digest_net
     volumes:
-      - digest_db_volume:/var/lib/postgresql/data
+      - digest_db_volume_dev:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=digest
       - POSTGRES_USER=digester
@@ -40,4 +27,4 @@ networks:
   digest_net:
 
 volumes:
-  digest_db_volume:
+  digest_db_volume_dev:

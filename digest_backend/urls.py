@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from digest_backend.views import test
+#from digest_backend.views import test
 
 urlpatterns = [
-    path('test',test)
+  #  path('test',test)
  #   path('db_test', admin.site.urls),
 ]
