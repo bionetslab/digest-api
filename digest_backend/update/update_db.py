@@ -2,7 +2,7 @@ from digest_backend.update.models_controller import ModelsController
 
 
 def fill_id_table(controller: ModelsController, new_dict: dict, selected_entries=None):
-    key_set = new_dict.keys if selected_entries is None else selected_entries
+    key_set = new_dict.keys() if selected_entries is None else selected_entries
     add_objects = []
     for key_val in key_set:
         add_objects.append(controller.create(object_dict=new_dict[key_val]))
@@ -10,11 +10,12 @@ def fill_id_table(controller: ModelsController, new_dict: dict, selected_entries
 
 
 def update_id_table(controller: ModelsController, new_dict: dict):
+    all_entry_keys = set(controller.db_model.objects.all().values_list('pk', flat=True))
     # ------------------------------
     # Update entries
     # ------------------------------
     updated_objects = []
-    object_list = controller.get_filtered(filter_set=controller.db_entries & new_dict.keys())
+    object_list = controller.get_filtered(filter_set=all_entry_keys & new_dict.keys())
     for single_obj in object_list:
         change_made = False
         for field in controller.get_fields():
@@ -29,15 +30,13 @@ def update_id_table(controller: ModelsController, new_dict: dict):
     # ------------------------------
     # Delete entries
     # -----------------------------
-    outdated_entries = controller.db_entries - new_dict.keys()
+    outdated_entries = all_entry_keys - new_dict.keys()
     controller.bulk_delete(object_list=outdated_entries)
-    controller.db_entries = controller.db_entries - outdated_entries
     # ------------------------------
     # Add entries
     # -----------------------------
-    missing_entries = (new_dict.keys() - controller.db_entries)
+    missing_entries = (new_dict.keys() - all_entry_keys)
     fill_id_table(controller=controller, new_dict=new_dict, selected_entries=missing_entries)
-    controller.db_entries.update(missing_entries)
 
 
 

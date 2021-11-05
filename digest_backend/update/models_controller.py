@@ -5,12 +5,10 @@ from django.db.models import Model
 class ModelsController:
     db_model = Model
     db_fields = list()
-    db_entries = set()
 
     def __init__(self, db_model: Type[Model]):
         self.db_model = db_model
         self.db_fields = [f.name for f in db_model._meta.get_fields()]
-        self.db_entries = set(db_model.objects.all().values_list('pk', flat=True))
 
     def get_fields(self) -> list:
         return self.db_fields
