@@ -1,9 +1,9 @@
-from application import setup as digest_setup
+from setup import main as digest_setup
 
 
 def setup(self):
     print("starting setup!")
-    digest_setup.__main__
+    digest_setup()
 
 
 def check(self):

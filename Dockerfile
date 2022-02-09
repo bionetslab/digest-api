@@ -23,6 +23,7 @@ COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
 COPY . /usr/src/digest/
+COPY application/ /usr/src/digest/
 
 EXPOSE 8000
 
