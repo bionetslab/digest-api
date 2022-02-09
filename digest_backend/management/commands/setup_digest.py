@@ -1,15 +1,5 @@
 from django.core.management import BaseCommand
-
-def setup(self):
-    pass
-
-
-def check(self):
-    if True :
-        setup(self)
-
-def clear(self):
-    pass
+import digest_backend.digest_executor as digest_executor
 
 
 class Command(BaseCommand):
@@ -20,15 +10,17 @@ class Command(BaseCommand):
         parser.add_argument('-r','--reset',action='store_true',help='Removes saved data and executes new setup.')
 
     def handle(self, *args, **kwargs):
+        print("reading commands")
         if kwargs['check']:
-            check(self)
+            print("checking")
+            digest_executor.check(self)
         if kwargs['setup']:
-            setup(self)
+            digest_executor.setup(self)
         if kwargs['drop']:
-            clear(self)
+            digest_executor.clear(self)
         if kwargs['reset']:
-            clear(self)
-            setup(self)
+            digest_executor.clear(self)
+            digest_executor.setup(self)
 
 
 
