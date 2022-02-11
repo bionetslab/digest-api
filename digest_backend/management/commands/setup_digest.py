@@ -21,7 +21,7 @@ class Command(BaseCommand):
         if kwargs['reset']:
             digest_executor.clear(self)
             digest_executor.setup(self)
-        digest_executor.init(self)
+        # digest_executor.init(self)
 
 
 
