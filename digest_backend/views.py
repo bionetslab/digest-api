@@ -1,18 +1,47 @@
+from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from digest_backend import preparation
 import digest_backend.digest_executor as digest_executor
-#from digest_backend.models import Example
-#from digest_backend.serializers import ExampleSerializer
-#
-#
+from digest_backend import digest_files
+
+
+@api_view(['POST'])
+def set(request) -> Response:
+    data = request.data
+    preparation.prepare_set(data)
+    result = digest_executor.run_set(data)
+    return Response(result)
+
+@api_view(['POST'])
+def cluster(request) -> Response:
+    data = request.data
+    preparation.prepare_cluster(data)
+    result = digest_executor.run_cluster(data)
+    return Response(result)
+
+@api_view(['POST'])
+def set_set(request) -> Response:
+    data = request.data
+    preparation.prepare_set_set(data)
+    result = digest_executor.run_set_set(data)
+    return Response(result)
+
+@api_view(['POST'])
+def id_set(request) -> Response:
+    data = request.data
+    preparation.prepare_id_set(data)
+    result = digest_executor.run_id_set(data)
+    return Response(result)
+
 @api_view(['GET'])
-def test(request) -> Response:
-    digest_executor.single_validation()
-    # if request.query_params.get('nr'):
-        # example = Example.objects.get(count=request.query_params.get("nr"))
-        # resp = {'examples': ExampleSerializer().to_representation(example)}
-    # else:
-        # examples = Example.objects.all()
-        # resp = {'examples': ExampleSerializer(many=True).to_representation(examples)}
-    # return Response(resp)
+def get_files(request)->Response:
+    file_name = request.GET.get('name')
+    file = digest_files.getFile(file_name)
+    if file is not None:
+        with open(file,'rb') as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response['Content-Disposition'] = 'inline; filename=' + file_name
+            return response
+    raise Http404

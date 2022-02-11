@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-#from digest_backend.views import test
+from digest_backend.views import set, set_set, id_set, cluster,get_files
 
 urlpatterns = [
-  #  path('test',test)
- #   path('db_test', admin.site.urls),
+  path('set_set',set_set),
+  path('set',set),
+  path('id_set',id_set),
+  path('cluster',cluster),
+  path('files',get_files)
 ]
