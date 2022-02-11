@@ -81,16 +81,18 @@ WSGI_APPLICATION = 'digest_backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql'),
-#         'NAME': os.environ.get('SQL_DATABASE', 'digest'),  # os.path.join(BASE_DIR, 'db.sqlite3')
-#         'USER': os.environ.get('SQL_USER', 'digester'),
-#         'PASSWORD': os.environ.get('SQL_PASSWORD', 'C9FbrA7Mt4asx3aP'),
-#         'HOST': os.environ.get('SQL_HOST', 'localhost'),
-#         'PORT': os.environ.get('SQL_PORT', '5432'),
-#     }
-# }
+
+
+DATABASES = {
+     'default': {
+         'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql'),
+         'NAME': os.environ.get('SQL_DATABASE', 'digest'),  # os.path.join(BASE_DIR, 'db.sqlite3')
+         'USER': os.environ.get('SQL_USER', 'digester'),
+         'PASSWORD': os.environ.get('SQL_PASSWORD', 'C9FbrA7Mt4asx3aP'),
+         'HOST': os.environ.get('SQL_HOST', 'localhost'),
+         'PORT': os.environ.get('SQL_PORT', '5432'),
+     }
+ }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
