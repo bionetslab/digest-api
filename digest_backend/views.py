@@ -38,6 +38,7 @@ def id_set(request) -> Response:
 @api_view(['GET'])
 def get_files(request)->Response:
     file_name = request.GET.get('name')
+    print("getting file "+file_name)
     file = digest_files.getFile(file_name)
     if file is not None:
         with open(file,'rb') as fh:
