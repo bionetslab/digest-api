@@ -36,22 +36,25 @@ def clear(self):
 #                       background_model: str = "complete", replace=100, verbose: bool = False)
 
 def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background_model, replace):
-    print("validate")
-    if enriched is None:
-        enriched = False
-    if runs is None:
-        runs=1000
-    if background_model is None:
-        background_model = "complete"
-    if replace is None:
-        replace=100
-    single_validation(tar=tar, tar_id=tar_id,mode=mode, ref=ref, ref_id=ref_id,enriched=enriched, out_dir=out_dir,
-                      runs=runs,background_model=background_model, replace=replace, mapper=mapper)
-    print(out_dir + 'digest_' + mode + '_result.json')
-    print(os.path.exists(out_dir + 'digest_' + mode + '_result.json'))
-    with open(out_dir + 'digest_' + mode + '_result.json', 'r') as f:
-        data = json.load(f)
-    return data
+    try:
+        print("validate")
+        if enriched is None:
+            enriched = False
+        if runs is None:
+            runs=1000
+        if background_model is None:
+            background_model = "complete"
+        if replace is None:
+            replace=100
+        single_validation(tar=tar, tar_id=tar_id,mode=mode, ref=ref, ref_id=ref_id,enriched=enriched, out_dir=out_dir,
+                          runs=runs,background_model=background_model, replace=replace, mapper=mapper)
+        print(out_dir + 'digest_' + mode + '_result.json')
+        print(os.path.exists(out_dir + 'digest_' + mode + '_result.json'))
+        with open(out_dir + 'digest_' + mode + '_result.json', 'r') as f:
+            data = json.load(f)
+        return data
+    except:
+        return "Some error occurred"
 
 def run_set(data):
     print("Executing set validation with uid: "+str(data["uid"]))
