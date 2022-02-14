@@ -6,9 +6,10 @@ fileDir = "/usr/src/digest/mapping_files"
 def fileSetupComplete():
     needed = list(digest_files.file_names.values())
     print(needed)
-    for file in os.listdir(fileDir):
-        if file in needed:
-            needed.remove(file)
+    if os.path.exists(fileDir):
+        for file in os.listdir(fileDir):
+            if file in needed:
+                needed.remove(file)
     return len(needed)==0
 
 
