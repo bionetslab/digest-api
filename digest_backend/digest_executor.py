@@ -4,15 +4,15 @@ from setup import main as digest_setup
 from digest_backend import digest_files
 #from single_validation import single_validation
 from d_utils import runner_utils as ru
-from mappers.mapper import Mapper, FileMapper
+#from mappers.mapper import Mapper, FileMapper
 
 import pandas as pd
 import json
 # from application.setup import main as digest_setup
 # from application.mappers.mapper import FileMapper as digest_files
 
-ru.print_current_usage('Load mappings for input into cache ...')
-mapper: Mapper = FileMapper()
+#ru.print_current_usage('Load mappings for input into cache ...')
+#mapper: Mapper = FileMapper()
 
 def setup(self):
     print("starting setup!")
