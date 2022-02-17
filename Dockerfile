@@ -12,11 +12,11 @@ RUN apt-get install -y supervisor nginx
 RUN apt-get install -y libgtk-3-dev
 RUN apt-get install wget
 
+RUN conda install conda python=3.8
+RUN conda install -c conda-forge -y django=4.0.2 graph-tool=2.32
+
+RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
-
-RUN conda install -y conda=4.3.16
-RUN conda install -c conda-forge -y graph-tool=2.32
-
 RUN pip install -r /usr/src/digest/requirements.txt
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf

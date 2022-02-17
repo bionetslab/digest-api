@@ -22,5 +22,5 @@ urlpatterns = [
   path('set',set),
   path('id_set',id_set),
   path('cluster',cluster),
-  path('files',get_files)
+  path('files',get_files),
 ]

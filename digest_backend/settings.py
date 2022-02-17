@@ -117,14 +117,14 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
 
-    'DEFAULT_RENDERER_CLASSES': (
-        'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
-        'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
-    ),
-
-    'DEFAULT_PARSER_CLASSES': (
-        'djangorestframework_camel_case.parser.CamelCaseJSONParser',
-    ),
+    # 'DEFAULT_RENDERER_CLASSES': (
+    #     'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
+    #     'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
+    # ),
+    #
+    # 'DEFAULT_PARSER_CLASSES': (
+    #     'djangorestframework_camel_case.parser.CamelCaseJSONParser',
+    # ),
 
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
@@ -154,7 +154,8 @@ STATIC_URL = '/static/'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
-        'TIMEOUT': None,
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': 'memcached:11211',
+        'TIMEOUT': None
     }
 }

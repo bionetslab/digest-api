@@ -16,6 +16,15 @@ services:
       - digest_net
     depends_on:
       - db
+      - memcached
+  memcached:
+    image: memcached
+    container_name: memcached
+    restart: always
+    networks:
+      - digest_net
+    ports:
+      - 11211:11211
   db:
     image: postgres
     restart: always
