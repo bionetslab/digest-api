@@ -1,5 +1,5 @@
 from django.core.management import BaseCommand
-from digest_backend.digest_executor import Executor
+import digest_backend.digest_executor as executor
 from django.core.cache import cache
 
 
@@ -12,8 +12,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         print("reading commands")
-        executor = Executor()
-        cache.set('executor', executor)
         if kwargs['check']:
             print("checking")
             executor.check()
@@ -25,6 +23,7 @@ class Command(BaseCommand):
         if kwargs['reset']:
             executor.clear()
             executor.setup()
+        executor.init()
 
 
 
