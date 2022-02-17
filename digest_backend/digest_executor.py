@@ -11,8 +11,11 @@ import json
 # from application.setup import main as digest_setup
 # from application.mappers.mapper import FileMapper as digest_files
 
-ru.print_current_usage('Load mappings for input into cache ...')
-mapper: Mapper = FileMapper(preload=True)
+init = False
+
+if not init:
+    ru.print_current_usage('Load mappings for input into cache ...')
+    mapper: Mapper = FileMapper(preload=True)
 
 def setup(self):
     print("starting setup!")
