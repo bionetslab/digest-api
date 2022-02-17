@@ -65,8 +65,8 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
                       runs=runs, background_model=background_model, replace=replace, mapper=mapper())
     result = None
     for file in os.listdir(out_dir):
+        print(file)
         if file.endswith(".json"):
-            print(file)
             result = file
             break
     print(result)
