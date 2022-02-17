@@ -19,7 +19,7 @@ services:
       - memcached
   memcached:
     image: memcached
-    container_name: memcached
+    container_name: digest_memcached
     restart: always
     networks:
       - digest_net
