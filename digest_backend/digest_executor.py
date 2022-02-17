@@ -66,8 +66,10 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
     result = None
     for file in os.listdir(out_dir):
         if file.endswith(".json"):
+            print(file)
             result = file
             break
+    print(result)
     if result is None:
         return None
     with open(result, 'r') as f:
