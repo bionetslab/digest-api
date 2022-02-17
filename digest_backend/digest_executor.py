@@ -36,6 +36,7 @@ def clear(self):
 #                       background_model: str = "complete", replace=100, verbose: bool = False)
 
 def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background_model, replace):
+
     print("validate")
     if enriched is None:
         enriched = False
@@ -45,6 +46,8 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
         background_model = "complete"
     if replace is None:
         replace=100
+    print({'tar':tar, 'tar_id':tar_id, 'mode':mode, 'ref':ref, 'ref_id':ref_id, 'enriched':enriched, 'out_dir':out_dir, 'runs':runs, 'background_model':background_model, 'replace':replace, 'mapper':mapper})
+
     single_validation(tar=tar, tar_id=tar_id,mode=mode, ref=ref, ref_id=ref_id,enriched=enriched, out_dir=out_dir,
                       runs=runs,background_model=background_model, replace=replace, mapper=mapper)
     print(out_dir + 'digest_' + mode + '_result.json')
@@ -52,6 +55,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
     with open(out_dir + 'digest_' + mode + '_result.json', 'r') as f:
         data = json.load(f)
     return data
+
 
 def run_set(data):
     print("Executing set validation with uid: "+str(data["uid"]))
@@ -61,17 +65,17 @@ def run_set(data):
 def run_cluster(data):
     print("Executing cluster validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster", out_dir=data["out"], runs=data["runs"],
-                    replace=data["replace"])
+                    replace=data["replace"],ref=None, ref_id=None, enriched=None, background_model=None)
 
 def run_set_set(data):
     print("Executing set-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"], ref=data["reference"], mode="set-set", out_dir=data["out"], runs=data["runs"],
-                    replace=data["replace"], enriched=data["enriched"])
+                    replace=data["replace"], enriched=data["enriched"], background_model=None)
 
 def run_id_set(data):
     print("Executing id-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"], ref=data["reference"], mode="id-set", out_dir=data["out"], runs=data["runs"],
-                    replace=data["replace"], enriched=data["enriched"])
+                    replace=data["replace"], enriched=data["enriched"], background_model=None)
 
 
 # def init(self):

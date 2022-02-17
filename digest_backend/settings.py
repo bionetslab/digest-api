@@ -27,8 +27,8 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'ml-s-zbhdock1.ad.uni-hamburg.de',
-    'api.digest-validation.net'
+    'api.digest-validation.net',
+    'ml-s-zbhdock1.ad.uni-hamburg.de'
 ]
 
 # Application definition
