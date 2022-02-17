@@ -15,7 +15,7 @@ def get_uid_for_file():
 
 def set_uid(data):
     data["uid"] = get_uid_for_file()
-    data["out"] = os.path.join("/tmp", str(data["uid"]))
+    data["out"] = os.path.join("/tmp", str(data["uid"]+"/"))
     os.mkdir(data["out"])
 
 def prepare_cluster_file(content, file):
