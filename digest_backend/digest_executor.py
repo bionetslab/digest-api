@@ -63,9 +63,14 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
 
     single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, out_dir=out_dir,
                       runs=runs, background_model=background_model, replace=replace, mapper=mapper())
-    print(out_dir + 'digest_' + mode + '_result.json')
-    print(os.path.exists(out_dir + 'digest_' + mode + '_result.json'))
-    with open(out_dir + 'digest_' + mode + '_result.json', 'r') as f:
+    result = None
+    for file in os.listdir(out_dir):
+        if file.endswith(".json"):
+            result = file
+            break
+    if result is None:
+        return None
+    with open(result, 'r') as f:
         data = json.load(f)
     return data
 
