@@ -67,7 +67,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
     for file in os.listdir(out_dir):
         print(file)
         if file.endswith(".ids"):
-            result = file
+            result = os.path.join(out_dir,file)
             break
     print(result)
     if result is None:
