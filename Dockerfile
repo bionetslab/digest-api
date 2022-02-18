@@ -13,7 +13,7 @@ RUN apt-get install -y libgtk-3-dev
 RUN apt-get install wget
 
 RUN conda install conda python=3.8
-RUN conda install -c conda-forge -y django=4.0.2 graph-tool=2.32
+RUN conda install -c conda-forge -y django=4.0.2
 
 RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
