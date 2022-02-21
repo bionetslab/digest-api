@@ -55,7 +55,7 @@ def get_files(request) -> Response:
     file = digest_files.getFile(file)
     if file is not None:
         # with open(file,'rb') as fh:
-        response = HttpResponse(mimetype="application/force_download")
+        response = HttpResponse(content_type="application/force_download")
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
         response['X-Sendfile'] = smart_str(file)
         return response
