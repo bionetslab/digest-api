@@ -5,9 +5,9 @@ fileDir = "/usr/src/digest/mapping_files"
 
 
 def fileSetupComplete():
-    csv_needed = list(i for i in digest_files.file_names.values() if i.endsWith(".csv"))
-    jaccard_needed = list(i for i in digest_files.file_names.values() if not i.endsWith(".csv"))
-    overlap_needed = list(i for i in digest_files.file_names.values() if not i.endsWith(".csv"))
+    csv_needed = list(i for i in digest_files.file_names.values() if i.endswith(".csv"))
+    jaccard_needed = list(i for i in digest_files.file_names.values() if not i.endswith(".csv"))
+    overlap_needed = list(i for i in digest_files.file_names.values() if not i.endswith(".csv"))
     print(csv_needed)
     print(jaccard_needed)
     print(overlap_needed)
