@@ -42,10 +42,12 @@ def id_set(request) -> Response:
 def get_files(request)->Response:
     file_name = request.GET.get('name')
     measure = request.GET.get('measure')
-    print("getting file "+measure+"/"+file_name)
     file = file_name
     if not file_name.endswith(".csv"):
+        print("getting file " + measure + "/" + file_name)
         file = os.path.join(measure,file_name)
+    else:
+        print("getting file "+ file_name)
     file = digest_files.getFile(file)
     if file is not None:
         with open(file,'rb') as fh:
