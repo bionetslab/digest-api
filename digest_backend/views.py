@@ -56,9 +56,18 @@ def get_files(request) -> StreamingHttpResponse:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        reader = open(file,"rb")
-        response = StreamingHttpResponse(reader ,content_type="application/force_download")
-        reader.close()
+        response = StreamingHttpResponse(file_iterator(file))
+        response['Content-Type']='application/octet-stream'
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
         return response
     raise Http404
+
+def file_iterator(file, chunk_size=512):
+    with open(file) as f:
+        while True:
+            c = f.read(chunk_size)
+            if c:
+                yield c
+            else:
+                break
+    f.close()
