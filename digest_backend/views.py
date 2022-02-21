@@ -56,17 +56,9 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        pseudo_buffer = Echo()
-        writer = open(pseudo_buffer,"rb")
         reader = open(file,"rb")
-        response = StreamingHttpResponse((writer.write(line) for line in reader) ,content_type="application/force_download")
+        response = StreamingHttpResponse(reader ,content_type="application/force_download")
         reader.close()
-        writer.close()
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
         return response
     raise Http404
-
-
-class Echo:
-    def write(self, value):
-        return value
