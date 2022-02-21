@@ -16,7 +16,7 @@ def fileSetupComplete():
     checkExistingFiles(jaccard_needed, dir_jaccard)
     dir_overlap = os.path.join(fileDir, "overlap")
     checkExistingFiles(overlap_needed, dir_overlap)
-    return (len(csv_needed) + len(jaccard_needed) + len(overlap_needed)) > 0
+    return (len(csv_needed) + len(jaccard_needed) + len(overlap_needed)) == 0
 
 
 def checkExistingFiles(files, fileDir):
