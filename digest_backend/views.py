@@ -58,7 +58,7 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        response = StreamingHttpResponse(FileWrapper(open(file,'rb'),4096),content_type=mimetypes.guess_type(file)[0])
+        response = StreamingHttpResponse(FileWrapper(open(file,'rb'),1024),content_type=mimetypes.guess_type(file)[0])
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
         response['Content-Length'] =os.path.getsize(file)
         return response
