@@ -1,4 +1,3 @@
-import io
 import mimetypes
 import os
 from django.http import HttpResponse, Http404
@@ -63,12 +62,3 @@ def get_files(request) -> Response:
         response['Content-Length'] =os.path.getsize(file)
         return response
     raise Http404
-
-def file_iterator(file, chunk_size=512):
-    with open(file) as f:
-        while True:
-            c = f.read(chunk_size)
-            if c:
-                yield c
-            else:
-                break
