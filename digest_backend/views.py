@@ -56,9 +56,9 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        response = StreamingHttpResponse(file_iterator(file))
-        response['Content-Type']='application/octet-stream'
+        response = HttpResponse(content_type='application/force-download')
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
+        response['X-Sendfile']=smart_str(file)
         return response
     raise Http404
 

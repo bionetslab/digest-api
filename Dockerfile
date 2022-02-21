@@ -25,6 +25,7 @@ COPY ./docker-entrypoint.sh /entrypoint.sh
 COPY . /usr/src/digest/
 COPY application/ /usr/src/digest/
 
+ENV SENDFILE=/usr/src/digest/mapping_files
 EXPOSE 8000
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
