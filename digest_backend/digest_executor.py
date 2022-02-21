@@ -59,10 +59,10 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
     if replace is None:
         replace = 100
     print({'tar': tar, 'tar_id': tar_id, 'mode': mode, 'ref': ref, 'ref_id': ref_id, 'enriched': enriched,
-           'out_dir': out_dir, 'runs': runs, 'background_model': background_model, 'replace': replace,
+          'runs': runs, 'background_model': background_model, 'replace': replace,
            'mapper': mapper, 'distance': distance})
 
-    return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, out_dir=out_dir,
+    return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                       runs=runs, background_model=background_model, replace=replace, mapper=mapper(), distance=distance)
     # result = None
     # for file in os.listdir(out_dir):
@@ -80,14 +80,14 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
 
 def run_set(data):
     print("Executing set validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], mode="set", out_dir=data["out"],
+    return validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
                          replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"])
 
 
 def run_cluster(data):
     print("Executing cluster validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster", out_dir=data["out"],
+    return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                          runs=data["runs"],
                          replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"])
 
@@ -95,14 +95,14 @@ def run_cluster(data):
 def run_set_set(data):
     print("Executing set-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
-                         ref=data["reference"], mode="set-set", out_dir=data["out"], runs=data["runs"],
+                         ref=data["reference"], mode="set-set", runs=data["runs"],
                          replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
 
 
 def run_id_set(data):
     print("Executing id-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
-                         ref=data["reference"], mode="id-set", out_dir=data["out"], runs=data["runs"],
+                         ref=data["reference"], mode="id-set", runs=data["runs"],
                          replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
 
 # def init(self):
