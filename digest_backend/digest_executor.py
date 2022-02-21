@@ -48,7 +48,7 @@ def clear():
 #                       mapper: Mapper = FileMapper(), out_dir: str = "", runs: int = config.NUMBER_OF_RANDOM_RUNS,
 #                       background_model: str = "complete", replace=100, verbose: bool = False)
 
-def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background_model, replace,distance):
+def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace,distance):
     print("validate")
     if enriched is None:
         enriched = False
