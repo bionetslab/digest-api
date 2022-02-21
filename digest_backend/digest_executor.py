@@ -62,20 +62,20 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
            'out_dir': out_dir, 'runs': runs, 'background_model': background_model, 'replace': replace,
            'mapper': mapper, 'distance': distance})
 
-    single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, out_dir=out_dir,
+    return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, out_dir=out_dir,
                       runs=runs, background_model=background_model, replace=replace, mapper=mapper(), distance=distance)
-    result = None
-    for file in os.listdir(out_dir):
-        print(file)
-        if file.endswith(".json"):
-            result = os.path.join(out_dir,file)
-            break
-    print(result)
-    if result is None:
-        return None
-    with open(result, 'r') as f:
-        data = json.load(f)
-    return data
+    # result = None
+    # for file in os.listdir(out_dir):
+    #     print(file)
+    #     if file.endswith(".json"):
+    #         result = os.path.join(out_dir,file)
+    #         break
+    # print(result)
+    # if result is None:
+    #     return None
+    # with open(result, 'r') as f:
+    #     data = json.load(f)
+    # return data
 
 
 def run_set(data):

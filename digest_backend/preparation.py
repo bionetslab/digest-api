@@ -1,6 +1,8 @@
 import uuid
 import os
-import json
+
+import pandas as pd
+
 
 def prepare_set_file(content, file):
     with open(file,"w") as fh:
@@ -26,16 +28,12 @@ def prepare_cluster_file(content, file):
 
 def prepare_set(data):
     set_uid(data)
-    file = os.path.join(data["out"],str(data["uid"]) + ".ids")
-    prepare_set_file(data["target"], file)
-    data["target"] = file
+    data["target"] = set(data["target"])
 
 
 def prepare_cluster(data):
     set_uid(data)
-    file = os.path.join(data["out"], str(data["uid"]) + ".clusters")
-    prepare_cluster_file(data["target"],file)
-    data["target"]=file
+    data["target"]=pd.DataFrame.from_dict(data["target"])
 
 
 def prepare_set_set(data):

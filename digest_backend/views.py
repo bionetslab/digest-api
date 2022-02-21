@@ -18,6 +18,7 @@ def set(request) -> Response:
     data = request.data
     preparation.prepare_set(data)
     result = executor.run_set(data)
+    print(result)
     return Response(result)
 
 
@@ -26,6 +27,7 @@ def cluster(request) -> Response:
     data = request.data
     preparation.prepare_cluster(data)
     result = executor.run_cluster(data)
+    print(result)
     return Response(result)
 
 
