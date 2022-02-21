@@ -1,3 +1,0 @@
-[submodule "application"]
-	path = application
-	url = git@gitlab.rrz.uni-hamburg.de:cosy-bio/digest/application.git
