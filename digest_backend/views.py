@@ -45,7 +45,7 @@ def id_set(request) -> Response:
 
 
 @api_view(['GET'])
-def get_files(request) -> Response:
+def get_files(request) -> StreamingHttpResponse:
     file_name = request.GET.get('name')
     measure = request.GET.get('measure')
     file = file_name
