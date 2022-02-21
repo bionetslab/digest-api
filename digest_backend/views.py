@@ -1,8 +1,10 @@
+import io
 import os
 from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.utils.encoding import smart_str
+from django.http import StreamingHttpResponse
 
 from digest_backend import preparation
 
@@ -54,9 +56,16 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        # with open(file,'rb') as fh:
-        response = HttpResponse(content_type="application/force_download")
+        pseudo_buffer = Echo()
+        writer = io.BytesIO(pseudo_buffer)
+        reader = open(file,"rb")
+        response = StreamingHttpResponse((writer.write(line) for line in reader) ,content_type="application/force_download")
+        reader.close()
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
-        response['X-Sendfile'] = smart_str(file)
         return response
     raise Http404
+
+
+class Echo:
+    def write(self, value):
+        return value

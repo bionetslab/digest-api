@@ -21,7 +21,7 @@ def set_uid(data):
 def prepare_cluster_file(content, file):
     with open(file, "w") as fh:
         for entry in json.loads(content):
-            fh.write(str(entry["id"]+"\t"+str(entry["cluster"])+"\t"+str(entry["name"]))+"\n")
+            fh.write(str(entry["id"])+"\t"+str(entry["cluster"])+"\n")
 
 def prepare_set(data):
     set_uid(data)

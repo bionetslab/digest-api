@@ -26,6 +26,8 @@ def checkExistingFiles(files, fileDir):
                 files.remove(file)
     return files
 
+def getFileWD():
+    return fileDir
 
 def getFile(name):
     file = os.path.join(fileDir, name)
