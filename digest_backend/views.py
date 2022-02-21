@@ -1,8 +1,11 @@
+import os
 from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from digest_backend import preparation
+
+
 import digest_backend.digest_executor as executor
 from digest_backend import digest_files
 
@@ -38,8 +41,12 @@ def id_set(request) -> Response:
 @api_view(['GET'])
 def get_files(request)->Response:
     file_name = request.GET.get('name')
-    print("getting file "+file_name)
-    file = digest_files.getFile(file_name)
+    measure = request.GET.get('measure')
+    print("getting file "+measure+"/"+file_name)
+    file = file_name
+    if not file_name.endsWith(".csv"):
+        file = os.path.join(measure,file_name)
+    file = digest_files.getFile(file)
     if file is not None:
         with open(file,'rb') as fh:
             response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
