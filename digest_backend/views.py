@@ -1,10 +1,12 @@
 import io
+import mimetypes
 import os
 from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.utils.encoding import smart_str
 from django.http import StreamingHttpResponse
+from wsgiref.util import FileWrapper
 
 from digest_backend import preparation
 
@@ -56,9 +58,9 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        response = HttpResponse(content_type='application/force-download')
+        response = StreamingHttpResponse(FileWrapper(open(file,'rb'),512),content_type=mimetypes.guess_type(file)[0])
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
-        response['X-Sendfile']=smart_str(file)
+        response['Content-Length'] =os.path.getsize(file)
         return response
     raise Http404
 
