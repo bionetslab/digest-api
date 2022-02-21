@@ -10,6 +10,7 @@ from digest_backend import preparation
 
 import digest_backend.digest_executor as executor
 from digest_backend import digest_files
+from wsgiref.util import FileWrapper
 
 
 @api_view(['POST'])
@@ -45,7 +46,7 @@ def id_set(request) -> Response:
 
 
 @api_view(['GET'])
-def get_files(request) -> StreamingHttpResponse:
+def get_files(request) -> Response:
     file_name = request.GET.get('name')
     measure = request.GET.get('measure')
     file = file_name
@@ -56,7 +57,7 @@ def get_files(request) -> StreamingHttpResponse:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        response = StreamingHttpResponse(file_iterator(file))
+        response = StreamingHttpResponse(FileWrapper(io.BytesIO(file)))
         response['Content-Type']='application/octet-stream'
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
         return response
@@ -70,4 +71,3 @@ def file_iterator(file, chunk_size=512):
                 yield c
             else:
                 break
-    f.close()
