@@ -7,14 +7,6 @@ from evaluation.d_utils import runner_utils as ru
 from evaluation.mappers.mapper import FileMapper, Mapper
 from django.core.cache import cache
 
-import pandas as pd
-import json
-
-
-# from application.setup import main as digest_setup
-# from application.mappers.mapper import FileMapper as digest_files
-
-
 def mapper():
     return cache.get('mapper')
 
@@ -44,10 +36,6 @@ def clear():
         os.remove("/usr/src/digest/mapping_files" + file)
 
 
-# (tar: str, tar_id: str, mode: str, ref: str = None, ref_id: str = None, enriched: bool = False,
-#                       mapper: Mapper = FileMapper(), out_dir: str = "", runs: int = config.NUMBER_OF_RANDOM_RUNS,
-#                       background_model: str = "complete", replace=100, verbose: bool = False)
-
 def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace,distance):
     print("validate")
     if enriched is None:
@@ -64,18 +52,6 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
 
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                       runs=runs, background_model=background_model, replace=replace, mapper=mapper(), distance=distance)
-    # result = None
-    # for file in os.listdir(out_dir):
-    #     print(file)
-    #     if file.endswith(".json"):
-    #         result = os.path.join(out_dir,file)
-    #         break
-    # print(result)
-    # if result is None:
-    #     return None
-    # with open(result, 'r') as f:
-    #     data = json.load(f)
-    # return data
 
 
 def run_set(data):
