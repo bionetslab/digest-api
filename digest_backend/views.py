@@ -2,6 +2,7 @@ import os
 from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from django.utils.encoding import smart_str
 
 from digest_backend import preparation
 
@@ -51,7 +52,8 @@ def get_files(request)->Response:
     file = digest_files.getFile(file)
     if file is not None:
         with open(file,'rb') as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response['Content-Disposition'] = 'inline; filename=' + file_name
+            response = HttpResponse(fh.read(), content_type="application/force_download")
+            response['Content-Disposition'] = 'attachment; filename=' + file_name
+            response['X-Sendfile'] = smart_str(file)
             return response
     raise Http404

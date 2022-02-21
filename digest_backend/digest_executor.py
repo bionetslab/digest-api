@@ -23,6 +23,7 @@ def init():
     if digest_files.fileSetupComplete():
         ru.print_current_usage('Load mappings for input into cache ...')
         cache.set('mapper', FileMapper(preload=True))
+        ru.print_current_usage('Done!')
 
 
 def setup():
