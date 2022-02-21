@@ -11,4 +11,5 @@ requests
 gunicorn
 django-cors-headers
 pymemcache==3.5.0
+seaborn
 

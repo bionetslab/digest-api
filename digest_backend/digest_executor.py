@@ -3,8 +3,8 @@ import os
 from setup import main as digest_setup
 from digest_backend import digest_files
 from single_validation import single_validation
-from d_utils import runner_utils as ru
-from mappers.mapper import FileMapper, Mapper
+from evaluation.d_utils import runner_utils as ru
+from evaluation.mappers.mapper import FileMapper, Mapper
 from django.core.cache import cache
 
 import pandas as pd
@@ -27,7 +27,7 @@ def init():
 
 def setup():
     print("starting setup!")
-    digest_setup()
+    digest_setup(True)
 
 
 def check():
