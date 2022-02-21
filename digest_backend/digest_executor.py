@@ -27,7 +27,7 @@ def init():
 
 def setup():
     print("starting setup!")
-    digest_setup(True)
+    digest_setup("create")
 
 
 def check():
@@ -47,7 +47,7 @@ def clear():
 #                       mapper: Mapper = FileMapper(), out_dir: str = "", runs: int = config.NUMBER_OF_RANDOM_RUNS,
 #                       background_model: str = "complete", replace=100, verbose: bool = False)
 
-def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background_model, replace):
+def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background_model, replace,distance):
     print("validate")
     if enriched is None:
         enriched = False
@@ -59,10 +59,10 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, out_dir, runs, background
         replace = 100
     print({'tar': tar, 'tar_id': tar_id, 'mode': mode, 'ref': ref, 'ref_id': ref_id, 'enriched': enriched,
            'out_dir': out_dir, 'runs': runs, 'background_model': background_model, 'replace': replace,
-           'mapper': mapper})
+           'mapper': mapper, 'distance': distance})
 
     single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, out_dir=out_dir,
-                      runs=runs, background_model=background_model, replace=replace, mapper=mapper())
+                      runs=runs, background_model=background_model, replace=replace, mapper=mapper(), distance=distance)
     result = None
     for file in os.listdir(out_dir):
         print(file)
@@ -81,28 +81,28 @@ def run_set(data):
     print("Executing set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], mode="set", out_dir=data["out"],
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None)
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"])
 
 
 def run_cluster(data):
     print("Executing cluster validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster", out_dir=data["out"],
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None)
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"])
 
 
 def run_set_set(data):
     print("Executing set-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="set-set", out_dir=data["out"], runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=None)
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
 
 
 def run_id_set(data):
     print("Executing id-set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="id-set", out_dir=data["out"], runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=None)
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
 
 # def init(self):
 
