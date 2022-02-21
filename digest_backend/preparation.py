@@ -19,10 +19,8 @@ def set_uid(data):
     os.mkdir(data["out"])
 
 def prepare_cluster_file(content, file):
-    content=content.replace("'",'"')
     with open(file, "w") as fh:
-        for entry in json.loads(content):
-            print(entry)
+        for entry in content:
             fh.write(str(entry["id"])+"\t"+str(entry["cluster"])+"\n")
 
 
