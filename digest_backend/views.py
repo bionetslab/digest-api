@@ -15,6 +15,7 @@ from digest_backend.models import Task
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 def run(mode, data) -> Response:
+    print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data)
     start_task(task)
     task.save()
