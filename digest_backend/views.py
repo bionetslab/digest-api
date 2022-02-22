@@ -68,6 +68,15 @@ def get_status(request)->Response:
     })
 
 @api_view(['GET'])
+def get_result(request)->Response:
+    uid = request.GET.get('task')
+    task = Task.objects.get(uid=uid)
+    if not task.done and not task.failed:
+        refresh_from_redis(task)
+        task.save()
+    return Response({'task':task.ui, 'result':task.results})
+
+@api_view(['GET'])
 def get_files(request) -> Response:
     file_name = request.GET.get('name')
     measure = request.GET.get('measure')

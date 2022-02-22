@@ -1,16 +1,15 @@
 from rest_framework import serializers
 
+from digest_backend.models import Task
+import json
 
-# class ExampleSerializer(serializers.ModelSerializer):
-#     name = serializers.SerializerMethodField()
-#     number = serializers.SerializerMethodField()
-#
-#     def get_name(self,obj):
-#         return obj.name
-#
-#     def get_number(self,obj):
-#         return obj.count
-#
-#     class Meta:
-#         model = Example
-#         fields = ['name', 'number']
+class TaskSerializer(serializers.ModelSerializer):
+    parameters = serializers.SerializerMethodField()
+
+    def get_parameters(self, obj):
+        return json.loads(obj.parameters)
+
+    class Meta:
+        model = Task
+        fields = ['algorithm', 'target', 'parameters', 'job_id', 'worker_id', 'progress', 'status', 'created_at',
+                  'started_at', 'finished_at', 'done', 'failed']

@@ -13,10 +13,11 @@ from digest_backend.tasks.task_hook import TaskHook
 
 
 def init():
-    if digest_files.fileSetupComplete():
-        ru.print_current_usage('Load mappings for input into cache ...')
-        cache.set('mapper', FileMapper(preload=True))
-        ru.print_current_usage('Done!')
+    pass
+    # if digest_files.fileSetupComplete():
+    #     ru.print_current_usage('Load mappings for input into cache ...')
+    #     cache.set('mapper', FileMapper(preload=True))
+    #     ru.print_current_usage('Done!')
 
 
 def setup():
@@ -48,10 +49,10 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
     if replace is None:
         replace = 100
     print({'tar': tar, 'tar_id': tar_id, 'mode': mode, 'ref': ref, 'ref_id': ref_id, 'enriched': enriched,
-          'runs': runs, 'background_model': background_model, 'replace': replace, 'mapper': cache.get('mapper'), 'distance': distance})
+          'runs': runs, 'background_model': background_model, 'replace': replace, 'distance': distance})
 
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                      runs=runs, background_model=background_model, replace=replace, mapper=cache.get('mapper'), distance=distance)
+                      runs=runs, background_model=background_model, replace=replace, distance=distance)
 
 
 def run_set(hook : TaskHook):
