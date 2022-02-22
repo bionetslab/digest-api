@@ -56,8 +56,6 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
 
 
 def run_set(data):
-    with open(os.path.join("/tmp",data["uid"]+".pkl"),'wb') as fh:
-        pickle.dump(data,fh,protocol=pickle.HIGHEST_PROTOCOL)
     print("Executing set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
@@ -65,6 +63,8 @@ def run_set(data):
 
 
 def run_cluster(data):
+    with open(os.path.join("/tmp/"+data["uid"],data["uid"]+".pkl"),'wb') as fh:
+        pickle.dump(data,fh,protocol=pickle.HIGHEST_PROTOCOL)
     print("Executing cluster validation with uid: " + str(data["uid"]))
 
     return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
