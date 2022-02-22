@@ -15,10 +15,10 @@ from digest_backend import digest_files
 from digest_backend.models import Task
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 
-def run(mode, data) -> Response:
+def run(mode, data, params) -> Response:
     print(data)
     print(json.dumps(data))
-    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data)
+    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=params)
     start_task(task)
     task.save()
     print(task)
@@ -29,29 +29,33 @@ def run(mode, data) -> Response:
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
+    params = json.loads(data)
     preparation.prepare_set(data)
-    return run("set",data)
+    return run("set",data, params)
 
 
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
+    params = json.loads(data)
     preparation.prepare_cluster(data)
-    return run("cluster",data)
+    return run("cluster",data, params)
 
 
 @api_view(['POST'])
 def set_set(request) -> Response:
     data = request.data
+    params = json.loads(data)
     preparation.prepare_set_set(data)
-    return run("set-set",data)
+    return run("set-set",data, params)
 
 
 @api_view(['POST'])
 def id_set(request) -> Response:
     data = request.data
+    params = json.loads(data)
     preparation.prepare_id_set(data)
-    return run("id-set",data)
+    return run("id-set",data, params)
 
 @never_cache
 @api_view(['GET'])
@@ -68,7 +72,7 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task),
         'mode':task.mode,
-        'parameters':task.parameters
+        'parameters':json.loads(task.parameters)
     })
     return response
 
