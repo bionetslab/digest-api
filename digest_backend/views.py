@@ -74,7 +74,7 @@ def get_result(request)->Response:
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({'task':task.ui, 'result':task.results})
+    return Response({'task':task.uid, 'result':task.results})
 
 @api_view(['GET'])
 def get_files(request) -> Response:
