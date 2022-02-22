@@ -56,6 +56,7 @@ def run_task(uid, mode, parameters):
     except Exception as e:
         set_status(f'{e}')
         r.set(f'{uid}_failed','1')
+        print(e)
 
 def refresh_from_redis(task):
     task.worker_id = r.get(f'{task.uid}_worker_id')
