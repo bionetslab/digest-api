@@ -18,6 +18,7 @@ def init():
         ru.print_current_usage('Load mappings for input into cache ...')
         mapper = FileMapper(preload=True)
         cache.set('mapper', mapper)
+        ru.print_current_usage('Integrity test: '+str((mapper == cache.get('mapper'))))
         ru.print_current_usage('Done!')
 
 
