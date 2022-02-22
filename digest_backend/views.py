@@ -67,7 +67,7 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task),
         'mode':task.mode,
-        'parameters':task.parameters
+        'parameters':json.loads(task.parameters)
     })
     return response
 
