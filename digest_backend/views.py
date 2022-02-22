@@ -67,7 +67,6 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task)
     })
-    response["Cache-Control"] = "no-cache, no-store, must-revalidate"
     return response
 
 @api_view(['GET'])
