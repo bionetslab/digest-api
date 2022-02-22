@@ -9,7 +9,7 @@ from django.http import StreamingHttpResponse
 from wsgiref.util import FileWrapper
 
 from digest_backend import preparation
-
+from django.views.decorators.cache import never_cache
 import digest_backend.digest_executor as executor
 from digest_backend import digest_files
 from digest_backend.models import Task
@@ -52,21 +52,23 @@ def id_set(request) -> Response:
     preparation.prepare_id_set(data)
     return run("id-set",data)
 
+@never_cache
 @api_view(['GET'])
 def get_status(request)->Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
-
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({
+    response = Response({
         'task':task.uid,
         'failed':task.failed,
         'done':task.done,
         'status':task.status,
         'stats':task_stats(task)
     })
+    response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    return response
 
 @api_view(['GET'])
 def get_result(request)->Response:
