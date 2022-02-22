@@ -17,7 +17,7 @@ from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 def run(mode, data) -> Response:
     print(data)
-    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=json.dumps(data))
+    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data)
     start_task(task)
     task.save()
     print(task)
@@ -67,7 +67,7 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task),
         'mode':task.mode,
-        'parameters':json.loads(task.parameters)
+        'parameters':task.parameters
     })
     return response
 
