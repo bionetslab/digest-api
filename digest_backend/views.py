@@ -82,7 +82,7 @@ def get_result(request)->Response:
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({'task':task.uid, 'result':json.loads(task.result), 'params':json.loads(task.parameters)})
+    return Response({'task':task.uid, 'result':json.loads(task.result), 'paramseters':json.loads(task.parameters)})
 
 @api_view(['GET'])
 def get_files(request) -> Response:
