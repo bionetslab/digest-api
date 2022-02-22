@@ -13,12 +13,12 @@ from digest_backend.tasks.task_hook import TaskHook
 
 
 def init():
-    pass
-    # if digest_files.fileSetupComplete():
-    #     ru.print_current_usage('Load mappings for input into cache ...')
-    #     mapper = FileMapper(preload=True)
-    #     cache.set('mapper', mapper)
-    #     ru.print_current_usage('Done!')
+    # pass
+    if digest_files.fileSetupComplete():
+        ru.print_current_usage('Load mappings for input into cache ...')
+        mapper = FileMapper(preload=True)
+        cache.set('mapper', mapper)
+        ru.print_current_usage('Done!')
 
 
 def setup():
@@ -51,7 +51,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
         replace = 100
     print({'tar': tar, 'tar_id': tar_id, 'mode': mode, 'ref': ref, 'ref_id': ref_id, 'enriched': enriched,
           'runs': runs, 'background_model': background_model, 'replace': replace, 'distance': distance})
-    mapper = FileMapper(True)
+    mapper = cache.get('mapper')
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                       runs=runs, background_model=background_model, mapper=mapper, replace=replace, distance=distance)
 
@@ -59,6 +59,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
 def run_set(hook : TaskHook):
     data = hook.parameters
     print("Executing set validation with uid: " + str(data["uid"]))
+    hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
                          replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"])
@@ -67,6 +68,7 @@ def run_set(hook : TaskHook):
 def run_cluster(hook : TaskHook):
     data = hook.parameters
     print("Executing cluster validation with uid: " + str(data["uid"]))
+    hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                          runs=data["runs"],
                          replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"])
@@ -75,6 +77,7 @@ def run_cluster(hook : TaskHook):
 def run_set_set(hook : TaskHook):
     data = hook.parameters
     print("Executing set-set validation with uid: " + str(data["uid"]))
+    hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="set-set", runs=data["runs"],
                          replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
@@ -83,6 +86,7 @@ def run_set_set(hook : TaskHook):
 def run_id_set(hook : TaskHook):
     data = hook.parameters
     print("Executing id-set validation with uid: " + str(data["uid"]))
+    hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="id-set", runs=data["runs"],
                          replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
