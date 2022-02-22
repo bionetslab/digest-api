@@ -153,12 +153,12 @@ STATIC_URL = '/static/'
 # Cache
 
 CACHES = {
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+    #     'LOCATION': 'digest_memcached:11211',
+    #     'TIMEOUT': None
+    # },
     'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-        'LOCATION': 'digest_memcached:11211',
-        'TIMEOUT': None
-    },
-    'redis': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': f'redis://{os.environ.get("REDIS_HOST", "digest_redis")}: \
            {os.environ.get("REDIS_PORT", "6379")}/1',

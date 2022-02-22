@@ -18,14 +18,6 @@ services:
       - db
       - memcached
       - redis
-  memcached:
-    image: memcached
-    container_name: digest_memcached
-    restart: always
-    networks:
-      - digest_net
-    ports:
-      - 11211:11211
   redis:
     image: redis
     restart: always
