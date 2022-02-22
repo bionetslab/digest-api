@@ -1,5 +1,6 @@
 import mimetypes
 import os
+import json
 from django.http import HttpResponse, Http404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -74,7 +75,7 @@ def get_result(request)->Response:
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({'task':task.uid, 'result':task.result})
+    return Response({'task':task.uid, 'result':json.loads(task.result)})
 
 @api_view(['GET'])
 def get_files(request) -> Response:
