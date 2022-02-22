@@ -1,3 +1,6 @@
 [submodule "application"]
 	path = application
 	url = git@gitlab.rrz.uni-hamburg.de:cosy-bio/digest/application.git
+[submodule "digest"]
+	path = digest
+	url = git@github.com:bionetslab/digest.git
