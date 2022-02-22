@@ -1,7 +1,7 @@
 from django.db import models
 
 class Task(models.Model):
-    token = models.CharField(max_length=32, unique=True)
+    uid = models.CharField(max_length=32, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     mode = models.CharField(max_length=32, choices=[('set','set'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
