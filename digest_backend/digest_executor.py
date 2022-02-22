@@ -58,9 +58,9 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
 def run_set(hook : TaskHook):
     data = hook.parameters
     print("Executing set validation with uid: " + str(data["uid"]))
-    result =  validate(tar=data["target"], tar_id=data["target_id"], mode="set",
+    result = validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"], mapper=hook.mapper)
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"], mapper=hook.mapper())
     hook.set_results(results=result)
 
 def run_cluster(hook : TaskHook):
