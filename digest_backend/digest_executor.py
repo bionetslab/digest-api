@@ -6,6 +6,7 @@ from single_validation import single_validation
 from evaluation.d_utils import runner_utils as ru
 from evaluation.mappers.mapper import FileMapper, Mapper
 from django.core.cache import cache
+import pickle
 
 def mapper():
     return cache.get('mapper')
@@ -55,6 +56,8 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
 
 
 def run_set(data):
+    with open(os.path.join("/tmp",data["uid"]+".pkl"),'wb') as fh:
+        pickle.dump(data,fh,protocol=pickle.HIGHEST_PROTOCOL)
     print("Executing set validation with uid: " + str(data["uid"]))
     return validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
@@ -63,6 +66,7 @@ def run_set(data):
 
 def run_cluster(data):
     print("Executing cluster validation with uid: " + str(data["uid"]))
+
     return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                          runs=data["runs"],
                          replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"])
