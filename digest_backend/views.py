@@ -57,7 +57,6 @@ def id_set(request) -> Response:
 def get_status(request)->Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
-    print(task.parameters)
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
@@ -68,7 +67,7 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task),
         'mode':task.mode,
-        'type':json.loads(task.parameters).type
+        'type':task.parameters["type"]
     })
     return response
 
