@@ -28,7 +28,7 @@ def run(mode, data, params) -> Response:
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
-    params = json.loads(data)
+    params = json.dumps(data)
     preparation.prepare_set(data)
     return run("set",data, params)
 
@@ -36,7 +36,7 @@ def set(request) -> Response:
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
-    params = json.loads(data)
+    params = json.dumps(data)
     preparation.prepare_cluster(data)
     return run("cluster",data, params)
 
@@ -44,7 +44,7 @@ def cluster(request) -> Response:
 @api_view(['POST'])
 def set_set(request) -> Response:
     data = request.data
-    params = json.loads(data)
+    params = json.dumps(data)
     preparation.prepare_set_set(data)
     return run("set-set",data, params)
 
@@ -52,7 +52,7 @@ def set_set(request) -> Response:
 @api_view(['POST'])
 def id_set(request) -> Response:
     data = request.data
-    params = json.loads(data)
+    params = json.dumps(data)
     preparation.prepare_id_set(data)
     return run("id-set",data, params)
 
