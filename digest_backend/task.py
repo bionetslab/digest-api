@@ -28,6 +28,7 @@ def run_task(uid, mode, parameters):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
         r.set(f'{uid}_done', '1')
+        print(uid+" finished!")
 
         set_status('Done')
 
