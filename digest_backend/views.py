@@ -75,6 +75,8 @@ def get_result(request)->Response:
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
+    print(task.result)
+    print(json.loads(task.result))
     return Response({'task':task.uid, 'result':json.loads(task.result)})
 
 @api_view(['GET'])
