@@ -75,6 +75,7 @@ def refresh_from_redis(task):
     if finished_at:
         task.finished_at = datetime.fromtimestamp(float(finished_at))
     task.result = r.get(f'{task.uid}_result')
+    print(f'Updated {task.uid} from redis')
 
 def start_task(task):
     job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, job_timeout=10*60)
