@@ -6,9 +6,10 @@ from single_validation import single_validation
 from evaluation.d_utils import runner_utils as ru
 from evaluation.mappers.mapper import FileMapper, Mapper
 from django.core.cache import cache
+from digest_backend.tasks.task_hook import TaskHook
 
-def mapper():
-    return cache.get('mapper')
+#def mapper():
+#    return cache.get('mapper')
 
 
 def init():
@@ -36,7 +37,7 @@ def clear():
         os.remove("/usr/src/digest/mapping_files" + file)
 
 
-def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace,distance):
+def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace,distance, mapper):
     print("validate")
     if enriched is None:
         enriched = False
@@ -51,36 +52,40 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
            'mapper': mapper, 'distance': distance})
 
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                      runs=runs, background_model=background_model, replace=replace, mapper=mapper(), distance=distance)
+                      runs=runs, background_model=background_model, replace=replace, mapper=mapper, distance=distance)
 
 
-def run_set(data):
+def run_set(hook : TaskHook):
+    data = hook.parameters
     print("Executing set validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], mode="set",
+    result =  validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"])
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"], mapper=hook.mapper)
+    hook.set_results(results=result)
 
-
-def run_cluster(data):
+def run_cluster(hook : TaskHook):
+    data = hook.parameters
     print("Executing cluster validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
+    result = validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"])
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"], mapper=hook.mapper)
+    hook.set_results(results=result)
 
-
-def run_set_set(data):
+def run_set_set(hook : TaskHook):
+    data = hook.parameters
     print("Executing set-set validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
+    result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="set-set", runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"], mapper=hook.mapper)
+    hook.set_results(results = result)
 
-
-def run_id_set(data):
+def run_id_set(hook : TaskHook):
+    data = hook.parameters
     print("Executing id-set validation with uid: " + str(data["uid"]))
-    return validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
+    result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="id-set", runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"])
-
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"], mapper=hook.mapper)
+    hook.set_results(results=result)
 # def init(self):
 
 # ru.print_current_usage('Load mappings for input into cache ...')

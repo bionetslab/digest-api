@@ -17,6 +17,7 @@ services:
     depends_on:
       - db
       - memcached
+      - redis
   memcached:
     image: memcached
     container_name: digest_memcached
@@ -25,6 +26,14 @@ services:
       - digest_net
     ports:
       - 11211:11211
+  redis:
+    image: redis
+    restart: always
+    command: [ "redis-server" ]
+    container_name: digest_redis
+    hostname: digest_redis
+    networks:
+      - digest_net
   db:
     image: postgres
     restart: always

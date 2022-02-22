@@ -11,41 +11,60 @@ from digest_backend import preparation
 
 import digest_backend.digest_executor as executor
 from digest_backend import digest_files
+from digest_backend.models import Task
+from digest_backend.task import start_task, refresh_from_redis, task_stats
+
+def run(mode, data) -> Response:
+    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data)
+    start_task(task)
+    task.save()
+    print(task)
+    return Response({'task': data["uid"]})
+
 
 
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
     preparation.prepare_set(data)
-    result = executor.run_set(data)
-    print(result)
-    return Response(result)
+    return run("set",data)
 
 
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
     preparation.prepare_cluster(data)
-    result = executor.run_cluster(data)
-    print(result)
-    return Response(result)
+    return run("cluster",data)
 
 
 @api_view(['POST'])
 def set_set(request) -> Response:
     data = request.data
     preparation.prepare_set_set(data)
-    result = executor.run_set_set(data)
-    return Response(result)
+    return run("set-set",data)
 
 
 @api_view(['POST'])
 def id_set(request) -> Response:
     data = request.data
     preparation.prepare_id_set(data)
-    result = executor.run_id_set(data)
-    return Response(result)
+    return run("id-set",data)
 
+@api_view(['GET'])
+def get_status(request)->Response:
+    uid = request.GET.get('task')
+    task = Task.objects.get(uid=uid)
+
+    if not task.done and not task.failed:
+        refresh_from_redis(task)
+        task.save()
+    return Response({
+        'task':task.uid,
+        'failed':task.failed,
+        'done':task.done,
+        'status':task.status,
+        'stats':task_stats(task)
+    })
 
 @api_view(['GET'])
 def get_files(request) -> Response:
