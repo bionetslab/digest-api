@@ -1,15 +1,8 @@
-biothings_client==0.2.6
 djangorestframework==3.13.1
-gseapy==0.10.7
-numpy
-pandas
-psutil==5.9.0
-scipy
 djangorestframework-camel-case==1.1.2
 entrypoints==0.3
 requests
 gunicorn
 django-cors-headers
 pymemcache==3.5.0
-seaborn
 
