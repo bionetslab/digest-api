@@ -17,12 +17,11 @@ from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 def run(mode, data, params) -> Response:
     print(data)
-    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=params)
+    task = Task.objects.create(uid=data["uid"], mode=mode, request=params)
     start_task(task)
     task.save()
     print(task)
     return Response({'task': data["uid"]})
-
 
 
 @api_view(['POST'])
@@ -71,7 +70,7 @@ def get_status(request)->Response:
         'status':task.status,
         'stats':task_stats(task),
         'mode':task.mode,
-        'type':json.loads(task.parameters)["type"]
+        'type':json.loads(task.request)["type"]
     })
     return response
 
@@ -82,7 +81,7 @@ def get_result(request)->Response:
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({'task':task.uid, 'result':json.loads(task.result), 'paramseters':json.loads(task.parameters)})
+    return Response({'task':task.uid, 'result':json.loads(task.result), 'parameters':json.loads(task.request)})
 
 @api_view(['GET'])
 def get_files(request) -> Response:
