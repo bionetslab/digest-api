@@ -16,7 +16,7 @@ def get_uid_for_file():
     return uid
 
 def set_uid(data):
-    data["uid"] = get_uid_for_file()
+    data["uid"] = str(get_uid_for_file())
     data["out"] = os.path.join("/tmp", str(data["uid"]))+"/"
     os.mkdir(data["out"])
 
