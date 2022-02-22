@@ -5,7 +5,6 @@ import rq
 import os
 import json
 
-from django.core.cache import cache
 
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
@@ -25,9 +24,6 @@ def run_task(uid, mode, parameters):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
-    def get_mapper():
-        cache.get('mapper')
-
     def set_result(results):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
@@ -42,7 +38,7 @@ def run_task(uid, mode, parameters):
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters, get_mapper, set_status, set_result)
+    task_hook = TaskHook(parameters,set_status, set_result)
 
     try:
         if mode =='set':

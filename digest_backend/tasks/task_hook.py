@@ -1,8 +1,7 @@
 class TaskHook:
 
-    def __init__(self, parameters, mapper, set_status,set_result):
+    def __init__(self, parameters, set_status,set_result):
         self.__parameters = parameters
-        self.__mapper = mapper
         self.__set_result = set_result
         self.__set_status = set_status
 
@@ -15,15 +14,6 @@ class TaskHook:
         :return: Parameters as dictionary (e.g. {"proteins": [...], "paramA": 123, "paramB": True, ...})
         """
         return self.__parameters
-
-    @property
-    def mapper(self):
-        """
-        Returns the data directory including trailing slash.
-
-        :return: Data directory (e.g. '/app/data-NetExpander/')
-        """
-        return self.__mapper
 
     def set_status(self, status):
         """
