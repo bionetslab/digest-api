@@ -50,6 +50,7 @@ def run_task(uid, mode, parameters):
         elif mode=='cluster':
             digest_backend.digest_executor.run_cluster(task_hook)
         r.set(f'{uid}_done','1')
+        r.set(f'{uid}_status','Done')
     except Exception as e:
         set_status(f'{e}')
         r.set(f'{uid}_failed','1')
