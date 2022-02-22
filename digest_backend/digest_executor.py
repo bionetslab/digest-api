@@ -63,7 +63,7 @@ def run_set(data):
 
 
 def run_cluster(data):
-    with open(os.path.join("/tmp/"+data["uid"],data["uid"]+".pkl"),'wb') as fh:
+    with open(os.path.join("/tmp",data["uid"]+".pkl"),'wb') as fh:
         pickle.dump(data,fh,protocol=pickle.HIGHEST_PROTOCOL)
     print("Executing cluster validation with uid: " + str(data["uid"]))
 
