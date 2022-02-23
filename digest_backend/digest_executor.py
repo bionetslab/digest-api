@@ -26,7 +26,6 @@ def clear():
 
 
 def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace, distance, out_dir, uid):
-    print("validate")
     if enriched is None:
         enriched = False
     if runs is None:

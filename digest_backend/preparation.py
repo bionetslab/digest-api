@@ -38,16 +38,10 @@ def prepare_cluster(data):
 
 def prepare_set_set(data):
     set_uid(data)
-    file_ref = os.path.join(data["out"], str(data["uid"]) + "_ref.ids")
-    prepare_set_file(data["reference"],file_ref)
-    file_tar = os.path.join(data["out"], str(data["uid"]) + "_tar.ids")
-    prepare_set_file(data["target"], file_tar)
-    data["reference"]=file_ref
-    data["target"]=file_tar
+    data["reference"]=set(data["reference"])
+    data["target"]=set(data["target"])
 
 
 def prepare_id_set(data):
     set_uid(data)
-    file = os.path.join(data["out"], str(data["uid"]) + ".ids")
-    prepare_set_file(data["target"], file)
-    data["target"] = file
+    data["target"] = set(data["target"])
