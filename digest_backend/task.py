@@ -1,6 +1,5 @@
 from datetime import datetime
 
-import dill
 import redis
 import rq
 import os
@@ -22,9 +21,7 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 db=0,
                 decode_responses=True)
 
-def run_task(uid, mode, parameters, mapper):
-    print("Running task with mapper size: "+str(len(mapper.loaded_mappings["gene_ids"])))
-
+def run_task(uid, mode, parameters):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
@@ -41,7 +38,7 @@ def run_task(uid, mode, parameters, mapper):
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters,set_status, set_result, mapper)
+    task_hook = TaskHook(parameters,set_status, set_result)
 
     try:
         if mode =='set':
