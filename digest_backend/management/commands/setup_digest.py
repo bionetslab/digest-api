@@ -1,6 +1,5 @@
 from django.core.management import BaseCommand
 import digest_backend.digest_executor as executor
-from django.core.cache import cache
 
 
 class Command(BaseCommand):
@@ -23,7 +22,6 @@ class Command(BaseCommand):
         if kwargs['reset']:
             executor.clear()
             executor.setup()
-        executor.init()
 
 
 

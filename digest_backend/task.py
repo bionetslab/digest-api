@@ -1,3 +1,5 @@
+import base64
+import io
 from datetime import datetime
 
 import redis
@@ -8,6 +10,7 @@ import json
 
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
+from digest_backend.models import Attachment
 
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
@@ -21,7 +24,7 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 db=0,
                 decode_responses=True)
 
-def run_task(uid, mode, parameters):
+def run_task(uid, mode, parameters, set_files):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
@@ -38,7 +41,7 @@ def run_task(uid, mode, parameters):
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters,set_status, set_result)
+    task_hook = TaskHook(parameters,set_status, set_result, set_files)
 
     try:
         if mode =='set':
@@ -75,9 +78,21 @@ def refresh_from_redis(task):
         task.finished_at = datetime.fromtimestamp(float(finished_at))
     task.result = r.get(f'{task.uid}_result')
 
+def save_files_to_db(files, uid):
+    for (type, entries) in files.items():
+        for (name,file) in entries.items():
+            content= bytearray()
+            with open(file,'rb') as fh:
+                for line in fh:
+                    content +=line
+            a = Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
+            # a.save()
+
 def start_task(task):
-    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, job_timeout=60*60)
+    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, save_files_to_db, job_timeout=60*60)
     task.job_id = job.id
+    task.status = "Queued"
+
 
 def task_stats(task):
     pos = 1
@@ -85,10 +100,9 @@ def task_stats(task):
         if j.id == task.job_id:
             break
         pos += 1
-
     return {
         'queueLength': rq_tasks.count,
-        'queuePosition': pos,
+        'queuePosition': pos
     }
 
 def task_result(task):

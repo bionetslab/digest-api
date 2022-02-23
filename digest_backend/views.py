@@ -1,3 +1,4 @@
+import base64
 import mimetypes
 import os
 import json
@@ -12,7 +13,7 @@ from digest_backend import preparation
 from django.views.decorators.cache import never_cache
 import digest_backend.digest_executor as executor
 from digest_backend import digest_files
-from digest_backend.models import Task
+from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 
@@ -74,6 +75,25 @@ def get_status(request) -> Response:
         'mode': task.mode,
         'type': json.loads(task.request)["type"]
     })
+    return response
+
+
+@api_view(['GET'])
+def get_result_file_list(request) -> Response:
+    uid = request.GET.get('task')
+    files = list({'name':a.name, 'type':a.type} for a in Attachment.objects.filter(uid=uid))
+    return (Response(files))
+
+def get_result_file(request)->Response:
+    name = request.GET.get('name')
+    a = Attachment.objects.get(name=name)
+    type=""
+    if a.type == 'csv':
+        type = 'text/csv'
+    elif a.type =='png':
+        type = 'image/png'
+    response = HttpResponse(base64.b64decode(a.content), content_type=type)
+    response['Content-Disposition'] =f'attachment; filename="{name}"'
     return response
 
 

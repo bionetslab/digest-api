@@ -16,7 +16,6 @@ services:
       - digest_net
     depends_on:
       - db
-      - memcached
       - redis
   redis:
     image: redis

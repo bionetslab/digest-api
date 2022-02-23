@@ -17,3 +17,10 @@ class Task(models.Model):
     status = models.CharField(max_length=255, null=True)
 
     result = models.TextField(null=True)
+
+
+class Attachment(models.Model):
+    uid = models.CharField(max_length=36)
+    type = models.CharField(max_length=4, choices=[('png','png'),('csv','csv')])
+    name = models.CharField(max_length=128)
+    content = models.TextField(null=False)

@@ -1,9 +1,10 @@
 class TaskHook:
 
-    def __init__(self, parameters, set_status,set_result):
+    def __init__(self, parameters, set_status,set_result, set_files):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
+        self.__set_files = set_files
 
 
     @property
@@ -26,6 +27,9 @@ class TaskHook:
         """
         self.__set_status(status)
 
+    def set_files(self, files, uid):
+        self.__set_files(files, uid)
+
     def set_results(self, results):
         """
         To be called when the computation is finished.
@@ -34,3 +38,4 @@ class TaskHook:
         (e.g. {"network": {"nodes": ["P61970", "Q9H4P4"], "edges": [{"from": "P61970", "to": "Q9H4P4"}]}})
         """
         self.__set_result(results)
+
