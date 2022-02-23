@@ -55,7 +55,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
     print("Running validation with mapping boole: " + str(mapper.load))
     # mapper = cache.get('mapper')
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                      runs=runs, background_model=background_model, mapper=mapper, replace=replace, distance=distance)
+                      runs=runs, background_model=background_model, mapper=mapper, replace=replace, distance=distance, verbose=True)
 
 
 def run_set(hook : TaskHook):
