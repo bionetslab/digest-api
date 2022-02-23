@@ -63,7 +63,7 @@ def run_set(hook : TaskHook):
     hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"],mapper=hook.mapper)
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=data["background_model"],distance=data["distance"],mapper=hook.get_mapper())
     hook.set_results(results=result)
 
 def run_cluster(hook : TaskHook):
@@ -72,7 +72,7 @@ def run_cluster(hook : TaskHook):
     hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                          runs=data["runs"],
-                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"],mapper=hook.mapper)
+                         replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,distance=data["distance"],mapper=hook.get_mapper())
     hook.set_results(results=result)
 
 def run_set_set(hook : TaskHook):
@@ -81,7 +81,7 @@ def run_set_set(hook : TaskHook):
     hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="set-set", runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"],mapper=hook.mapper)
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"],mapper=hook.get_mapper())
     hook.set_results(results = result)
 
 def run_id_set(hook : TaskHook):
@@ -90,7 +90,7 @@ def run_id_set(hook : TaskHook):
     hook.set_status("Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="id-set", runs=data["runs"],
-                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"],mapper=hook.mapper)
+                         replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"],mapper=hook.get_mapper())
     hook.set_results(results=result)
 # def init(self):
 

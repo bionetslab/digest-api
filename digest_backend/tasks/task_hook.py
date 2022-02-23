@@ -1,10 +1,10 @@
 class TaskHook:
 
-    def __init__(self, parameters, set_status,set_result, mapper):
+    def __init__(self, parameters, set_status,set_result, get_mapper):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
-        self.__mapper = mapper
+        self.__get_mapper = get_mapper
 
 
     @property
@@ -16,14 +16,14 @@ class TaskHook:
         """
         return self.__parameters
 
-    @property
-    def mapper(self):
+
+    def get_mapper(self):
         """
         Returns parameters selected for the algorithm.
 
         :return: Parameters as dictionary (e.g. {"proteins": [...], "paramA": 123, "paramB": True, ...})
         """
-        return self.__mapper
+        return self.__get_mapper
 
     def set_status(self, status):
         """
