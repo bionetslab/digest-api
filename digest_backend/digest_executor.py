@@ -52,6 +52,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
         replace = 100
     print({'tar': tar, 'tar_id': tar_id, 'mode': mode, 'ref': ref, 'ref_id': ref_id, 'enriched': enriched,
           'runs': runs, 'background_model': background_model, 'replace': replace, 'distance': distance})
+    print("Running validation with mapping boole: " + str(mapper.load))
     # mapper = cache.get('mapper')
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                       runs=runs, background_model=background_model, mapper=mapper, replace=replace, distance=distance)
@@ -88,6 +89,7 @@ def run_id_set(hook : TaskHook):
     data = hook.parameters
     print("Executing id-set validation with uid: " + str(data["uid"]))
     hook.set_status("Executing")
+    print("Running set with mapping boole: "+str(hook.get_mapper().load))
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                          ref=data["reference"], mode="id-set", runs=data["runs"],
                          replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],distance=data["distance"],mapper=hook.get_mapper())
