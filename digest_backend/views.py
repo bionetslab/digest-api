@@ -38,8 +38,8 @@ def getMapper():
 def run(mode, data, params) -> Response:
     print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
-    print(__mapper__.load)
     print(getMapper().load)
+    print(__mapper__.load)
     start_task(task, getMapper())
     task.save()
     print(task)
