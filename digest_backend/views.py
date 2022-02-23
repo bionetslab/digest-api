@@ -14,7 +14,7 @@ import digest_backend.digest_executor as executor
 from digest_backend import digest_files
 from digest_backend.models import Task
 from digest_backend.task import start_task, refresh_from_redis, task_stats
-from evaluation.mappers.mapper import FileMapper, Mapper
+from evaluation.mappers.mapper import FileMapper
 from evaluation.d_utils import runner_utils as ru
 
 __mapper__: FileMapper = None
