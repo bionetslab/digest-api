@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import dill
 import redis
 import rq
 import os
@@ -8,6 +9,7 @@ import json
 
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
+
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                    port=os.getenv('REDIS_PORT', 6379),
