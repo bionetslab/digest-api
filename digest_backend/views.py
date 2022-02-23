@@ -32,6 +32,7 @@ def initMapper():
 
 
 def getMapper():
+    global __mapper__
     if __mapper__ is None:
         initMapper()
     return __mapper__
