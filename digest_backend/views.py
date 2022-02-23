@@ -17,6 +17,8 @@ from digest_backend.task import start_task, refresh_from_redis, task_stats
 from evaluation.mappers.mapper import FileMapper, Mapper
 from evaluation.d_utils import runner_utils as ru
 
+__mapper__: FileMapper = None
+
 def __init__():
     initMapper()
 
@@ -24,15 +26,15 @@ def __init__():
 def initMapper():
    if executor.digest_files.fileSetupComplete():
         ru.print_current_usage('Load mappings for input into cache ...')
-        global mapper
-        mapper = FileMapper(preload=True)
+        global __mapper__
+        __mapper__ = FileMapper(preload=True)
         ru.print_current_usage('Done!')
 
 
 def getMapper():
-    if mapper is None:
+    if __mapper__ is None:
         initMapper()
-    return mapper
+    return __mapper__
 
 
 def run(mode, data, params) -> Response:
