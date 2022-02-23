@@ -1,7 +1,7 @@
 from django.db import models
 
 class Task(models.Model):
-    uid = models.CharField(max_length=36, unique=True)
+    uid = models.CharField(max_length=36, unique=True, primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     mode = models.CharField(max_length=32, choices=[('set','set'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
@@ -22,5 +22,5 @@ class Task(models.Model):
 class Attachment(models.Model):
     uid = models.CharField(max_length=36)
     type = models.CharField(max_length=4, choices=[('png','png'),('csv','csv')])
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, unique=True, primary_key=True)
     content = models.TextField(null=False)
