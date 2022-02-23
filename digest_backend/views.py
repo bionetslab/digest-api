@@ -14,11 +14,31 @@ import digest_backend.digest_executor as executor
 from digest_backend import digest_files
 from digest_backend.models import Task
 from digest_backend.task import start_task, refresh_from_redis, task_stats
+from evaluation.mappers.mapper import FileMapper, Mapper
+from evaluation.d_utils import runner_utils as ru
+
+def __init__():
+    initMapper()
+
+
+def initMapper():
+   if executor.digest_files.fileSetupComplete():
+        ru.print_current_usage('Load mappings for input into cache ...')
+        global mapper
+        mapper = FileMapper(preload=True)
+        ru.print_current_usage('Done!')
+
+
+def getMapper():
+    if mapper is None:
+        initMapper()
+    return mapper
+
 
 def run(mode, data, params) -> Response:
     print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
-    start_task(task)
+    start_task(task, getMapper())
     task.save()
     print(task)
     return Response({'task': data["uid"]})
@@ -29,7 +49,7 @@ def set(request) -> Response:
     data = request.data
     params = json.dumps(data)
     preparation.prepare_set(data)
-    return run("set",data, params)
+    return run("set", data, params)
 
 
 @api_view(['POST'])
@@ -37,7 +57,7 @@ def cluster(request) -> Response:
     data = request.data
     params = json.dumps(data)
     preparation.prepare_cluster(data)
-    return run("cluster",data, params)
+    return run("cluster", data, params)
 
 
 @api_view(['POST'])
@@ -45,7 +65,7 @@ def set_set(request) -> Response:
     data = request.data
     params = json.dumps(data)
     preparation.prepare_set_set(data)
-    return run("set-set",data, params)
+    return run("set-set", data, params)
 
 
 @api_view(['POST'])
@@ -53,35 +73,38 @@ def id_set(request) -> Response:
     data = request.data
     params = json.dumps(data)
     preparation.prepare_id_set(data)
-    return run("id-set",data, params)
+    return run("id-set", data, params)
+
 
 @never_cache
 @api_view(['GET'])
-def get_status(request)->Response:
+def get_status(request) -> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
     response = Response({
-        'task':task.uid,
-        'failed':task.failed,
-        'done':task.done,
-        'status':task.status,
-        'stats':task_stats(task),
-        'mode':task.mode,
-        'type':json.loads(task.request)["type"]
+        'task': task.uid,
+        'failed': task.failed,
+        'done': task.done,
+        'status': task.status,
+        'stats': task_stats(task),
+        'mode': task.mode,
+        'type': json.loads(task.request)["type"]
     })
     return response
 
+
 @api_view(['GET'])
-def get_result(request)->Response:
+def get_result(request) -> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
     if not task.done and not task.failed:
         refresh_from_redis(task)
         task.save()
-    return Response({'task':task.uid, 'result':json.loads(task.result), 'parameters':json.loads(task.request)})
+    return Response({'task': task.uid, 'result': json.loads(task.result), 'parameters': json.loads(task.request)})
+
 
 @api_view(['GET'])
 def get_files(request) -> Response:
@@ -95,8 +118,8 @@ def get_files(request) -> Response:
         print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
-        response = StreamingHttpResponse(FileWrapper(open(file,'rb'),512),content_type=mimetypes.guess_type(file)[0])
+        response = StreamingHttpResponse(FileWrapper(open(file, 'rb'), 512), content_type=mimetypes.guess_type(file)[0])
         response['Content-Disposition'] = 'attachment; filename=' + smart_str(file_name)
-        response['Content-Length'] =os.path.getsize(file)
+        response['Content-Length'] = os.path.getsize(file)
         return response
     raise Http404
