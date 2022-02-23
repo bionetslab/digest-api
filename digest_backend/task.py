@@ -75,9 +75,8 @@ def refresh_from_redis(task):
         task.finished_at = datetime.fromtimestamp(float(finished_at))
     task.result = r.get(f'{task.uid}_result')
 
-def start_task(task, mapper):
-    print("starting task mapper boole: "+str(len(mapper.loaded_mappings["gene_ids"])))
-    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, mapper, job_timeout=60*60)
+def start_task(task):
+    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, job_timeout=60*60)
     task.job_id = job.id
 
 def task_stats(task):
