@@ -40,23 +40,6 @@ def clear():
         os.remove("/usr/src/digest/mapping_files" + file)
 
 
-__mapper__: FileMapper = None
-
-
-def initMapper():
-    if digest_files.fileSetupComplete():
-        ru.print_current_usage('Load mappings for input into cache ...')
-        global __mapper__
-        __mapper__ = FileMapper(preload=True)
-        ru.print_current_usage('Done!')
-
-def getMapper():
-    try:
-        __mapper__.load
-    except:
-        initMapper()
-    return __mapper__
-
 def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace,distance):
     print("validate")
     if enriched is None:
@@ -71,7 +54,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
           'runs': runs, 'background_model': background_model, 'replace': replace, 'distance': distance})
     # mapper = cache.get('mapper')
     return single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                      runs=runs, background_model=background_model, replace=replace, mapper=getMapper(), distance=distance, verbose=True)
+                      runs=runs, background_model=background_model, replace=replace, distance=distance, verbose=True)
 
 
 def run_set(hook : TaskHook):
