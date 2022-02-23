@@ -28,13 +28,12 @@ def initMapper():
         ru.print_current_usage('Done!')
 
 
-if __name__ == "__main__":
-    initMapper()
+initMapper()
 
 
 def getMapper():
     try:
-        return __mapper__
+        __mapper__.load
     except:
         initMapper()
     return __mapper__
