@@ -27,10 +27,6 @@ def initMapper():
         __mapper__ = FileMapper(preload=True)
         ru.print_current_usage('Done!')
 
-
-initMapper()
-
-
 def getMapper():
     try:
         __mapper__.load
@@ -42,6 +38,8 @@ def getMapper():
 def run(mode, data, params) -> Response:
     print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
+    print(__mapper__.load)
+    print(getMapper().load)
     start_task(task, getMapper())
     task.save()
     print(task)
