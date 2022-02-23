@@ -23,7 +23,7 @@ class TaskHook:
 
         :return: Parameters as dictionary (e.g. {"proteins": [...], "paramA": 123, "paramB": True, ...})
         """
-        return self.__get_mapper
+        return self.__get_mapper()
 
     def set_status(self, status):
         """
