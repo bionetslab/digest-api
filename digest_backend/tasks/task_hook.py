@@ -18,7 +18,7 @@ class TaskHook:
 
 
     def get_mapper(self):
-        print("getting mapper with boole: "+str(self.__mapper.load))
+        print("getting mapper with size: "+str(len(self.__mapper.loaded_mappings["gene_ids"])))
         """
         Returns parameters selected for the algorithm.
 

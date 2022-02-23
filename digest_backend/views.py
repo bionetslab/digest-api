@@ -38,6 +38,7 @@ def getMapper():
 def run(mode, data, params) -> Response:
     print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
+    print(str(len(getMapper().loaded_mappings["gene_ids"])))
     start_task(task, getMapper())
     task.save()
     print(task)

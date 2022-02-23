@@ -21,6 +21,8 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 decode_responses=True)
 
 def run_task(uid, mode, parameters, mapper):
+    print("Running task with mapper size: "+str(len(mapper.loaded_mappings["gene_ids"])))
+
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
@@ -75,7 +77,7 @@ def refresh_from_redis(task):
     task.result = r.get(f'{task.uid}_result')
 
 def start_task(task, mapper):
-    print("starting task mapper boole: "+str(mapper.load))
+    print("starting task mapper boole: "+str(len(mapper.loaded_mappings["gene_ids"])))
     job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, mapper, job_timeout=60*60)
     task.job_id = job.id
 
