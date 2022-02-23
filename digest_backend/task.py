@@ -20,7 +20,7 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 db=0,
                 decode_responses=True)
 
-def run_task(uid, mode, parameters, get_mapper):
+def run_task(uid, mode, parameters, mapper):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
@@ -37,7 +37,7 @@ def run_task(uid, mode, parameters, get_mapper):
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters,set_status, set_result, get_mapper)
+    task_hook = TaskHook(parameters,set_status, set_result, mapper)
 
     try:
         if mode =='set':
@@ -74,9 +74,9 @@ def refresh_from_redis(task):
         task.finished_at = datetime.fromtimestamp(float(finished_at))
     task.result = r.get(f'{task.uid}_result')
 
-def start_task(task, get_mapper):
-    # print("starting task mapper boole: "+str(get_mapper.load))
-    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, get_mapper, job_timeout=60*60)
+def start_task(task, mapper):
+    print("starting task mapper boole: "+str(mapper.load))
+    job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, mapper, job_timeout=60*60)
     task.job_id = job.id
 
 def task_stats(task):
