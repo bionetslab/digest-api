@@ -19,21 +19,23 @@ from evaluation.d_utils import runner_utils as ru
 
 __mapper__: FileMapper = None
 
-def __init__():
-    initMapper()
-
 
 def initMapper():
-   if executor.digest_files.fileSetupComplete():
+    if executor.digest_files.fileSetupComplete():
         ru.print_current_usage('Load mappings for input into cache ...')
         global __mapper__
         __mapper__ = FileMapper(preload=True)
         ru.print_current_usage('Done!')
 
 
+if __name__ == "__main__":
+    initMapper()
+
+
 def getMapper():
-    global __mapper__
-    if __mapper__ is None:
+    try:
+        return __mapper__
+    except:
         initMapper()
     return __mapper__
 
