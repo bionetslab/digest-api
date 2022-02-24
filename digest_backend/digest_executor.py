@@ -1,10 +1,10 @@
 import os
 
-from setup import main as digest_setup
+from biodigest.setup import main as digest_setup
 from digest_backend import digest_files
-from single_validation import single_validation, save_results
+from biodigest.single_validation import single_validation, save_results
 from digest_backend.tasks.task_hook import TaskHook
-from evaluation.d_utils.plotting_utils import create_plots
+from biodigest.evaluation.d_utils.plotting_utils import create_plots
 
 
 def setup():

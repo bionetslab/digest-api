@@ -1,4 +1,4 @@
-from evaluation.mappers.mapper import FileMapper as digest_files
+from biodigest.evaluation.mappers.mapper import FileMapper as digest_files
 import os
 
 fileDir = "/usr/src/digest/mapping_files"

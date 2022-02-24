@@ -18,14 +18,11 @@ RUN conda install -c conda-forge -y django=4.0.2
 RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
 RUN pip install -r /usr/src/digest/requirements.txt
-COPY ./digest/requirements.txt /usr/src/digest/digest_requirements.txt
-RUN pip install -r /usr/src/digest/digest_requirements.txt
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
 COPY . /usr/src/digest/
-COPY digest/ /usr/src/digest/
 
 ENV SENDFILE=/usr/src/digest/mapping_files
 EXPOSE 8000
