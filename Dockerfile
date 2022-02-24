@@ -22,9 +22,9 @@ RUN pip install -r /usr/src/digest/requirements.txt
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY ./docker-entrypoint.sh /entrypoint.sh
 
+RUN pip install biodigest==0.0.5
 COPY . /usr/src/digest/
 
-ENV SENDFILE=/usr/src/digest/mapping_files
 EXPOSE 8000
 
 ENTRYPOINT ["sh", "/entrypoint.sh"]
