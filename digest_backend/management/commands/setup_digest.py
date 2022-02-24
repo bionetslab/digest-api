@@ -10,9 +10,7 @@ class Command(BaseCommand):
         parser.add_argument('-r','--reset',action='store_true',help='Removes saved data and executes new setup.')
 
     def handle(self, *args, **kwargs):
-        print("reading commands")
         if kwargs['check']:
-            print("checking")
             executor.check()
             # digest_executor.check()
         if kwargs['setup']:

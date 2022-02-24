@@ -18,11 +18,9 @@ from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 
 def run(mode, data, params) -> Response:
-    print(data)
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
     start_task(task)
     task.save()
-    print(task)
     return Response({'task': data["uid"]})
 
 
@@ -114,10 +112,7 @@ def get_files(request) -> Response:
     measure = request.GET.get('measure')
     file = file_name
     if not file_name.endswith(".csv"):
-        print("getting file " + measure + "/" + file_name)
         file = os.path.join(measure, file_name)
-    else:
-        print("getting file " + file_name)
     file = digest_files.getFile(file)
     if file is not None:
         response = StreamingHttpResponse(FileWrapper(open(file, 'rb'), 512), content_type=mimetypes.guess_type(file)[0])

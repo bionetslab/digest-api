@@ -53,9 +53,11 @@ def run_task(uid, mode, parameters, set_files):
         elif mode=='cluster':
             digest_backend.digest_executor.run_cluster(task_hook)
     except Exception as e:
+        print("Error in DIGEST execution:")
+        import traceback
+        traceback.print_exc()
         set_status(f'{e}')
         r.set(f'{uid}_failed','1')
-        print(e.with_traceback())
 
 def refresh_from_redis(task):
     task.worker_id = r.get(f'{task.uid}_worker_id')
