@@ -1,6 +1,8 @@
 import os
 
 from biodigest.setup import main as digest_setup
+
+from biodigest.evaluation.mappers.mapper import FileMapper
 from digest_backend import digest_files
 from biodigest.single_validation import single_validation, save_results
 from digest_backend.tasks.task_hook import TaskHook
@@ -35,7 +37,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
     if replace is None:
         replace = 100
     result = single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                               runs=runs, background_model=background_model, replace=replace, distance=distance)
+                               runs=runs, background_model=background_model, replace=replace, distance=distance,mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
 
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     save_results(results=result, prefix=uid, out_dir=out_dir)
