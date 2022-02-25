@@ -20,7 +20,6 @@ from digest_backend.views import set, set_set, id_set, cluster,get_files, get_st
 urlpatterns = [
   path('set_set',set_set),
   path('set',set),
-  path('id_set',id_set),
   path('cluster',cluster),
   path('files',get_files),
   path('status',get_status),

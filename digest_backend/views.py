@@ -18,11 +18,22 @@ from digest_backend.task import start_task, refresh_from_redis, task_stats
 
 
 def run(mode, data, params) -> Response:
+    id = checkExistence(params)
+    if id is not None:
+        return Response({'task': id})
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
     start_task(task)
     task.save()
     return Response({'task': data["uid"]})
 
+def checkExistence(params):
+    print(params)
+    try:
+        entry = Task.objects.filter(request=params).last()
+        print(entry)
+        return entry.uid
+    except:
+        return None
 
 @api_view(['POST'])
 def set(request) -> Response:

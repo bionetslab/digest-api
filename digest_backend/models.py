@@ -6,7 +6,7 @@ class Task(models.Model):
 
     mode = models.CharField(max_length=32, choices=[('set','set'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
     parameters = models.TextField()
-    request = models.TextField()
+    request = models.TextField(unique=True)
 
     started_at = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
