@@ -29,7 +29,7 @@ def run(mode, data, params) -> Response:
 def checkExistence(params):
     print(params)
     try:
-        entry = Task.objects.filter(request=params).last()
+        entry = Task.objects.filter(request=params, failed=False).last()
         print(entry)
         return entry.uid
     except:
