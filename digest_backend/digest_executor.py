@@ -28,7 +28,7 @@ def clear():
         os.remove("/usr/src/digest/mapping_files" + file)
 
 
-def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace, distance, out_dir, uid):
+def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, replace, distance, out_dir, uid, set_progress):
     if enriched is None:
         enriched = False
     if runs is None:
@@ -39,7 +39,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
         replace = 100
     result = single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                                runs=runs, background_model=background_model, replace=replace, distance=distance,
-                               mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
+                               mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"), progress=set_progress)
 
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     save_results(results=result, prefix=uid, out_dir=out_dir)
@@ -72,7 +72,7 @@ def run_set(hook: TaskHook):
                       runs=data["runs"],
                       replace=data["replace"], ref=None, ref_id=None, enriched=None,
                       background_model=data["background_model"], distance=data["distance"], out_dir=data["out"],
-                      uid=data["uid"])
+                      uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 
@@ -83,7 +83,7 @@ def run_cluster(hook: TaskHook):
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                       runs=data["runs"],
                       replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,
-                      distance=data["distance"], out_dir=data["out"], uid=data["uid"])
+                      distance=data["distance"], out_dir=data["out"], uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 
@@ -94,7 +94,7 @@ def run_set_set(hook: TaskHook):
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                       ref=data["reference"], mode="set-set", runs=data["runs"],
                       replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],
-                      distance=data["distance"], out_dir=data["out"], uid=data["uid"])
+                      distance=data["distance"], out_dir=data["out"], uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 
@@ -105,7 +105,7 @@ def run_id_set(hook: TaskHook):
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                       ref=data["reference"], mode="id-set", runs=data["runs"],
                       replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],
-                      distance=data["distance"], out_dir=data["out"], uid=data["uid"])
+                      distance=data["distance"], out_dir=data["out"], uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 # def init(self):

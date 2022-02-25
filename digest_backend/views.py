@@ -83,7 +83,8 @@ def get_status(request) -> Response:
         'stats': task_stats(task),
         'mode': task.mode,
         'type': json.loads(task.request)["type"],
-        'input':json.loads(task.request)
+        'input':json.loads(task.request),
+        'progress': task.progress
     })
     return response
 

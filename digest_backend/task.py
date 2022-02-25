@@ -35,15 +35,20 @@ def run_task(uid, mode, parameters, set_files):
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
         r.set(f'{uid}_done', '1')
         set_status('Done')
+        set_progress(1.0)
+
+    def set_progress(progress):
+        r.set(f'{uid}_progress', progress)
 
     set_status('Initialized')
+    set_progress(0.0)
     worker_id = os.getenv('RQ_WORKER_ID')
     r.set(f'{uid}_worker_id', f'{worker_id}')
     job_id = os.getenv('RQ_JOB_ID')
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters,set_status, set_result, set_files)
+    task_hook = TaskHook(parameters,set_status, set_result, set_files, set_progress)
 
     try:
         if mode =='set':
@@ -69,6 +74,7 @@ def refresh_from_redis(task):
     task.job_id = r.get(f'{task.uid}_job_id')
     task.done = True if r.get(f'{task.uid}_done') else False
     task.failed = True if r.get(f'{task.uid}_failed') else False
+    task.progress = r.get(f'{task.uid}_progress')
     status = r.get(f'{task.uid}_status')
     if not status or len(status) < 255:
         task.status = status
@@ -91,6 +97,7 @@ def save_files_to_db(files, uid):
                     content +=line
             Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
     os.system("rm -rf /tmp/"+uid)
+
 
 def start_task(task):
     job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, save_files_to_db, job_timeout=60*60)

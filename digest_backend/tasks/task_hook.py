@@ -1,10 +1,11 @@
 class TaskHook:
 
-    def __init__(self, parameters, set_status,set_result, set_files):
+    def __init__(self, parameters, set_status,set_result, set_files, set_progress):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
         self.__set_files = set_files
+        self.__set_progress = set_progress
 
 
     @property
@@ -17,6 +18,8 @@ class TaskHook:
         return self.__parameters
 
 
+    def set_progress(self, progress):
+        self.__set_progress(progress)
     def set_status(self, status):
         """
         To be called to indicate computation progress.

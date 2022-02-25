@@ -16,6 +16,7 @@ class Task(models.Model):
     failed = models.BooleanField(default=False)
     status = models.CharField(max_length=255, null=True)
 
+    progress = models.FloatField(default=0.0)
     result = models.TextField(null=True)
 
 
