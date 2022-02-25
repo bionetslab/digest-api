@@ -1,4 +1,5 @@
 import os
+import zipfile
 
 from biodigest.setup import main as digest_setup
 
@@ -37,21 +38,30 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, r
     if replace is None:
         replace = 100
     result = single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                               runs=runs, background_model=background_model, replace=replace, distance=distance,mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
+                               runs=runs, background_model=background_model, replace=replace, distance=distance,
+                               mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
 
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     save_results(results=result, prefix=uid, out_dir=out_dir)
-    files = getFiles(out_dir=out_dir)
-    return {'result':result,'files':files}
+    files = getFiles(wd=out_dir, uid=uid)
+    return {'result': result, 'files': files}
 
 
-def getFiles(out_dir):
-    dict = {'csv': {}, 'png': {}}
-    for file in os.listdir(out_dir):
-        if file.endswith('.csv'):
-            dict['csv'][file] = os.path.join(out_dir, file)
-        if file.endswith('.png'):
-            dict['png'][file] = os.path.join(out_dir, file)
+def getFiles(wd, uid):
+    dict = {'csv': {}, 'png': {}, 'zip': {}}
+    zip_name = uid+'.zip'
+    zip_path = os.path.join(wd,zip_name)
+    zip = zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED)
+    for file in os.listdir(wd):
+        if file != zip_name:
+            file_path = os.path.join(wd, file)
+            zip.write(file_path, os.path.relpath(file_path, os.path.join(wd, '..')))
+            if file.endswith('.csv'):
+                dict['csv'][file] = file_path
+            if file.endswith('.png'):
+                dict['png'][file] = file_path
+    zip.close()
+    dict['zip'][zip_name] = zip_path
     return dict
 
 
@@ -88,6 +98,7 @@ def run_set_set(hook: TaskHook):
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 
+
 def run_id_set(hook: TaskHook):
     data = hook.parameters
     hook.set_status("Executing")
@@ -95,7 +106,7 @@ def run_id_set(hook: TaskHook):
                       ref=data["reference"], mode="id-set", runs=data["runs"],
                       replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],
                       distance=data["distance"], out_dir=data["out"], uid=data["uid"])
-    hook.set_files(files = result["files"], uid=data["uid"])
+    hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
 # def init(self):
 

@@ -1,5 +1,7 @@
 import base64
 import io
+import shutil
+import zipfile
 from datetime import datetime
 
 import redis
@@ -87,8 +89,8 @@ def save_files_to_db(files, uid):
             with open(file,'rb') as fh:
                 for line in fh:
                     content +=line
-            a = Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
-            # a.save()
+            Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
+    os.system("rm -rf /tmp/"+uid)
 
 def start_task(task):
     job = rq_tasks.enqueue(run_task, task.uid, task.mode, task.parameters, save_files_to_db, job_timeout=60*60)

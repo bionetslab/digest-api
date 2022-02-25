@@ -28,7 +28,7 @@ def run(mode, data, params) -> Response:
 def set(request) -> Response:
     data = request.data
     params = json.dumps(data)
-    preparation.prepare_set(data)
+    preparation.prepare_set(data,params)
     return run("set", data, params)
 
 
@@ -36,7 +36,7 @@ def set(request) -> Response:
 def cluster(request) -> Response:
     data = request.data
     params = json.dumps(data)
-    preparation.prepare_cluster(data)
+    preparation.prepare_cluster(data,params)
     return run("cluster", data, params)
 
 
@@ -44,7 +44,7 @@ def cluster(request) -> Response:
 def set_set(request) -> Response:
     data = request.data
     params = json.dumps(data)
-    preparation.prepare_set_set(data)
+    preparation.prepare_set_set(data,params)
     return run("set-set", data, params)
 
 
@@ -52,7 +52,7 @@ def set_set(request) -> Response:
 def id_set(request) -> Response:
     data = request.data
     params = json.dumps(data)
-    preparation.prepare_id_set(data)
+    preparation.prepare_id_set(data,params)
     return run("id-set", data, params)
 
 
@@ -91,6 +91,8 @@ def get_result_file(request)->Response:
         type = 'text/csv'
     elif a.type =='png':
         type = 'image/png'
+    elif a.type =='zip':
+        type ='application/zip'
     response = HttpResponse(base64.b64decode(a.content), content_type=type)
     response['Content-Disposition'] =f'attachment; filename="{name}"'
     return response
