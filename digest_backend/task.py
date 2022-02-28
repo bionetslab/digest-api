@@ -34,14 +34,13 @@ def run_task(uid, mode, parameters, set_files):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
         r.set(f'{uid}_done', '1')
-        set_status('Done')
-        set_progress(1.0)
+        set_progress(1.0,'Done')
 
-    def set_progress(progress):
+    def set_progress(progress,status):
+        set_status(status)
         r.set(f'{uid}_progress', progress)
 
-    set_status('Initialized')
-    set_progress(0.0)
+    set_progress(0.0,'Initialized')
     worker_id = os.getenv('RQ_WORKER_ID')
     r.set(f'{uid}_worker_id', f'{worker_id}')
     job_id = os.getenv('RQ_JOB_ID')

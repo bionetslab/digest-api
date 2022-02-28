@@ -18,8 +18,8 @@ class TaskHook:
         return self.__parameters
 
 
-    def set_progress(self, progress):
-        self.__set_progress(progress)
+    def set_progress(self, progress,status):
+        self.__set_progress(progress,status)
     def set_status(self, status):
         """
         To be called to indicate computation progress.

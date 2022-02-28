@@ -67,7 +67,7 @@ def getFiles(wd, uid):
 
 def run_set(hook: TaskHook):
     data = hook.parameters
-    hook.set_status("Executing")
+    hook.set_progress(0.1, "Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                       runs=data["runs"],
                       replace=data["replace"], ref=None, ref_id=None, enriched=None,
@@ -79,7 +79,7 @@ def run_set(hook: TaskHook):
 
 def run_cluster(hook: TaskHook):
     data = hook.parameters
-    hook.set_status("Executing")
+    hook.set_progress(0.1, "Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="cluster",
                       runs=data["runs"],
                       replace=data["replace"], ref=None, ref_id=None, enriched=None, background_model=None,
@@ -90,7 +90,7 @@ def run_cluster(hook: TaskHook):
 
 def run_set_set(hook: TaskHook):
     data = hook.parameters
-    hook.set_status("Executing")
+    hook.set_progress(0.1, "Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                       ref=data["reference"], mode="set-set", runs=data["runs"],
                       replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],
@@ -101,7 +101,7 @@ def run_set_set(hook: TaskHook):
 
 def run_id_set(hook: TaskHook):
     data = hook.parameters
-    hook.set_status("Executing")
+    hook.set_progress(0.1, "Executing")
     result = validate(tar=data["target"], tar_id=data["target_id"], ref_id=data["reference_id"],
                       ref=data["reference"], mode="id-set", runs=data["runs"],
                       replace=data["replace"], enriched=data["enriched"], background_model=data["background_model"],
