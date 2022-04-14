@@ -11,7 +11,6 @@ from wsgiref.util import FileWrapper
 
 from digest_backend import preparation
 from django.views.decorators.cache import never_cache
-import digest_backend.digest_executor as executor
 from digest_backend import digest_files
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
@@ -27,7 +26,6 @@ def run(mode, data, params) -> Response:
     return Response({'task': data["uid"]})
 
 def checkExistence(params):
-    print(params)
     try:
         entry = Task.objects.filter(request=params, failed=False).last()
         print(entry)
@@ -38,32 +36,33 @@ def checkExistence(params):
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
-    params = json.dumps(data)
-    preparation.prepare_set(data,params)
+    params = preparation.prepare_set(data)
     return run("set", data, params)
 
+@api_view(['POST'])
+def network(request) -> Response:
+    data = request.data
+    params = preparation.prepare_network(data)
+    return run("network", data, params)
 
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
-    params = json.dumps(data)
-    preparation.prepare_cluster(data,params)
+    params = preparation.prepare_cluster(data)
     return run("cluster", data, params)
 
 
 @api_view(['POST'])
 def set_set(request) -> Response:
     data = request.data
-    params = json.dumps(data)
-    preparation.prepare_set_set(data,params)
+    params = preparation.prepare_set_set(data)
     return run("set-set", data, params)
 
 
 @api_view(['POST'])
 def id_set(request) -> Response:
     data = request.data
-    params = json.dumps(data)
-    preparation.prepare_id_set(data,params)
+    params = preparation.prepare_id_set(data)
     return run("id-set", data, params)
 
 

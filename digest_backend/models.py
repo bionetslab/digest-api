@@ -4,7 +4,7 @@ class Task(models.Model):
     uid = models.CharField(max_length=36, unique=True, primary_key=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    mode = models.CharField(max_length=32, choices=[('set','set'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
+    mode = models.CharField(max_length=32, choices=[('set','set'),('network','network'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
     parameters = models.TextField()
     request = models.TextField(unique=True)
 
