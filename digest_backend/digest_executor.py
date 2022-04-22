@@ -39,9 +39,8 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, b
     if replace is None:
         replace = 100
     result = single_validation(tar=tar, tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                               runs=runs, background_model=background_model, replace=replace, distance=distance,
+                               runs=runs, background_model=background_model,  network_file=background_network, replace=replace, distance=distance,
                                mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"), progress=set_progress)
-
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     create_extended_plots(results=result, mode=mode, tar=tar, out_dir=out_dir, prefix=uid, file_type="png")
     save_results(results=result, prefix=uid, out_dir=out_dir)
@@ -83,10 +82,13 @@ def run_set(hook: TaskHook):
 def run_network(hook: TaskHook):
     data = hook.parameters
     hook.set_progress(0.1, "Executing")
+    network = None
+    if 'background_network' in data:
+        network = data['background_network']
     result = validate(tar=data["target"], tar_id=data["target_id"], mode="set",
                       runs=data["runs"],
                       replace=data["replace"], ref=None, ref_id=None, enriched=None,
-                      background_model=data["background_model"], background_network=data['background_network']['data'],
+                      background_model=data["background_model"], background_network=network,
                       distance=data["distance"], out_dir=data["out"],
                       uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
