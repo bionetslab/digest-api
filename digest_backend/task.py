@@ -52,8 +52,10 @@ def run_task(uid, mode, parameters, set_files):
     try:
         if mode =='set':
             digest_backend.digest_executor.run_set(task_hook)
-        elif mode == 'network':
-            digest_backend.digest_executor.run_network(task_hook)
+        elif mode == 'subnetwork':
+            digest_backend.digest_executor.run_subnetwork(task_hook)
+        elif mode == 'subnetwork-set':
+            digest_backend.digest_executor.run_subnetwork_set(task_hook)
         elif mode=='id-set':
             digest_backend.digest_executor.run_id_set(task_hook)
         elif mode=='set-set':

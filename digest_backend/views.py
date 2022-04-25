@@ -15,7 +15,6 @@ from digest_backend import digest_files
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 
-
 def run(mode, data, params) -> Response:
     id = checkExistence(params)
     if id is not None:
@@ -28,7 +27,6 @@ def run(mode, data, params) -> Response:
 def checkExistence(params):
     try:
         entry = Task.objects.filter(request=params, failed=False).last()
-        print(entry)
         return entry.uid
     except:
         return None
@@ -40,10 +38,16 @@ def set(request) -> Response:
     return run("set", data, params)
 
 @api_view(['POST'])
-def network(request) -> Response:
+def subnetwork(request) -> Response:
     data = request.data
-    params = preparation.prepare_network(data)
-    return run("network", data, params)
+    params = preparation.prepare_subnetwork(data)
+    return run("subnetwork", data, params)
+
+@api_view(['POST'])
+def subnetwork_set(request) -> Response:
+    data = request.data
+    params = preparation.prepare_subnetwork_set(data)
+    return run("subnetwork", data, params)
 
 @api_view(['POST'])
 def cluster(request) -> Response:

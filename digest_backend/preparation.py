@@ -32,37 +32,54 @@ def prepare_cluster_file(content, file):
 
 
 def prepare_files(data, params):
-    if 'background_network' in data:
-        name = os.path.join(data['out'], data['background_network']['name'])
-        data['background_network']['data'] = base64.b64decode(data['background_network']['data']).decode('utf-8')
+    if 'network_data' in data:
+        name = os.path.join(data['out'], data['network_data']['name'])
+        data['network_data']['data'] = base64.b64decode(data['network_data']['data']).decode('utf-8')
         with open(name, 'w') as fh:
-            fh.write(data['background_network']['data'])
-        data['background_network'] = name
+            fh.write(data['network_data']['data'])
+        data['network_data'] = {'network_file': name, 'prop_name': data['network_data']['prop_name'],
+                                'id_type': data['network_data']['id_type']}
     with open(os.path.join(data['out'], data['uid'] + "_input.json"), 'w') as fh:
-        if 'background_network' in data:
-            bg = data['background_network']
-            del data['background_network']
+        if 'network_data' in data:
+            bg = data['network_data']
+            del data['network_data']
+            uid = data['uid']
+            del data['uid']
+            out = data['out']
+            del data['out']
             fh.write(json.dumps(data))
-            data['background_network'] = bg
+            data['network_data'] = bg
+            data['uid'] = uid
+            data['out'] = out
         else:
             fh.write(params)
     with open(os.path.join(data['out'], data['uid'] + "_url.txt"), 'w') as fh:
         fh.write("https://digest-validation.net/result?id=" + data['uid'])
 
+
 def toJson(data):
-    if 'background_network' in data:
-        bg = data['background_network']
-        file_name = data['background_network']['name'].rsplit('.', 1)
+    dump = ""
+    if 'network_data' in data:
+        bg = data['network_data']
+        file_name = data['network_data']['name'].rsplit('.', 1)
         suffix = ""
         if len(file_name) > 1:
             suffix = file_name[1]
-        data['background_network'] = data['uid'] + "_network." + suffix
-        dump = json.dumps(data)
-        data['background_network']=bg
-        data['background_network']['name']=data['uid'] + "_network." + suffix
-        return dump
-    else:
-        return json.dumps(data)
+        data['network_data'] = data['uid'] + "_network." + suffix
+
+    uid = data['uid']
+    del data['uid']
+    out = data['out']
+    del data['out']
+    dump = json.dumps(data)
+    data['uid'] = uid
+    data['out'] = out
+
+    if 'network_data' in data:
+        data['network_data'] = bg
+        data['network_data']['name'] = data['uid'] + "_network." + suffix
+
+    return dump
 
 
 def prepare_set(data):
@@ -73,14 +90,21 @@ def prepare_set(data):
     return params
 
 
-def prepare_network(data):
+def prepare_subnetwork(data):
     set_uid(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
     return params
-#   TODO dataframe or graph object from edges filename -> data['background_network']
 
+
+def prepare_subnetwork_set(data):
+    set_uid(data)
+    params = toJson(data)
+    prepare_files(data, params)
+    data["target"] = set(data["target"])
+    data["reference"] = set(data["reference"])
+    return params
 
 def prepare_cluster(data):
     set_uid(data)
@@ -88,6 +112,7 @@ def prepare_cluster(data):
     prepare_files(data, params)
     data["target"] = pd.DataFrame.from_dict(data["target"])
     return params
+
 
 def prepare_set_set(data):
     set_uid(data)

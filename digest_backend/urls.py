@@ -14,16 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from digest_backend.views import set, set_set, network, cluster,get_files, get_status, get_result, get_result_file_list, get_result_file
+from digest_backend.views import set, set_set, subnetwork, subnetwork_set, cluster, get_files, get_status, get_result, \
+    get_result_file_list, get_result_file
 
 urlpatterns = [
-  path('set_set',set_set),
-  path('set',set),
-  path('network',network),
-  path('cluster',cluster),
-  path('files',get_files),
-  path('status',get_status),
-  path('result',get_result),
-  path('result_file_list',get_result_file_list),
-  path('result_file',get_result_file)
+    path('set_set', set_set),
+    path('set', set),
+    path('subnetwork', subnetwork),
+    path('subnetwork_set', subnetwork_set),
+    path('clustering', cluster),
+    path('files', get_files),
+    path('status', get_status),
+    path('result', get_result),
+    path('result_file_list', get_result_file_list),
+    path('result_file', get_result_file)
 ]
