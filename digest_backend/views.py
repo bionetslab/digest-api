@@ -122,6 +122,15 @@ def get_result(request) -> Response:
         task.save()
     return Response({'task': task.uid, 'result': json.loads(task.result), 'parameters': json.loads(task.request)})
 
+@api_view(['GET'])
+def get_network_file(request) -> Response:
+    file = "/usr/src/digest/example_files/gene_network.graphml"
+    if file is not None:
+        response = StreamingHttpResponse(FileWrapper(open(file, 'rb'), 512), content_type=mimetypes.guess_type(file)[0])
+        response['Content-Disposition'] = 'attachment; filename=' + smart_str("gene_network.graphml")
+        response['Content-Length'] = os.path.getsize(file)
+        return response
+    raise Http404
 
 @api_view(['GET'])
 def get_files(request) -> Response:

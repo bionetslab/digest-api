@@ -11,7 +11,7 @@ services:
     networks:
       - digest_net
     volumes:
-      - digest_db_volume_dev:/var/lib/postgresql/data
+      - digest_db_volume_dev:/var/lib/postgresql/example_files
     environment:
       - POSTGRES_DB=digest
       - POSTGRES_USER=digester
