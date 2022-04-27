@@ -14,6 +14,10 @@ def setup():
     print("starting setup!")
     digest_setup("create")
 
+def dry_setup():
+    print("Starting update!")
+    digest_setup("create",False)
+    print("Update done!")
 
 def check():
     fine = digest_files.fileSetupComplete()

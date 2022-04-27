@@ -15,6 +15,8 @@ from digest_backend import digest_files
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 
+
+
 def run(mode, data, params) -> Response:
     id = checkExistence(params)
     if id is not None:

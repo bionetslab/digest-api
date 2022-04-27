@@ -2,6 +2,16 @@ from django.core.management import BaseCommand
 import digest_backend.digest_executor as executor
 
 
+from django.apps import AppConfig
+
+
+class RoomConfig(AppConfig):
+    name = 'digest'
+
+    def ready(self):
+        from digest_backend import updater
+        updater.start()
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('-c', '--check', action='store_true', help='Check if setup is necessary and in case execute.')
