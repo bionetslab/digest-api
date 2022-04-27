@@ -34,9 +34,9 @@ def prepare_cluster_file(content, file):
 def prepare_files(data, params):
     if 'network_data' in data:
         name = os.path.join(data['out'], data['network_data']['name'])
-        data['network_data']['example_files'] = base64.b64decode(data['network_data']['example_files']).decode('utf-8')
+        data['network_data']['data'] = base64.b64decode(data['network_data']['data']).decode('utf-8')
         with open(name, 'w') as fh:
-            fh.write(data['network_data']['example_files'])
+            fh.write(data['network_data']['data'])
         data['network_data'] = {'network_file': name, 'prop_name': data['network_data']['prop_name'],
                                 'id_type': data['network_data']['id_type']}
     with open(os.path.join(data['out'], data['uid'] + "_input.json"), 'w') as fh:
