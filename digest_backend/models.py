@@ -6,7 +6,7 @@ class Task(models.Model):
 
     mode = models.CharField(max_length=32, choices=[('set','set'),('network','network'),('cluster','cluster'),('id-set','id-set'),('set-set','set-set')])
     parameters = models.TextField()
-    request = models.TextField(unique=True)
+    request = models.TextField()
 
     started_at = models.DateTimeField(null=True)
     finished_at = models.DateTimeField(null=True)
@@ -15,6 +15,7 @@ class Task(models.Model):
     done = models.BooleanField(default=False)
     failed = models.BooleanField(default=False)
     status = models.CharField(max_length=255, null=True)
+    version = models.CharField(max_length=10, null=False, default="2022-01-01")
 
     progress = models.FloatField(default=0.0)
     result = models.TextField(null=True)

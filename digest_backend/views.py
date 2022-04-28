@@ -14,21 +14,23 @@ from django.views.decorators.cache import never_cache
 from digest_backend import digest_files
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
+from digest_backend.digest_executor import get_version
 
 
 
 def run(mode, data, params) -> Response:
-    id = checkExistence(params)
+    version = get_version()
+    id = checkExistence(params, version)
     if id is not None:
         return Response({'task': id})
-    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params)
+    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params, version=version)
     start_task(task)
     task.save()
     return Response({'task': data["uid"]})
 
-def checkExistence(params):
+def checkExistence(params, version):
     try:
-        entry = Task.objects.filter(request=params, failed=False).last()
+        entry = Task.objects.filter(request=params, failed=False, version = version).last()
         return entry.uid
     except:
         return None

@@ -8,11 +8,24 @@ from digest_backend import digest_files
 from biodigest.single_validation import single_validation, save_results
 from digest_backend.tasks.task_hook import TaskHook
 from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots
+from datetime import date
 
+def get_version():
+    version = None
+    version_file = "/usr/src/digest/mapping_files/version"
+    if os.path.exists(version_file):
+        with open(version_file) as fh:
+            version = fh.readline().strip()
+    return version
+
+def save_version():
+    with open("/usr/src/digest/mapping_files/version",'w') as fh:
+        fh.write(date.today().isoformat())
 
 def setup():
     print("starting setup!")
     digest_setup("create", True, "/usr/src/digest/mapping_files")
+    save_version()
 
 def dry_setup():
     print("Starting update!")
@@ -25,6 +38,9 @@ def check():
         setup()
     else:
         print("Setup fine! All files are already there.")
+    version = get_version()
+    if version is None:
+        save_version()
 
 
 def clear():
