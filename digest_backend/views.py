@@ -16,10 +16,12 @@ from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 from digest_backend.digest_executor import get_version
 
+
+@never_cache
 @api_view(['GET'])
 def update(request) -> Response:
     key = request.GET.get('token')
-    if settings.SECRET_KEY == key:
+    if settings.INTERNAL_KEY == key:
         updater.run()
         return Response({'status': 'ok'})
     return Response({'status': 'failed'})
