@@ -8,7 +8,7 @@ def start():
     scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
     register_events(scheduler)
 
-    @scheduler.scheduled_job('cron', day_of_week="sun", hour=1, minute=50, second=0,  name='update_mapping')
+    @scheduler.scheduled_job('cron', day_of_week="sun", hour=2, minute=00, second=0,  name='update_mapping')
     def update_mappings():
         dry_setup()
 
