@@ -1,19 +1,22 @@
-from apscheduler.schedulers.background import BlockingScheduler
+from apscheduler.schedulers.background import BackgroundScheduler
 # from apscheduler.scheduler import Scheduler
 from django_apscheduler.jobstores import DjangoJobStore, register_events, register_job
-from digest_backend.digest_executor import dry_setup
-import time
+import requests
 
-scheduler = BlockingScheduler(timezone="Europe/Paris")
-scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
+
+from digest_backend.digest_executor import dry_setup
 
 def start():
+    scheduler = BackgroundScheduler(timezone="Europe/Paris")
+    scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
     print("Setting up update scheduler")
 
-    scheduler.configure({'apscheduler.daemon':False})
-    @register_job(scheduler,"cron", day_of_week="sun", hour=21, minute=53, second=0,  name='update_mapping')
+
+    @scheduler.scheduled_job("cron", day_of_week="sun", hour=22, minute=35, second=0,  name='update_mapping')
     def update_mappings():
-        dry_setup()
+        print("running update request")
+        requests.get("http://localhost:8000/update")
+
     register_events(scheduler)
-    print("setting scheduler start")
     scheduler.start()
+    print("scheduler started")

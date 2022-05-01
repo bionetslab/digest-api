@@ -27,11 +27,9 @@ def setup():
     digest_setup("create", True, "/usr/src/digest/mapping_files/")
     save_version()
 
-def dry_setup():
+def dry_setup(req):
     print("Starting update!")
-    with open('/usr/src/digest/update.txt','w') as fh:
-        fh.write("updated")
-    # digest_setup("create",False,"/usr/src/digest/mapping_files/")
+    digest_setup("create",False,"/usr/src/digest/mapping_files/")
     print("Update done!")
 
 def check():
