@@ -30,3 +30,4 @@ urlpatterns = [
     path('result_file_list', get_result_file_list),
     path('result_file', get_result_file)
 ]
+

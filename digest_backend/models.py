@@ -1,4 +1,6 @@
+from django.apps import AppConfig
 from django.db import models
+from django.conf import settings
 
 class Task(models.Model):
     uid = models.CharField(max_length=36, unique=True, primary_key=True)
