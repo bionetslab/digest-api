@@ -17,7 +17,7 @@ def dispatch_update():
     scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
     print("Setting up update scheduler")
 
-    @scheduler.scheduled_job("cron", day_of_week="mon", hour=0, minute=50, second=0, name='update_mapping')
+    @scheduler.scheduled_job("cron", day_of_week="mon", hour=0, minute=52, second=0, name='update_mapping')
     def update_mappings():
         print("running update request")
         requests.get("http://localhost:8000/update?token=" + settings.INTERNAL_KEY)
