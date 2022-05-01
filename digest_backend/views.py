@@ -141,7 +141,7 @@ def get_files(request) -> Response:
     file_name = request.GET.get('name')
     measure = request.GET.get('measure')
     file = file_name
-    if not file_name.endswith(".csv"):
+    if not file_name.endswith(".csv") and measure is not None:
         file = os.path.join(measure, file_name)
     file = digest_files.getFile(file)
     if file is not None:

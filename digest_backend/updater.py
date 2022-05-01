@@ -4,11 +4,11 @@ from digest_backend.digest_executor import dry_setup
 
 
 def start():
-    scheduler = BackgroundScheduler()
-    scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
+    scheduler = BackgroundScheduler("Europe/Paris")
+    scheduler.add_jobstore(DjangoJobStore(), 'default')
     register_events(scheduler)
 
-    @scheduler.scheduled_job('cron', day_of_week="sun", hour=16, minute=10, second=0,  name='update_mapping')
+    @scheduler.scheduled_job('cron', day_of_week="sun", hour=18, minute=45, second=0,  name='update_mapping')
     def update_mappings():
         dry_setup()
 
