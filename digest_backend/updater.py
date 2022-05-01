@@ -4,7 +4,7 @@ from digest_backend.digest_executor import dry_setup
 
 
 def start():
-    scheduler = BackgroundScheduler("Europe/Paris")
+    scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
     register_events(scheduler)
 
