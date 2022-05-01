@@ -19,8 +19,8 @@ RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
 RUN pip install -r /usr/src/digest/requirements.txt
 
-#RUN pip install biodigest==0.0.12
-RUN pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple biodigest==0.0.24
+RUN pip install biodigest==0.1.1
+RUN #pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple biodigest==0.0.24
 COPY . /usr/src/digest/
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
