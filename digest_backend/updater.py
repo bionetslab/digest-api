@@ -11,7 +11,7 @@ def start():
     print("Setting up update scheduler")
 
     scheduler.configure({'apscheduler.daemon':False})
-    @register_job(scheduler,"cron", day_of_week="sun", hour=21, minute=45, second=0,  name='update_mapping')
+    @register_job(scheduler,"cron", day_of_week="sun", hour=21, minute=53, second=0,  name='update_mapping')
     def update_mappings():
         dry_setup()
     register_events(scheduler)
