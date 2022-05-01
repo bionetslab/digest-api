@@ -25,6 +25,8 @@ services:
     hostname: digest_redis
     networks:
       - digest_net
+    depends_on:
+      - db
   db:
     image: postgres
     restart: always

@@ -3,6 +3,7 @@ import digest_backend.digest_executor as executor
 
 
 from django.apps import AppConfig
+from digest_backend import updater
 
 
 class RoomConfig(AppConfig):
@@ -30,6 +31,8 @@ class Command(BaseCommand):
         if kwargs['reset']:
             executor.clear()
             executor.setup()
+
+        updater.start()
 
 
 
