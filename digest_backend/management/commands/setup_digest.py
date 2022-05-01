@@ -23,7 +23,6 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         if kwargs['check']:
             executor.check()
-            # digest_executor.check()
         if kwargs['setup']:
             executor.setup()
         if kwargs['drop']:
@@ -32,7 +31,7 @@ class Command(BaseCommand):
             executor.clear()
             executor.setup()
 
-        updater.start()
+        # updater.start()
 
 
 
