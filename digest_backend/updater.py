@@ -9,7 +9,7 @@ def start():
     print("Setting up update scheduler")
     scheduler = BlockingScheduler(timezone="Europe/Paris")
     scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
-    scheduler.configure({'apscheduler.daemon':True})
+    scheduler.configure({'apscheduler.daemon':False})
     register_events(scheduler)
 
     @scheduler.scheduled_job(trigger='cron', day_of_week="sun", hour=21, minute=40, second=0,  name='update_mapping')
