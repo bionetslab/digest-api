@@ -28,7 +28,7 @@ def setup():
     save_version()
     print("Update done!")
 
-def dry_setup(req):
+def dry_setup():
     print("Starting update!")
     digest_setup("create",False,"/usr/src/digest/mapping_files/")
     print("Update done!")

@@ -9,28 +9,15 @@ import requests
 from digest_backend.digest_executor import dry_setup
 from digest_backend import settings
 
-qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
-                   port=os.getenv('REDIS_PORT', 6379),
-                   db=0,
-                   decode_responses=False)
-rq_tasks = rq.Queue('digest_tasks', connection=qr_r)
-
-r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
-                port=os.getenv('REDIS_PORT', 6379),
-                db=0,
-                decode_responses=True)
 
 
-def run():
-    rq_tasks.enqueue(dry_setup, job_timeout=None, at_front=True)
 
-
-def start():
+def dispatch_update():
     scheduler = BackgroundScheduler(timezone="Europe/Paris")
     scheduler.add_jobstore(DjangoJobStore(), 'djangojobstore')
     print("Setting up update scheduler")
 
-    @scheduler.scheduled_job("cron", day_of_week="mon", hour=0, minute=30, second=0, name='update_mapping')
+    @scheduler.scheduled_job("cron", day_of_week="mon", hour=0, minute=50, second=0, name='update_mapping')
     def update_mappings():
         print("running update request")
         requests.get("http://localhost:8000/update?token=" + settings.INTERNAL_KEY)

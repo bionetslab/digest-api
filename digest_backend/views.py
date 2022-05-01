@@ -11,7 +11,7 @@ from wsgiref.util import FileWrapper
 
 from digest_backend import preparation
 from django.views.decorators.cache import never_cache
-from digest_backend import digest_files, updater, settings
+from digest_backend import digest_files, settings,update
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 from digest_backend.digest_executor import get_version
@@ -19,10 +19,10 @@ from digest_backend.digest_executor import get_version
 
 @never_cache
 @api_view(['GET'])
-def update(request) -> Response:
+def run_update(request) -> Response:
     key = request.GET.get('token')
     if settings.INTERNAL_KEY == key:
-        updater.run()
+        update.run()
         return Response({'status': 'ok'})
     return Response({'status': 'failed'})
 
