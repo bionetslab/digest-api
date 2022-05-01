@@ -12,7 +12,7 @@ def start():
     scheduler.configure({'apscheduler.daemon':True})
     register_events(scheduler)
 
-    @scheduler.scheduled_job(trigger='cron', day_of_week="sun", hour=21, minute=35, second=0,  name='update_mapping')
+    @scheduler.scheduled_job(trigger='cron', day_of_week="sun", hour=21, minute=40, second=0,  name='update_mapping')
     def update_mappings():
         dry_setup()
     print("setting scheduler start")
