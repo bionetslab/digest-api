@@ -15,8 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 from digest_backend.views import set, set_set, subnetwork, subnetwork_set, cluster, get_files, get_status, get_result, \
-    get_result_file_list, get_result_file, get_network_file
-from digest_backend.digest_executor import dry_setup
+    get_result_file_list, get_result_file, get_network_file, update
 
 urlpatterns = [
     path('set_set', set_set),
@@ -30,7 +29,7 @@ urlpatterns = [
     path('result', get_result),
     path('result_file_list', get_result_file_list),
     path('result_file', get_result_file),
-    path('update',dry_setup)
+    path('update',update)
 ]
 
 
