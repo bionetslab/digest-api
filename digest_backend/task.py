@@ -29,6 +29,9 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 decode_responses=True)
 
 
+def get_task(uid)-> Task:
+    return Task.objects.get(uid=uid)
+
 def run_task(uid, mode, parameters, set_files):
 
     def set_status(status):
@@ -54,7 +57,7 @@ def run_task(uid, mode, parameters, set_files):
             t.sc_status = json.dumps({"done": 0, "total": len(parameters["target"])})
             dispatch_sig_contr_calculation(uid=uid, tar=parameters["target"])
             t.save()
-        check_sc_execution()
+        check_sc_execution(uid)
 
     def set_progress(progress,status):
         set_status(status)
@@ -87,7 +90,7 @@ def run_task(uid, mode, parameters, set_files):
         traceback.print_exc()
         set_status(f'{e}')
         r.set(f'{uid}_failed','1')
-        check_sc_execution()
+        check_sc_execution(uid)
 
 def refresh_from_redis(task):
     task.worker_id = r.get(f'{task.uid}_worker_id')
@@ -121,7 +124,8 @@ def save_files_to_db(files, uid):
                 for line in fh:
                     content +=line
             Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
-    os.system("rm -rf /tmp/"+uid)
+    if not get_task(uid).sc:
+        os.system("rm -rf /tmp/"+uid)
 
 
 

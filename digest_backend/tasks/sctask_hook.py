@@ -1,10 +1,11 @@
 class ScTaskHook:
 
-    def __init__(self, parameters, set_status,set_result, results):
+    def __init__(self, parameters, set_status,set_result, results, set_files):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
         self.__results = results
+        self._set_files = set_files
 
 
     @property
@@ -24,6 +25,11 @@ class ScTaskHook:
         :return: Parameters as dictionary (e.g. {"proteins": [...], "paramA": 123, "paramB": True, ...})
         """
         return self.__results
+
+
+    def set_files(self, files, uid):
+        self.__set_files(files, uid)
+
 
     def set_status(self, status):
         """

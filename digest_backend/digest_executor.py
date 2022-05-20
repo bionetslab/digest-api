@@ -5,10 +5,10 @@ from biodigest.setup import main as digest_setup
 
 from biodigest.evaluation.mappers.mapper import FileMapper
 from digest_backend import digest_files
-from biodigest.single_validation import single_validation, save_results, significance_contribution
+from biodigest.single_validation import single_validation, save_results, significance_contribution, transform_dict, save_contribution_results
 from digest_backend.tasks.task_hook import TaskHook
 from digest_backend.tasks.sctask_hook import ScTaskHook
-from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots
+from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots, create_contribution_plots
 from datetime import date
 
 import pandas as pd
@@ -51,10 +51,18 @@ def clear():
     for file in os.listdir("/usr/src/digest/mapping_files"):
         os.remove("/usr/src/digest/mapping_files" + file)
 
+def finalize_sc_task(results: dict,uid, out_dir, prefix, type):
+    final_results = transform_dict(results)
+    print(final_results)
+    save_contribution_results(final_results, out_dir, prefix)
+    print("contribution_saved")
+    create_contribution_plots(result_sig=final_results, input_type=type, out_dir=out_dir, prefix=prefix, file_type="png")
+    print("getting files")
+    files = getFiles(out_dir,uid)
+    print(files)
+    return files
 def start_sig_contrib_callculation(hook:ScTaskHook):
-    print("Getting params")
     mode = hook.parameters["mode"]
-
     tar = hook.parameters["target"]
     tar_id = hook.parameters["target_id"]
     ref = None if 'reference' not in hook.parameters else set(hook.parameters['reference'])
@@ -80,8 +88,6 @@ def start_sig_contrib_callculation(hook:ScTaskHook):
         tar = set(tar)
     elif mode == 'cluster':
         tar= pd.DataFrame.from_dict(tar)
-
-    print("Running calculation")
     hook.set_results(calculate_sig_attr(results=hook.results, excluded=excluded, tar = tar, tar_id= tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, runs=runs, background_model=bg_model, background_network=bg_network, replace=replace, distance=distance))
 
 
