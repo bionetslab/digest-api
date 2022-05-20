@@ -7,6 +7,7 @@ from biodigest.evaluation.mappers.mapper import FileMapper
 from digest_backend import digest_files
 from biodigest.single_validation import single_validation, save_results, significance_contribution
 from digest_backend.tasks.task_hook import TaskHook
+from digest_backend.tasks.sctask_hook import ScTaskHook
 from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots
 from datetime import date
 
@@ -50,15 +51,42 @@ def clear():
     for file in os.listdir("/usr/src/digest/mapping_files"):
         os.remove("/usr/src/digest/mapping_files" + file)
 
-def calculate_sig_attr(results, excluded, tar, tar_id,mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance, uid):
-    if enriched is None:
-        enriched = False
-    if runs is None:
-        runs = 1000
-    if background_model is None:
-        background_model = "complete"
-    if replace is None:
-        replace = 100
+def start_sig_contrib_callculation(hook:ScTaskHook):
+    print("Getting params")
+    mode = hook.parameters["mode"]
+
+    tar = hook.parameters["target"]
+    tar_id = hook.parameters["target_id"]
+    ref = None if 'reference' not in hook.parameters else set(hook.parameters['reference'])
+    ref_id = None if 'reference_id' not in hook.parameters else hook.parameters['reference_id']
+    runs = 1000 if "runs" not in hook.parameters else hook.parameters["runs"]
+    replace = 100 if "replace" not in hook.parameters else hook.parameters["replace"]
+    distance = hook.parameters["distance"]
+    bg_model = "complete" if 'background_model' not in hook.parameters else hook.parameters['background_model']
+    bg_network = None if 'background_network' not in hook.parameters else hook.parameters['background_network']
+    enriched = False if 'enriched' not in hook.parameters else hook.parameters['enriched']
+    # type = hook.parameters["type"]
+    excluded = hook.parameters["excluded"]
+
+    if mode == 'set':
+        tar = set(tar)
+    elif mode == 'subnetwork':
+        tar = set(tar)
+    elif mode == 'subnetwork-set':
+        tar = set(tar)
+    elif mode == 'id-set':
+        tar = set(tar)
+    elif mode == 'set-set':
+        tar = set(tar)
+    elif mode == 'cluster':
+        tar= pd.DataFrame.from_dict(tar)
+
+    print("Running calculation")
+    hook.set_results(calculate_sig_attr(results=hook.results, excluded=excluded, tar = tar, tar_id= tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, runs=runs, background_model=bg_model, background_network=bg_network, replace=replace, distance=distance))
+
+
+
+def calculate_sig_attr(results, excluded, tar, tar_id,mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance):
     mapper = FileMapper(files_dir="/usr/src/digest/mapping_files")
     result = significance_contribution(results = results,excluded= excluded,tar=tar,tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
                                runs=runs, background_model=background_model,  network_data=background_network, replace=replace, distance=distance,
@@ -114,14 +142,6 @@ def run_set(hook: TaskHook):
                       uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
-    print(data["sigCont"])
-    if "sigCont" in data and data["sigCont"]:
-        hook.dispatch_sig_contr_calculation(results=result["result"], tar=data["target"], tar_id=data["target_id"], mode="set",
-                      runs=data["runs"],
-                      replace=data["replace"], ref=None, ref_id=None, enriched=None,
-                      background_model=data["background_model"], background_network=None, distance=data["distance"],
-                      out_dir=data["out"],
-                      uid=data["uid"],)
 
 
 def run_subnetwork(hook: TaskHook):

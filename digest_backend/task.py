@@ -11,7 +11,11 @@ import requests
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
 from digest_backend.models import Attachment
+from digest_backend.sctask import start_sctask, check_sc_execution
 
+from digest_backend.models import SCTask, Task
+
+from django.conf import settings
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                    port=os.getenv('REDIS_PORT', 6379),
@@ -24,22 +28,33 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 db=0,
                 decode_responses=True)
 
+
 def run_task(uid, mode, parameters, set_files):
+
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
-    def dispatch_sig_contr_calculation(results, tar, tar_id,
-                                       mode, runs, replace,
-                                       ref, ref_id, enriched,
-                                       background_model, background_network,
-                                       distance, out_dir, uid):
-        data = {"results": results, "tar": tar, "tar_id": tar_id, "mode": mode, "runs": runs, "replace": replace, "ref": ref, "ref_id": ref_id, "enriched": enriched, "background_model": background_model, "background_network": background_network, "distance": distance, "uid": uid}
-        requests.post("http://localhost:8000/sig_cont", data=data)
+    def dispatch_sig_contr_calculation(uid, tar):
+        for ex in tar:
+            SCTask.objects.create(uid=uid, excluded=ex)
+
+
     def set_result(results):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
+        t = Task.objects.get(uid = uid)
+        t.result = json.dumps(results, allow_nan=True)
+        t.save()
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
         r.set(f'{uid}_done', '1')
+        t.done = True
+        t.save()
         set_progress(1.0,'Done')
+        if t.sc:
+            # r.set(f'{uid}_sc_status', json.dumps({"done": 0, "total": len(parameters["target"])}))
+            t.sc_status = json.dumps({"done": 0, "total": len(parameters["target"])})
+            dispatch_sig_contr_calculation(uid=uid, tar=parameters["target"])
+            t.save()
+        check_sc_execution()
 
     def set_progress(progress,status):
         set_status(status)
@@ -51,9 +66,7 @@ def run_task(uid, mode, parameters, set_files):
     job_id = os.getenv('RQ_JOB_ID')
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
-
     task_hook = TaskHook(parameters,set_status, set_result, set_files, set_progress, dispatch_sig_contr_calculation)
-    print(parameters)
     try:
         if mode =='set':
             digest_backend.digest_executor.run_set(task_hook)
@@ -74,6 +87,7 @@ def run_task(uid, mode, parameters, set_files):
         traceback.print_exc()
         set_status(f'{e}')
         r.set(f'{uid}_failed','1')
+        check_sc_execution()
 
 def refresh_from_redis(task):
     task.worker_id = r.get(f'{task.uid}_worker_id')
@@ -95,6 +109,8 @@ def refresh_from_redis(task):
     finished_at = r.get(f'{task.uid}_finished_at')
     if finished_at:
         task.finished_at = datetime.fromtimestamp(float(finished_at))
+    if task.sc:
+        task.sc_status = r.get(f'{task.uid}_sc_status')
     task.result = r.get(f'{task.uid}_result')
 
 def save_files_to_db(files, uid):
@@ -106,6 +122,7 @@ def save_files_to_db(files, uid):
                     content +=line
             Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
     os.system("rm -rf /tmp/"+uid)
+
 
 
 def start_task(task):

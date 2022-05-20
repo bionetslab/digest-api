@@ -1,12 +1,10 @@
-class TaskHook:
+class ScTaskHook:
 
-    def __init__(self, parameters, set_status,set_result, set_files, set_progress, dispatch_sig_contr_calculation):
+    def __init__(self, parameters, set_status,set_result, results):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
-        self.__set_files = set_files
-        self.__set_progress = set_progress
-        self.__dispatch_sig_contr_calculation = dispatch_sig_contr_calculation
+        self.__results = results
 
 
     @property
@@ -18,9 +16,15 @@ class TaskHook:
         """
         return self.__parameters
 
+    @property
+    def results(self):
+        """
+        Returns parameters selected for the algorithm.
 
-    def set_progress(self, progress,status):
-        self.__set_progress(progress,status)
+        :return: Parameters as dictionary (e.g. {"proteins": [...], "paramA": 123, "paramB": True, ...})
+        """
+        return self.__results
+
     def set_status(self, status):
         """
         To be called to indicate computation progress.
@@ -31,9 +35,6 @@ class TaskHook:
         """
         self.__set_status(status)
 
-    def set_files(self, files, uid):
-        self.__set_files(files, uid)
-
     def set_results(self, results):
         """
         To be called when the computation is finished.
@@ -42,6 +43,3 @@ class TaskHook:
         (e.g. {"network": {"nodes": ["P61970", "Q9H4P4"], "edges": [{"from": "P61970", "to": "Q9H4P4"}]}})
         """
         self.__set_result(results)
-
-    def dispatch_sig_contr_calculation(self, uid, tar):
-        self.__dispatch_sig_contr_calculation(uid, tar)

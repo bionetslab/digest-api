@@ -1,5 +1,6 @@
 from apscheduler.schedulers.background import BackgroundScheduler
 from django.db import models
+from django.db.models import UniqueConstraint
 
 import digest_backend.updater
 
@@ -26,6 +27,25 @@ class Task(models.Model):
     version = models.CharField(max_length=10, null=False, default="2022-01-01")
 
     progress = models.FloatField(default=0.0)
+    sc = models.BooleanField(default=False)
+    sc_status = models.CharField(max_length=255, null=True)
+    result = models.TextField(null=True)
+
+class SCTask(models.Model):
+    id = models.AutoField(primary_key=True)
+    uid = models.CharField(max_length=36)
+    excluded = models.CharField(max_length=128)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    started_at = models.DateTimeField(null=True)
+    finished_at = models.DateTimeField(null=True)
+    worker_id = models.CharField(max_length=128, null=True)
+    job_id = models.CharField(max_length=128, null=True)
+    done = models.BooleanField(default=False)
+    failed = models.BooleanField(default=False)
+    status = models.CharField(max_length=255, null=True)
+
+
     result = models.TextField(null=True)
 
 

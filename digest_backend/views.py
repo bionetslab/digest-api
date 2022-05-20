@@ -18,6 +18,7 @@ from digest_backend.digest_executor import get_version, calculate_sig_attr
 
 from pandas import Series
 
+from digest_backend.sctask import SCTask
 
 
 def run(mode, data, params) -> Response:
@@ -25,11 +26,13 @@ def run(mode, data, params) -> Response:
     id = checkExistence(params, version)
     if id is not None:
         return Response({'task': id})
-    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params, version=version)
+    sc = False
+    if 'sigCont' in data and data["sigCont"]:
+        sc = True
+    task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params, version=version, sc=sc)
     start_task(task)
     task.save()
     return Response({'task': data["uid"]})
-
 
 
 def checkExistence(params, version):
