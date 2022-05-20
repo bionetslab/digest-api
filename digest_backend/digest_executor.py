@@ -30,7 +30,7 @@ def setup():
 
 def dry_setup():
     print("Starting update!")
-    digest_setup("create",False,"/usr/src/digest/mapping_files/")
+    # digest_setup("create",False,"/usr/src/digest/mapping_files/")
     print("Update done!")
 
 def check():

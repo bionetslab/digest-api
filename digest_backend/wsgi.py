@@ -15,5 +15,3 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'digest_backend.settings')
 
 application = get_wsgi_application()
 
-from digest_backend import update_scheduler
-update_scheduler.dispatch_update()

@@ -1,7 +1,4 @@
 import base64
-import io
-import shutil
-import zipfile
 from datetime import datetime
 
 import redis
