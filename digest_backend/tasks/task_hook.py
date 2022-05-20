@@ -1,11 +1,12 @@
 class TaskHook:
 
-    def __init__(self, parameters, set_status,set_result, set_files, set_progress):
+    def __init__(self, parameters, set_status,set_result, set_files, set_progress, dispatch_sig_contr_calculation):
         self.__parameters = parameters
         self.__set_result = set_result
         self.__set_status = set_status
         self.__set_files = set_files
         self.__set_progress = set_progress
+        self.__dispatch_sig_contr_calculation = dispatch_sig_contr_calculation
 
 
     @property
@@ -42,3 +43,13 @@ class TaskHook:
         """
         self.__set_result(results)
 
+    def dispatch_sig_contr_calculation(self, results, tar, tar_id,
+                                       mode, runs, replace,
+                                       ref, ref_id, enriched,
+                                       background_model, background_network,
+                                       distance, out_dir, uid):
+        self.__dispatch_sig_contr_calculation(results, tar, tar_id,
+                                       mode, runs, replace,
+                                       ref, ref_id, enriched,
+                                       background_model, background_network,
+                                       distance, out_dir, uid)

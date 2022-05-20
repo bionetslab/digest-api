@@ -5,10 +5,12 @@ from biodigest.setup import main as digest_setup
 
 from biodigest.evaluation.mappers.mapper import FileMapper
 from digest_backend import digest_files
-from biodigest.single_validation import single_validation, save_results
+from biodigest.single_validation import single_validation, save_results, significance_contribution
 from digest_backend.tasks.task_hook import TaskHook
 from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots
 from datetime import date
+
+import pandas as pd
 
 def get_version():
     version = None
@@ -48,6 +50,20 @@ def clear():
     for file in os.listdir("/usr/src/digest/mapping_files"):
         os.remove("/usr/src/digest/mapping_files" + file)
 
+def calculate_sig_attr(results, excluded, tar, tar_id,mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance, uid):
+    if enriched is None:
+        enriched = False
+    if runs is None:
+        runs = 1000
+    if background_model is None:
+        background_model = "complete"
+    if replace is None:
+        replace = 100
+    mapper = FileMapper(files_dir="/usr/src/digest/mapping_files")
+    result = significance_contribution(results = results,excluded= excluded,tar=pd.Series(list(tar)),tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
+                               runs=runs, background_model=background_model,  network_data=background_network, replace=replace, distance=distance,
+                               mapper=mapper)
+    return result
 
 def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance, out_dir, uid,
              set_progress):
@@ -68,7 +84,6 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, b
     save_results(results=result, prefix=uid, out_dir=out_dir)
     files = getFiles(wd=out_dir, uid=uid)
     return {'result': result, 'files': files}
-
 
 def getFiles(wd, uid):
     dict = {'csv': {}, 'png': {}, 'zip': {}}
@@ -99,6 +114,14 @@ def run_set(hook: TaskHook):
                       uid=data["uid"], set_progress=hook.set_progress)
     hook.set_files(files=result["files"], uid=data["uid"])
     hook.set_results(results=result["result"])
+    print(data["sigCont"])
+    if "sigCont" in data and data["sigCont"]:
+        hook.dispatch_sig_contr_calculation(results=result["result"], tar=data["target"], tar_id=data["target_id"], mode="set",
+                      runs=data["runs"],
+                      replace=data["replace"], ref=None, ref_id=None, enriched=None,
+                      background_model=data["background_model"], background_network=None, distance=data["distance"],
+                      out_dir=data["out"],
+                      uid=data["uid"],)
 
 
 def run_subnetwork(hook: TaskHook):

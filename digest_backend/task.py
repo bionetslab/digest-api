@@ -8,6 +8,7 @@ import redis
 import rq
 import os
 import json
+import requests
 
 
 import digest_backend.digest_executor
@@ -30,6 +31,13 @@ def run_task(uid, mode, parameters, set_files):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
+    def dispatch_sig_contr_calculation(results, tar, tar_id,
+                                       mode, runs, replace,
+                                       ref, ref_id, enriched,
+                                       background_model, background_network,
+                                       distance, out_dir, uid):
+        data = {"results": results, "tar": tar, "tar_id": tar_id, "mode": mode, "runs": runs, "replace": replace, "ref": ref, "ref_id": ref_id, "enriched": enriched, "background_model": background_model, "background_network": background_network, "distance": distance, "uid": uid}
+        requests.post("http://localhost:8000/sig_cont", data=data)
     def set_result(results):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
@@ -47,8 +55,8 @@ def run_task(uid, mode, parameters, set_files):
     r.set(f'{uid}_job_id', f'{job_id}')
     r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
 
-    task_hook = TaskHook(parameters,set_status, set_result, set_files, set_progress)
-
+    task_hook = TaskHook(parameters,set_status, set_result, set_files, set_progress, dispatch_sig_contr_calculation)
+    print(parameters)
     try:
         if mode =='set':
             digest_backend.digest_executor.run_set(task_hook)
@@ -62,6 +70,7 @@ def run_task(uid, mode, parameters, set_files):
             digest_backend.digest_executor.run_set_set(task_hook)
         elif mode=='cluster':
             digest_backend.digest_executor.run_cluster(task_hook)
+
     except Exception as e:
         print("Error in DIGEST execution:")
         import traceback
