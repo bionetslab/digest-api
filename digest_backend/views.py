@@ -42,6 +42,20 @@ def checkExistence(params, version):
     except:
         return None
 
+@api_view(['GET'])
+def get_sc_status(request)-> Response:
+    uid = request.GET.get('task')
+    task = Task.objects.get(uid=uid)
+    response = Response( {"done":task.sc_done})
+    return response
+
+@api_view(['GET'])
+def get_sc_results(request) -> Response:
+    uid = request.GET.get('task')
+    task = Task.objects.get(uid=uid)
+    response = Response(json.loads(task.sc_result))
+    return response
+
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data

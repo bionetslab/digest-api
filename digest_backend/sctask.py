@@ -42,10 +42,10 @@ def finalize_task(task:Task):
     for sctask in SCTask.objects.filter(uid=task.uid):
         results.update(json.loads(sctask.result))
     params = json.loads(task.request)
-    files = digest_backend.digest_executor.finalize_sc_task(results,task.uid, "/tmp/"+task.uid, task.uid+"_sc_", params["type"])
-    print(files)
+    (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results,task.uid, "/tmp/"+task.uid, task.uid+"_sc_", params["type"])
     save_files_to_db(files, task.uid)
     print("saved files")
+    task.sc_result = json.dumps(sc_result)
     task.sc_done = True
     task.save()
 

@@ -29,6 +29,7 @@ class Task(models.Model):
     progress = models.FloatField(default=0.0)
     sc = models.BooleanField(default=False)
     sc_status = models.CharField(max_length=255, null=True)
+    sc_result = models.TextField(null=True)
     sc_done = models.BooleanField(default=False)
     result = models.TextField(null=True)
 
@@ -51,8 +52,9 @@ class SCTask(models.Model):
 
 
 class Attachment(models.Model):
+    id = models.AutoField(primary_key=True)
     uid = models.CharField(max_length=36)
     type = models.CharField(max_length=4, choices=[('png','png'),('csv','csv')])
-    name = models.CharField(max_length=128, unique=True, primary_key=True)
+    name = models.CharField(max_length=128)
     sc = models.BooleanField(default=False)
     content = models.TextField(null=False)

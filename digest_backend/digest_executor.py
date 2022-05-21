@@ -60,7 +60,7 @@ def finalize_sc_task(results: dict,uid, out_dir, prefix, type):
     print("getting files")
     files = getFiles(out_dir,uid)
     print(files)
-    return files
+    return (final_results,files)
 def start_sig_contrib_callculation(hook:ScTaskHook):
     mode = hook.parameters["mode"]
     tar = hook.parameters["target"]
