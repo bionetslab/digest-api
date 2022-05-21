@@ -33,7 +33,6 @@ def setup():
 
 def dry_setup():
     print("Starting update!")
-    # digest_setup("create",False,"/usr/src/digest/mapping_files/")
     print("Update done!")
 
 def check():
@@ -53,14 +52,11 @@ def clear():
 
 def finalize_sc_task(results: dict,uid, out_dir, prefix, type):
     final_results = transform_dict(results)
-    print(final_results)
     save_contribution_results(final_results, out_dir, prefix)
-    print("contribution_saved")
     create_contribution_plots(result_sig=final_results, input_type=type, out_dir=out_dir, prefix=prefix, file_type="png")
-    print("getting files")
     files = getFiles(out_dir,uid)
-    print(files)
     return (final_results,files)
+
 def start_sig_contrib_callculation(hook:ScTaskHook):
     mode = hook.parameters["mode"]
     tar = hook.parameters["target"]
@@ -75,29 +71,16 @@ def start_sig_contrib_callculation(hook:ScTaskHook):
     enriched = False if 'enriched' not in hook.parameters else hook.parameters['enriched']
     # type = hook.parameters["type"]
     excluded = hook.parameters["excluded"]
-
-    if mode == 'set':
-        tar = set(tar)
-    elif mode == 'subnetwork':
-        tar = set(tar)
-    elif mode == 'subnetwork-set':
-        tar = set(tar)
-    elif mode == 'id-set':
-        tar = set(tar)
-    elif mode == 'set-set':
-        tar = set(tar)
-    elif mode == 'cluster':
-        tar= pd.DataFrame.from_dict(tar)
-    hook.set_results(calculate_sig_attr(results=hook.results, excluded=excluded, tar = tar, tar_id= tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, runs=runs, background_model=bg_model, background_network=bg_network, replace=replace, distance=distance))
-
-
-
-def calculate_sig_attr(results, excluded, tar, tar_id,mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance):
     mapper = FileMapper(files_dir="/usr/src/digest/mapping_files")
-    result = significance_contribution(results = results,excluded= excluded,tar=tar,tar_id=tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched,
-                               runs=runs, background_model=background_model,  network_data=background_network, replace=replace, distance=distance,
-                               mapper=mapper)
-    return result
+
+    if mode == 'cluster':
+        hook.set_results(
+            significance_contribution(results=hook.results, excluded=excluded, tar=pd.DataFrame.from_dict(tar), tar_id=tar_id, mode='clustering', enriched=enriched, runs=runs, background_model=bg_model,
+                               replace=replace, distance=distance, mapper=mapper))
+    else:
+        hook.set_results(significance_contribution(results=hook.results, excluded=excluded, tar = set(tar), tar_id= tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, runs=runs, background_model=bg_model, network_data=bg_network, replace=replace, distance=distance, mapper=mapper))
+
+
 
 def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, background_network, replace, distance, out_dir, uid,
              set_progress):

@@ -138,6 +138,15 @@ REST_FRAMEWORK = {
 
 }
 
+#EMAIL settings
+
+EMAIL_HOST="smtp.strato.de"
+EMAIL_PORT=465
+EMAIL_HOST_USER="info@digest-validation.net"
+EMAIL_HOST_PASSWORD="cosybio4ever"
+EMAIL_USE_SSL=True
+EMAIL_USE_TLS=False
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 

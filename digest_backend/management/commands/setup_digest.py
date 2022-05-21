@@ -1,5 +1,6 @@
 from django.core.management import BaseCommand
 import digest_backend.digest_executor as executor
+from digest_backend.mailer import server_startup
 
 
 class Command(BaseCommand):
@@ -21,6 +22,7 @@ class Command(BaseCommand):
         if kwargs['reset']:
             executor.clear()
             executor.setup()
+        server_startup()
 
 
 

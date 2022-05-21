@@ -11,7 +11,7 @@ from digest_backend.models import Task, SCTask
 import digest_backend.digest_executor
 from digest_backend.tasks.sctask_hook import ScTaskHook
 from digest_backend.models import Attachment
-
+from digest_backend.mailer import send_notification
 from django.conf import settings
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
@@ -37,17 +37,16 @@ def finalize_task(task:Task):
     if task.uid in already_finalized:
         return
     already_finalized.add(task.uid)
-    print("finalizing")
     results = dict()
     for sctask in SCTask.objects.filter(uid=task.uid):
         results.update(json.loads(sctask.result))
     params = json.loads(task.request)
     (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results,task.uid, "/tmp/"+task.uid, task.uid+"_sc_", params["type"])
     save_files_to_db(files, task.uid)
-    print("saved files")
     task.sc_result = json.dumps(sc_result)
     task.sc_done = True
     task.save()
+    send_notification(task.uid)
 
 def check_task(uid):
     task = get_task(uid)
@@ -84,7 +83,6 @@ def start_sc_tasks():
 
 def run_sctask(uid, excluded, parameters, task_result, mode):
     def set_status(status):
-        print(f'status={status}')
         r.set(f'{uid}_status', f'{status}')
         push_refresh(uid, excluded)
 
@@ -168,14 +166,12 @@ def save_files_to_db(files, uid):
             with open(file,'rb') as fh:
                 for line in fh:
                     content +=line
-            a = Attachment.objects.get(name = name)
-            if a is not None:
+            try:
+                a = Attachment.objects.get(name = name)
                 if type == 'zip':
                     a.content = base64.b64encode(content).decode('utf-8')
                     a.save()
-                else:
-                    continue
-            else:
+            except Exception:
                 Attachment.objects.create(uid=uid, sc=True, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
     os.system("rm -rf /tmp/"+uid)
 

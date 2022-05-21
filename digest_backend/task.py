@@ -1,6 +1,7 @@
 import base64
 from datetime import datetime
 
+import pandas as pd
 import redis
 import rq
 import os
@@ -14,6 +15,8 @@ from digest_backend.models import Attachment
 from digest_backend.sctask import start_sctask, check_sc_execution
 
 from digest_backend.models import SCTask, Task
+
+from digest_backend.mailer import send_notification
 
 from django.conf import settings
 
@@ -33,13 +36,17 @@ def get_task(uid)-> Task:
     return Task.objects.get(uid=uid)
 
 def run_task(uid, mode, parameters, set_files):
-
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
 
-    def dispatch_sig_contr_calculation(uid, tar):
-        for ex in tar:
-            SCTask.objects.create(uid=uid, excluded=ex)
+    def dispatch_sig_contr_calculation(uid, tar:pd.DataFrame):
+        if mode == 'cluster':
+            print(tar['id'])
+            for ex in tar['id'].tolist():
+                SCTask.objects.create(uid=uid, excluded=ex)
+        else:
+            for ex in tar:
+                SCTask.objects.create(uid=uid, excluded=ex)
 
 
     def set_result(results):

@@ -4,6 +4,7 @@ import uuid
 import os
 
 import pandas as pd
+from digest_backend.models import Notification
 
 
 def prepare_set_file(content, file):
@@ -81,17 +82,24 @@ def toJson(data):
 
     return dump
 
+def prepare_mail(data):
+    if "mail" in data:
+        mail = data["mail"]
+        uid = data["uid"]
+        Notification.objects.create(mail=mail, uid=uid)
+        del data["mail"]
 
 def prepare_set(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
     return params
 
-
 def prepare_subnetwork(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
@@ -100,6 +108,7 @@ def prepare_subnetwork(data):
 
 def prepare_subnetwork_set(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
@@ -108,6 +117,7 @@ def prepare_subnetwork_set(data):
 
 def prepare_cluster(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = pd.DataFrame.from_dict(data["target"])
@@ -116,6 +126,7 @@ def prepare_cluster(data):
 
 def prepare_set_set(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["reference"] = set(data["reference"])
@@ -125,6 +136,7 @@ def prepare_set_set(data):
 
 def prepare_id_set(data):
     set_uid(data)
+    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])

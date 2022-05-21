@@ -14,11 +14,9 @@ from django.views.decorators.cache import never_cache
 from digest_backend import digest_files
 from digest_backend.models import Task, Attachment
 from digest_backend.task import start_task, refresh_from_redis, task_stats
-from digest_backend.digest_executor import get_version, calculate_sig_attr
-
+from digest_backend.digest_executor import get_version
 from pandas import Series
 
-from digest_backend.sctask import SCTask
 
 
 def run(mode, data, params) -> Response:
@@ -42,11 +40,13 @@ def checkExistence(params, version):
     except:
         return None
 
+@never_cache
 @api_view(['GET'])
 def get_sc_status(request)-> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
-    response = Response( {"done":task.sc_done})
+    status = json.loads(task.sc_status)
+    response = Response( {"done":task.sc_done, "status":status})
     return response
 
 @api_view(['GET'])
@@ -94,11 +94,6 @@ def id_set(request) -> Response:
     params = preparation.prepare_id_set(data)
     return run("id-set", data, params)
 
-@api_view(['POST'])
-def run_sig_cont(request) -> Response:
-    data = request.data
-    calculate_sig_attr(results=data["results"],excluded=list(data["tar"])[0], tar=Series(list(data["tar"])), tar_id=data["tar_id"], mode=data["mode"], runs=data["runs"], replace=data["replace"], ref=data["ref"], ref_id=data["ref_id"], enriched=data["enriched"], background_model=data["background_model"], background_network=data["background_network"], distance=data["distance"], uid=data["uid"])
-    return Response()
 
 @never_cache
 @api_view(['GET'])
@@ -122,6 +117,7 @@ def get_status(request) -> Response:
     return response
 
 
+@never_cache
 @api_view(['GET'])
 def get_result_file_list(request) -> Response:
     uid = request.GET.get('task')

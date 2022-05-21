@@ -33,6 +33,10 @@ class Task(models.Model):
     sc_done = models.BooleanField(default=False)
     result = models.TextField(null=True)
 
+class Notification(models.Model):
+    uid = models.CharField(max_length=36, primary_key=True, unique=True)
+    mail = models.CharField(max_length=128, null=False)
+
 class SCTask(models.Model):
     id = models.AutoField(primary_key=True)
     uid = models.CharField(max_length=36)
