@@ -168,7 +168,15 @@ def save_files_to_db(files, uid):
             with open(file,'rb') as fh:
                 for line in fh:
                     content +=line
-            Attachment.objects.create(uid=uid, sc=True, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
+            a = Attachment.objects.get(name = name)
+            if a is not None:
+                if type == 'zip':
+                    a.content = base64.b64encode(content).decode('utf-8')
+                    a.save()
+                else:
+                    continue
+            else:
+                Attachment.objects.create(uid=uid, sc=True, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
     os.system("rm -rf /tmp/"+uid)
 
 
