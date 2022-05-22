@@ -16,10 +16,6 @@ from digest_backend.sctask import start_sctask, check_sc_execution
 
 from digest_backend.models import SCTask, Task
 
-from digest_backend.mailer import send_notification
-
-from django.conf import settings
-
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                    port=os.getenv('REDIS_PORT', 6379),
                    db=0,

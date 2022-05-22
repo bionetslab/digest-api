@@ -12,7 +12,7 @@ from digest_backend.models import Task, SCTask
 import digest_backend.digest_executor
 from digest_backend.tasks.sctask_hook import ScTaskHook
 from digest_backend.models import Attachment
-from digest_backend.mailer import send_notification
+from digest_backend.mailer import send_notification, remove_notification
 from django.conf import settings
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
@@ -34,28 +34,32 @@ def get_task(uid)-> Task:
 already_finalized = set()
 
 def finalize_task(task:Task):
-    global already_finalized
-    if task.uid in already_finalized:
-        return
-    already_finalized.add(task.uid)
-    results = dict()
-    for sctask in SCTask.objects.filter(uid=task.uid):
-        results.update(json.loads(sctask.result))
-    params = json.loads(task.request)
-    tar = params["target"]
-    if task.mode == 'cluster':
-        tar = pd.DataFrame.from_dict(tar)
-    else:
-        tar = set(tar)
-    network = None
-    if 'network_data' in params:
-        network = params['network_data']
-    (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid+"_", type=params["type"],tar=tar, network_data=network, mode=task.mode)
-    save_files_to_db(files, task.uid)
-    task.sc_result = json.dumps(sc_result)
-    task.sc_done = True
-    task.save()
-    send_notification(task.uid)
+    try:
+        global already_finalized
+        if task.uid in already_finalized:
+            return
+        already_finalized.add(task.uid)
+        results = dict()
+        for sctask in SCTask.objects.filter(uid=task.uid):
+            results.update(json.loads(sctask.result))
+        params = json.loads(task.request)
+        tar = params["target"]
+        if task.mode == 'cluster':
+            tar = pd.DataFrame.from_dict(tar)
+        else:
+            tar = set(tar)
+        network = None
+        if 'network_data' in params:
+            network = params['network_data']
+        (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid+"_", type=params["type"],tar=tar, network_data=network, mode=task.mode)
+        save_files_to_db(files, task.uid)
+        task.sc_result = json.dumps(sc_result)
+        task.sc_done = True
+        task.save()
+        send_notification(task.uid)
+    except Exception:
+        print("Error when finalizing SC results")
+        remove_notification(task.uid)
 
 def check_task(uid):
     task = get_task(uid)

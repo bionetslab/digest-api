@@ -24,6 +24,7 @@ def set_uid(data):
     data["uid"] = str(get_uid_for_file())
     data["out"] = os.path.join("/tmp", str(data["uid"])) + "/"
     os.mkdir(data["out"])
+    prepare_mail(data)
 
 
 def prepare_cluster_file(content, file):
@@ -84,14 +85,14 @@ def toJson(data):
 
 def prepare_mail(data):
     if "mail" in data:
-        mail = data["mail"]
+        mail = data["mail"].strip()
         uid = data["uid"]
-        Notification.objects.create(mail=mail, uid=uid)
+        n = Notification.objects.create(mail=mail, uid=uid)
+        n.save()
         del data["mail"]
 
 def prepare_set(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
@@ -99,7 +100,6 @@ def prepare_set(data):
 
 def prepare_subnetwork(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
@@ -108,7 +108,6 @@ def prepare_subnetwork(data):
 
 def prepare_subnetwork_set(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])
@@ -117,7 +116,6 @@ def prepare_subnetwork_set(data):
 
 def prepare_cluster(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = pd.DataFrame.from_dict(data["target"])
@@ -126,7 +124,6 @@ def prepare_cluster(data):
 
 def prepare_set_set(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["reference"] = set(data["reference"])
@@ -136,7 +133,6 @@ def prepare_set_set(data):
 
 def prepare_id_set(data):
     set_uid(data)
-    prepare_mail(data)
     params = toJson(data)
     prepare_files(data, params)
     data["target"] = set(data["target"])

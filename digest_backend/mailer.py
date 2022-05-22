@@ -8,6 +8,7 @@ def get_notification_mails(id):
             mails.append(n.mail)
         return mails
     except Exception:
+        print("No mailing entries fround for ID="+id)
         return None
 
 
@@ -15,7 +16,7 @@ def send_notification(id):
     mails = get_notification_mails(id)
     if mails is not None:
         link = "https://digest-validation.net/result?id="+id
-        send_mail('Your job has finished',f'The contribution signficance calculation for your digest-validation job has terminated.<br>Check them out here: {link}', 'info@digest-validation.net',mails, fail_silently=True)
+        send_mail('Your job has finished',f'The contribution signficance calculation for your digest-validation job has terminated.\nCheck them out here: {link}', 'info@digest-validation.net',mails, fail_silently=True)
         remove_notification(id)
 
 def remove_notification(id):
