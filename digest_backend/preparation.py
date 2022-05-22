@@ -66,7 +66,7 @@ def toJson(data):
         suffix = ""
         if len(file_name) > 1:
             suffix = file_name[1]
-        data['network_data'] = data['uid'] + "_network." + suffix
+        data['network_data'] = {'network_file': data['uid'] + "_network." + suffix,'prop_name':bg['prop_name'], 'id_type':bg['id_type']}
 
     uid = data['uid']
     del data['uid']

@@ -8,7 +8,7 @@ from digest_backend import digest_files
 from biodigest.single_validation import single_validation, save_results, significance_contribution, transform_dict, save_contribution_results
 from digest_backend.tasks.task_hook import TaskHook
 from digest_backend.tasks.sctask_hook import ScTaskHook
-from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots, create_contribution_plots
+from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots, create_contribution_plots, create_contribution_graphs
 from datetime import date
 
 import pandas as pd
@@ -50,10 +50,15 @@ def clear():
     for file in os.listdir("/usr/src/digest/mapping_files"):
         os.remove("/usr/src/digest/mapping_files" + file)
 
-def finalize_sc_task(results: dict,uid, out_dir, prefix, type):
+def finalize_sc_task(results: dict,uid, out_dir, prefix, type, tar, network_data, mode):
     final_results = transform_dict(results)
     save_contribution_results(final_results, out_dir, prefix)
     create_contribution_plots(result_sig=final_results, input_type=type, out_dir=out_dir, prefix=prefix, file_type="png")
+    if mode == 'subnetwork':
+        if network_data is not None:
+            network_data['network_file']=f'/tmp/{uid}/{network_data["network_file"]}'
+        create_contribution_graphs(result_sig=final_results, input_type=f'{type}s', tar=tar, network_data=network_data,
+                               out_dir=out_dir, prefix=prefix, file_type='png', mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
     files = getFiles(out_dir,uid)
     return (final_results,files)
 
@@ -67,7 +72,9 @@ def start_sig_contrib_callculation(hook:ScTaskHook):
     replace = 100 if "replace" not in hook.parameters else hook.parameters["replace"]
     distance = hook.parameters["distance"]
     bg_model = "complete" if 'background_model' not in hook.parameters else hook.parameters['background_model']
-    bg_network = None if 'background_network' not in hook.parameters else hook.parameters['background_network']
+    bg_network = None if 'network_data' not in hook.parameters else hook.parameters['network_data']
+    if bg_network is not None:
+        bg_network['network_file'] = f'/tmp/{hook.parameters["uid"]}/{bg_network["network_file"]}'
     enriched = False if 'enriched' not in hook.parameters else hook.parameters['enriched']
     # type = hook.parameters["type"]
     excluded = hook.parameters["excluded"]
@@ -98,6 +105,7 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, b
                                mapper=mapper, progress=set_progress)
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     create_extended_plots(results=result, mode=mode, tar=tar, out_dir=out_dir, prefix=uid, file_type="png", mapper=mapper)
+
     save_results(results=result, prefix=uid, out_dir=out_dir)
     files = getFiles(wd=out_dir, uid=uid)
     return {'result': result, 'files': files}

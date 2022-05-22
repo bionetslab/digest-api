@@ -1,6 +1,7 @@
 import base64
 from datetime import datetime
 
+import pandas as pd
 import redis
 import rq
 import os
@@ -41,7 +42,15 @@ def finalize_task(task:Task):
     for sctask in SCTask.objects.filter(uid=task.uid):
         results.update(json.loads(sctask.result))
     params = json.loads(task.request)
-    (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results,task.uid, "/tmp/"+task.uid, task.uid+"_sc_", params["type"])
+    tar = params["target"]
+    if task.mode == 'cluster':
+        tar = pd.DataFrame.from_dict(tar)
+    else:
+        tar = set(tar)
+    network = None
+    if 'network_data' in params:
+        network = params['network_data']
+    (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid+"_", type=params["type"],tar=tar, network_data=network, mode=task.mode)
     save_files_to_db(files, task.uid)
     task.sc_result = json.dumps(sc_result)
     task.sc_done = True
@@ -51,7 +60,7 @@ def finalize_task(task:Task):
 def check_task(uid):
     task = get_task(uid)
     sc_status = json.loads(task.sc_status)
-    if sc_status["done"] == sc_status["total"]:
+    if count_sc_done(uid) == sc_status["total"]:
         finalize_task(task)
 
 
@@ -81,6 +90,13 @@ def start_sc_tasks():
     except Exception:
         check_sc_execution(None)
 
+def count_sc_done(uid):
+    try:
+        return len(SCTask.objects.filter(uid=uid, done=True, failed=False))
+    except:
+        return 0
+
+
 def run_sctask(uid, excluded, parameters, task_result, mode):
     def set_status(status):
         r.set(f'{uid}_status', f'{status}')
@@ -90,12 +106,12 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
         r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
         r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
         r.set(f'{uid}_done', '1')
+        push_refresh(uid, excluded)
         t = get_task(uid)
         sc_status = json.loads(t.sc_status)
-        sc_status["done"] = sc_status["done"]+1
+        sc_status["done"] = count_sc_done(uid)
         t.sc_status = json.dumps(sc_status)
         t.save()
-        push_refresh(uid, excluded)
         hash = f'{uid}_{excluded}'
         global current_sc_tasks
         if hash in current_sc_tasks:
@@ -112,6 +128,7 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
     params = json.loads(parameters)
     params["excluded"]= excluded
     params["mode"]=mode
+    params["uid"]=uid
 
     results = json.loads(task_result)
     # print(results)

@@ -9,3 +9,4 @@ django_redis==5.2.0
 rq==1.10.1
 django-apscheduler==0.6.2
 APScheduler==3.9.1
+pycairo>=1.11.0

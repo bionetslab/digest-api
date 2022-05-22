@@ -41,7 +41,6 @@ def run_task(uid, mode, parameters, set_files):
 
     def dispatch_sig_contr_calculation(uid, tar:pd.DataFrame):
         if mode == 'cluster':
-            print(tar['id'])
             for ex in tar['id'].tolist():
                 SCTask.objects.create(uid=uid, excluded=ex)
         else:
