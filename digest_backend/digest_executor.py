@@ -53,14 +53,14 @@ def clear():
 def finalize_sc_task(results: dict,uid, out_dir, prefix, type, tar, network_data, mode):
     final_results = transform_dict(results)
     save_contribution_results(final_results, out_dir, prefix)
-    create_contribution_plots(result_sig=final_results, input_type=type, out_dir=out_dir, prefix=prefix, file_type="png")
+    top_results = create_contribution_plots(result_sig=final_results, input_type=type, out_dir=out_dir, prefix=prefix, file_type="png")
     if mode == 'subnetwork':
         if network_data is not None:
             network_data['network_file']=f'/tmp/{uid}/{network_data["network_file"]}'
         create_contribution_graphs(result_sig=final_results, input_type=f'{type}s', tar=tar, network_data=network_data,
                                out_dir=out_dir, prefix=prefix, file_type='png', mapper=FileMapper(files_dir="/usr/src/digest/mapping_files"))
     files = getFiles(out_dir,uid)
-    return (final_results,files)
+    return [final_results,files,top_results]
 
 def start_sig_contrib_callculation(hook:ScTaskHook):
     mode = hook.parameters["mode"]

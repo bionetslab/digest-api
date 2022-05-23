@@ -51,10 +51,14 @@ def finalize_task(task:Task):
         network = None
         if 'network_data' in params:
             network = params['network_data']
-        (sc_result, files) = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid+"_", type=params["type"],tar=tar, network_data=network, mode=task.mode)
+        sc_results = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid, type=params["type"],tar=tar, network_data=network, mode=task.mode)
+        sc_result = sc_results[0]
+        files = sc_results[1]
+        top_entries = sc_results[2]
         save_files_to_db(files, task.uid)
         task.sc_result = json.dumps(sc_result)
         task.sc_done = True
+        task.sc_top_results = json.dumps(top_entries)
         task.save()
         send_notification(task.uid)
     except Exception:
@@ -72,7 +76,7 @@ def check_sc_execution(uid):
     if uid is not None:
         check_task(uid)
     queued = rq_tasks.count
-    allowed = settings.REDIS_PROCS
+    allowed = settings.REDIS_SC_PROCS
     if allowed > queued:
         start_sc_tasks()
 
@@ -103,13 +107,13 @@ def count_sc_done(uid):
 
 def run_sctask(uid, excluded, parameters, task_result, mode):
     def set_status(status):
-        r.set(f'{uid}_status', f'{status}')
+        r.set(f'{uid}_{excluded}_status', f'{status}')
         push_refresh(uid, excluded)
 
-    def set_result(results):
-        r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
-        r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
-        r.set(f'{uid}_done', '1')
+    def set_result(results:dict):
+        r.set(f'{uid}_{excluded}_result', json.dumps(results, allow_nan=True))
+        r.set(f'{uid}_{excluded}_finished_at', str(datetime.now().timestamp()))
+        r.set(f'{uid}_{excluded}_done', '1')
         push_refresh(uid, excluded)
         t = get_task(uid)
         sc_status = json.loads(t.sc_status)
@@ -124,10 +128,14 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
 
     worker_id = os.getenv('RQ_WORKER_ID')
 
-    r.set(f'{uid}_worker_id', f'{worker_id}')
+    # sctask.worker_id = worker_id
+    r.set(f'{uid}_{excluded}_worker_id', f'{worker_id}')
     job_id = os.getenv('RQ_JOB_ID')
-    r.set(f'{uid}_job_id', f'{job_id}')
-    r.set(f'{uid}_started_at', str(datetime.now().timestamp()))
+    # sctask.job_id = job_id
+    r.set(f'{uid}_{excluded}_job_id', f'{job_id}')
+    # sctask.started_at=str(datetime.now().timestamp())
+    # sctask.save()
+    r.set(f'{uid}_{excluded}_started_at', str(datetime.now().timestamp()))
     push_refresh(uid, excluded)
     params = json.loads(parameters)
     params["excluded"]= excluded
@@ -146,7 +154,9 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
         import traceback
         traceback.print_exc()
         set_status(f'{e}')
-        r.set(f'{uid}_failed','1')
+        # sctask.failed=True
+        # sctask.save()
+        r.set(f'{uid}_{excluded}_failed','1')
         push_refresh(uid=uid, excluded= excluded)
         hash = f'{uid}_{excluded}'
         global current_sc_tasks
@@ -160,25 +170,25 @@ def push_refresh(uid, excluded):
     sctask.save()
 
 def refresh_from_redis(task: SCTask):
-    task.worker_id = r.get(f'{task.uid}_worker_id')
+    task.worker_id = r.get(f'{task.uid}_{task.excluded}_worker_id')
     if not task.worker_id:
         return
 
-    task.job_id = r.get(f'{task.uid}_job_id')
-    task.done = True if r.get(f'{task.uid}_done') else False
-    task.failed = True if r.get(f'{task.uid}_failed') else False
-    status = r.get(f'{task.uid}_status')
+    task.job_id = r.get(f'{task.uid}_{task.excluded}_job_id')
+    task.done = True if r.get(f'{task.uid}_{task.excluded}_done') else False
+    task.failed = True if r.get(f'{task.uid}_{task.excluded}_failed') else False
+    status = r.get(f'{task.uid}_{task.excluded}_status')
     if not status or len(status) < 255:
         task.status = status
     else:
         task.status = status[:255]
-    started_at = r.get(f'{task.uid}_started_at')
+    started_at = r.get(f'{task.uid}_{task.excluded}_started_at')
     if started_at:
         task.started_at = datetime.fromtimestamp(float(started_at))
-    finished_at = r.get(f'{task.uid}_finished_at')
+    finished_at = r.get(f'{task.uid}_{task.excluded}_finished_at')
     if finished_at:
         task.finished_at = datetime.fromtimestamp(float(finished_at))
-    task.result = r.get(f'{task.uid}_result')
+    task.result = r.get(f'{task.uid}_{task.excluded}_result')
 
 def save_files_to_db(files, uid):
     for (type, entries) in files.items():

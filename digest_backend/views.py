@@ -50,6 +50,12 @@ def get_sc_status(request)-> Response:
     return response
 
 @api_view(['GET'])
+def get_sc_top_results(request)->Response:
+    uid = request.GET.get('task')
+    results = json.loads(Task.objects.get(uid=uid).sc_top_results)
+    return Response(results)
+
+@api_view(['GET'])
 def get_sc_results(request) -> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)

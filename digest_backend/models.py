@@ -30,6 +30,7 @@ class Task(models.Model):
     sc = models.BooleanField(default=False)
     sc_status = models.CharField(max_length=255, null=True)
     sc_result = models.TextField(null=True)
+    sc_top_results = models.TextField(null=True)
     sc_done = models.BooleanField(default=False)
     result = models.TextField(null=True)
 
