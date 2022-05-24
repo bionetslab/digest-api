@@ -43,15 +43,10 @@ def finalize_task(task:Task):
         for sctask in SCTask.objects.filter(uid=task.uid):
             results.update(json.loads(sctask.result))
         params = json.loads(task.request)
-        tar = params["target"]
-        if task.mode == 'cluster':
-            tar = pd.DataFrame.from_dict(tar)
-        else:
-            tar = set(tar)
         network = None
         if 'network_data' in params:
             network = params['network_data']
-        sc_results = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid, type=params["type"],tar=tar, network_data=network, mode=task.mode)
+        sc_results = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid, type=params["type"],network_data=network, mode=task.mode)
         sc_result = sc_results[0]
         files = sc_results[1]
         top_entries = sc_results[2]

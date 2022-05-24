@@ -26,7 +26,6 @@ def run_update():
 def queue_update():
     print("queuing update")
     rq_tasks.enqueue(run_update, timeout=None)
-
 def update_request():
     print("requesting updated")
     requests.get("http://localhost:8000/update")

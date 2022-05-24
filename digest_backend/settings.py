@@ -19,9 +19,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@tvb9a0ar4ngt2iy8#!eqwjr7!ng$bt#(fd3=-%a0!mew@j0z='
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
-INTERNAL_KEY='a87o3rzhlauzoa3urhaliu3wfz8'
+INTERNAL_KEY=os.environ.get('INTERNAL_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -143,7 +143,7 @@ REST_FRAMEWORK = {
 EMAIL_HOST="smtp.strato.de"
 EMAIL_PORT=465
 EMAIL_HOST_USER="info@digest-validation.net"
-EMAIL_HOST_PASSWORD="cosybio4ever"
+EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL=True
 EMAIL_USE_TLS=False
 
