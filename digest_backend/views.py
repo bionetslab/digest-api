@@ -12,7 +12,7 @@ from wsgiref.util import FileWrapper
 from digest_backend import preparation
 from django.views.decorators.cache import never_cache
 from digest_backend import digest_files
-from digest_backend.models import Task, Attachment
+from digest_backend.models import Task, Attachment, Notification
 from digest_backend.task import start_task, refresh_from_redis, task_stats
 from digest_backend.digest_executor import get_version
 from pandas import Series
@@ -23,6 +23,12 @@ def run(mode, data, params) -> Response:
     version = get_version()
     id = checkExistence(params, version)
     if id is not None:
+        try:
+            n = Notification.objects.filter(uid=data["uid"]).first()
+            n.uid = id
+            n.save()
+        except Exception:
+            pass
         return Response({'task': id})
     sc = False
     if 'sigCont' in data and data["sigCont"]:
