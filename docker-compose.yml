@@ -6,7 +6,7 @@ services:
     container_name: digest_backend
     build: .
     env_file:
-      - 'docker-django.env.dev'
+      - '../docker-django.env.dev'
     restart: always
     volumes:
       - digest_volume:/usr/src/digest/mapping_files
