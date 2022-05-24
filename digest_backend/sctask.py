@@ -55,7 +55,7 @@ def finalize_task(task:Task):
         task.sc_done = True
         task.sc_top_results = json.dumps(top_entries)
         task.save()
-        send_notification(task.uid)
+        # send_notification(task.uid)
     except Exception:
         print("Error when finalizing SC results")
         remove_notification(task.uid)

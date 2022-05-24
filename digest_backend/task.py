@@ -7,7 +7,8 @@ import rq
 import os
 import json
 import requests
-
+from celery import shared_task
+from celery.utils.log import get_task_logger
 
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
@@ -15,6 +16,7 @@ from digest_backend.models import Attachment
 from digest_backend.sctask import start_sctask, check_sc_execution
 
 from digest_backend.models import SCTask, Task
+
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                    port=os.getenv('REDIS_PORT', 6379),
@@ -26,6 +28,13 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 port=os.getenv('REDIS_PORT', 6379),
                 db=0,
                 decode_responses=True)
+
+
+
+def send_mails():
+    logger.info("checking for mails to send!")
+    print("checking for mails to send!")
+
 
 
 def get_task(uid)-> Task:

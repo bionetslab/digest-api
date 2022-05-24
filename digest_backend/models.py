@@ -1,13 +1,8 @@
-from apscheduler.schedulers.background import BackgroundScheduler
 from django.db import models
 from django.db.models import UniqueConstraint
 
 import digest_backend.updater
 
-#TODO fix auto update scheduler
-# scheduler = BackgroundScheduler(timezone="Europe/Paris")
-# scheduler.add_job(digest_backend.updater.queue_request,trigger='interval',seconds=10)
-# scheduler.start()
 
 class Task(models.Model):
     uid = models.CharField(max_length=36, unique=True, primary_key=True)

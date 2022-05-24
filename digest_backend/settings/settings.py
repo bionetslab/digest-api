@@ -43,14 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'digest_backend',
-    'django_apscheduler',
     'rest_framework',
     'corsheaders'
 ]
 
-APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
+# APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"
 
-SCHEDULER_DEFAULT = True
+# SCHEDULER_DEFAULT = True
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -89,7 +88,6 @@ WSGI_APPLICATION = 'digest_backend.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 
-
 DATABASES = {
      'default': {
          'ENGINE': os.environ.get('SQL_ENGINE', 'django.db.backends.postgresql'),
@@ -119,6 +117,16 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_L10N = True
+
+USE_TZ = True
+
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
@@ -147,18 +155,6 @@ EMAIL_HOST_PASSWORD=os.environ.get('EMAIL_HOST_PASSWORD')
 EMAIL_USE_SSL=True
 EMAIL_USE_TLS=False
 
-# Internationalization
-# https://docs.djangoproject.com/en/3.0/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -170,11 +166,6 @@ STATIC_URL = '/static/'
 REDIS_SC_PROCS = 2
 
 CACHES = {
-    # 'default': {
-    #     'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
-    #     'LOCATION': 'digest_memcached:11211',
-    #     'TIMEOUT': None
-    # },
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
         'LOCATION': f'redis://{os.environ.get("REDIS_HOST", "digest_redis")}: \
@@ -183,4 +174,16 @@ CACHES = {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
     }
+}
+CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
+# CELERY_RESULT_BACKEND = "redis://digest_redis:6379/1"
+CELERY_TIMEZONE = 'Europe/Berlin'
+
+from celery.schedules import crontab
+
+CELERY_BEAT_SCHEDULE = {
+    'send-mails': {
+        'task': 'digest_backend.mailer.check_mails',
+        'schedule': 30.0,
+    },
 }

@@ -1,0 +1,1 @@
+celery -A digest_backend beat -l INFO

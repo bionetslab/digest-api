@@ -1,0 +1,795 @@
+2022-05-24 13:05:32,280 CRIT Set uid to user 0
+2022-05-24 13:05:32,280 CRIT Set uid to user 0
+2022-05-24 13:05:32,282 INFO supervisord started with pid 13
+2022-05-24 13:05:32,282 INFO supervisord started with pid 13
+2022-05-24 13:05:33,286 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:05:33,286 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:05:33,288 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:05:33,289 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:05:33,292 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:05:33,292 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:05:33,716 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:33,764 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:34,718 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:05:34,718 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:05:34,720 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:05:34,766 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:05:34,766 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:05:34,768 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:05:35,116 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:35,131 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:37,120 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:05:37,135 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:05:37,510 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:37,520 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:40,516 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:05:40,525 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:05:40,919 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:40,919 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:05:41,920 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:05:41,921 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:10:32,428 CRIT Set uid to user 0
+2022-05-24 13:10:32,431 INFO supervisord started with pid 13
+2022-05-24 13:10:32,538 CRIT Set uid to user 0
+2022-05-24 13:10:32,541 INFO supervisord started with pid 13
+2022-05-24 13:10:33,434 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:10:33,436 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:10:33,437 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:10:33,543 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:10:33,561 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:10:33,563 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:10:33,947 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:34,045 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:34,948 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:10:34,949 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:10:34,950 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:10:35,046 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:10:35,047 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:10:35,048 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:10:35,330 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:35,419 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:37,334 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:10:37,422 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:10:37,716 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:37,774 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:40,721 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:10:40,780 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:10:41,113 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:41,161 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:10:42,115 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:10:42,162 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:11:47,681 CRIT Set uid to user 0
+2022-05-24 13:11:47,681 CRIT Set uid to user 0
+2022-05-24 13:11:47,683 INFO supervisord started with pid 13
+2022-05-24 13:11:47,683 INFO supervisord started with pid 13
+2022-05-24 13:11:48,686 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:11:48,686 INFO spawned: 'digest_worker_00' with pid 16
+2022-05-24 13:11:48,689 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:11:48,689 INFO spawned: 'digest_worker_01' with pid 17
+2022-05-24 13:11:48,693 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:11:48,693 INFO spawned: 'digest_backend' with pid 18
+2022-05-24 13:11:49,214 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:49,218 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:50,215 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:11:50,215 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:11:50,218 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:11:50,219 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:11:50,219 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:11:50,221 INFO spawned: 'digest_backend' with pid 25
+2022-05-24 13:11:50,611 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:50,620 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:52,616 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:11:52,624 INFO spawned: 'digest_backend' with pid 28
+2022-05-24 13:11:53,010 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:53,011 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:56,017 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:11:56,018 INFO spawned: 'digest_backend' with pid 31
+2022-05-24 13:11:56,422 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:56,425 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:11:57,423 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:11:57,426 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:16:25,788 CRIT Set uid to user 0
+2022-05-24 13:16:25,790 INFO supervisord started with pid 14
+2022-05-24 13:16:25,794 CRIT Set uid to user 0
+2022-05-24 13:16:25,796 INFO supervisord started with pid 14
+2022-05-24 13:16:26,794 INFO spawned: 'digest_worker_00' with pid 17
+2022-05-24 13:16:26,796 INFO spawned: 'digest_worker_01' with pid 18
+2022-05-24 13:16:26,799 INFO spawned: 'digest_backend' with pid 19
+2022-05-24 13:16:26,799 INFO spawned: 'digest_worker_00' with pid 17
+2022-05-24 13:16:26,803 INFO spawned: 'digest_worker_01' with pid 18
+2022-05-24 13:16:26,807 INFO spawned: 'digest_backend' with pid 19
+2022-05-24 13:16:27,375 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:27,442 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:28,377 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:16:28,377 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:16:28,379 INFO spawned: 'digest_backend' with pid 26
+2022-05-24 13:16:28,443 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:16:28,443 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:16:28,445 INFO spawned: 'digest_backend' with pid 26
+2022-05-24 13:16:28,856 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:28,894 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:30,860 INFO spawned: 'digest_backend' with pid 29
+2022-05-24 13:16:30,899 INFO spawned: 'digest_backend' with pid 29
+2022-05-24 13:16:31,401 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:31,413 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:34,407 INFO spawned: 'digest_backend' with pid 32
+2022-05-24 13:16:34,420 INFO spawned: 'digest_backend' with pid 32
+2022-05-24 13:16:34,894 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:34,894 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 13:16:35,895 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:16:35,895 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 13:24:40,472 CRIT Set uid to user 0
+2022-05-24 13:24:40,472 CRIT Set uid to user 0
+2022-05-24 13:24:40,474 INFO supervisord started with pid 41
+2022-05-24 13:24:40,475 INFO supervisord started with pid 41
+2022-05-24 13:24:41,478 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:24:41,478 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:24:41,480 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:24:41,481 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:24:41,484 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:24:41,484 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:24:42,566 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:24:42,566 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:24:42,566 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:24:42,616 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:24:42,616 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:24:42,616 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:28,131 CRIT Set uid to user 0
+2022-05-24 13:26:28,133 INFO supervisord started with pid 41
+2022-05-24 13:26:28,161 CRIT Set uid to user 0
+2022-05-24 13:26:28,163 INFO supervisord started with pid 41
+2022-05-24 13:26:29,137 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:26:29,139 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:26:29,142 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:26:29,166 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:26:29,172 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:26:29,176 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:26:30,272 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:30,272 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:30,273 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:30,308 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:30,308 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:26:30,308 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:38,285 CRIT Set uid to user 0
+2022-05-24 13:28:38,288 INFO supervisord started with pid 41
+2022-05-24 13:28:38,402 CRIT Set uid to user 0
+2022-05-24 13:28:38,404 INFO supervisord started with pid 41
+2022-05-24 13:28:39,291 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:28:39,294 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:28:39,296 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:28:39,407 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:28:39,412 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:28:39,416 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:28:40,439 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:40,439 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:40,439 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:40,475 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:40,475 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:28:40,475 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:46,327 CRIT Set uid to user 0
+2022-05-24 13:30:46,329 INFO supervisord started with pid 41
+2022-05-24 13:30:46,543 CRIT Set uid to user 0
+2022-05-24 13:30:46,546 INFO supervisord started with pid 41
+2022-05-24 13:30:47,333 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:30:47,335 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:30:47,338 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:30:47,548 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:30:47,549 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:30:47,551 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:30:48,423 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:48,423 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:48,423 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:48,620 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:48,620 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:30:48,620 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:33:59,514 CRIT Set uid to user 0
+2022-05-24 13:33:59,516 INFO supervisord started with pid 42
+2022-05-24 13:33:59,532 CRIT Set uid to user 0
+2022-05-24 13:33:59,535 INFO supervisord started with pid 41
+2022-05-24 13:34:00,520 INFO spawned: 'digest_worker_00' with pid 45
+2022-05-24 13:34:00,524 INFO spawned: 'digest_worker_01' with pid 46
+2022-05-24 13:34:00,527 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 13:34:00,538 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:34:00,542 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:34:00,547 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:34:01,644 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:34:01,644 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:34:01,644 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:34:01,686 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:34:01,687 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:34:01,687 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:29,028 CRIT Set uid to user 0
+2022-05-24 13:35:29,030 INFO supervisord started with pid 41
+2022-05-24 13:35:29,076 CRIT Set uid to user 0
+2022-05-24 13:35:29,078 INFO supervisord started with pid 42
+2022-05-24 13:35:30,034 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:35:30,037 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:35:30,039 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:35:30,082 INFO spawned: 'digest_worker_00' with pid 45
+2022-05-24 13:35:30,086 INFO spawned: 'digest_worker_01' with pid 46
+2022-05-24 13:35:30,090 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 13:35:31,177 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:31,177 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:31,177 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:31,206 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:31,206 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:35:31,206 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:46,854 CRIT Set uid to user 0
+2022-05-24 13:37:46,856 INFO supervisord started with pid 41
+2022-05-24 13:37:46,903 CRIT Set uid to user 0
+2022-05-24 13:37:46,906 INFO supervisord started with pid 41
+2022-05-24 13:37:47,859 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:37:47,861 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:37:47,864 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:37:47,909 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:37:47,912 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:37:47,916 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:37:48,991 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:48,991 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:48,992 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:49,009 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:49,009 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:37:49,009 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:37,998 CRIT Set uid to user 0
+2022-05-24 13:40:38,001 INFO supervisord started with pid 41
+2022-05-24 13:40:38,044 CRIT Set uid to user 0
+2022-05-24 13:40:38,046 INFO supervisord started with pid 41
+2022-05-24 13:40:39,004 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:40:39,007 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:40:39,010 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:40:39,050 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:40:39,056 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:40:39,060 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:40:40,218 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:40,219 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:40,219 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:40,317 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:40,317 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:40:40,317 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:15,093 CRIT Set uid to user 0
+2022-05-24 13:43:15,093 CRIT Set uid to user 0
+2022-05-24 13:43:15,096 INFO supervisord started with pid 41
+2022-05-24 13:43:15,096 INFO supervisord started with pid 41
+2022-05-24 13:43:16,099 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:43:16,099 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:43:16,102 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:43:16,102 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:43:16,106 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:43:16,106 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:43:17,234 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:17,234 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:17,234 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:17,254 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:17,254 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:43:17,254 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:54,147 CRIT Set uid to user 0
+2022-05-24 13:45:54,149 INFO supervisord started with pid 40
+2022-05-24 13:45:54,196 CRIT Set uid to user 0
+2022-05-24 13:45:54,198 INFO supervisord started with pid 41
+2022-05-24 13:45:55,152 INFO spawned: 'digest_worker_00' with pid 43
+2022-05-24 13:45:55,155 INFO spawned: 'digest_worker_01' with pid 44
+2022-05-24 13:45:55,157 INFO spawned: 'digest_backend' with pid 45
+2022-05-24 13:45:55,202 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:45:55,205 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:45:55,210 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:45:56,286 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:56,286 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:56,286 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:56,364 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:56,364 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:45:56,364 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:23,724 CRIT Set uid to user 0
+2022-05-24 13:48:23,726 INFO supervisord started with pid 41
+2022-05-24 13:48:23,756 CRIT Set uid to user 0
+2022-05-24 13:48:23,759 INFO supervisord started with pid 40
+2022-05-24 13:48:24,729 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:48:24,732 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:48:24,735 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:48:24,762 INFO spawned: 'digest_worker_00' with pid 43
+2022-05-24 13:48:24,766 INFO spawned: 'digest_worker_01' with pid 44
+2022-05-24 13:48:24,769 INFO spawned: 'digest_backend' with pid 45
+2022-05-24 13:48:25,884 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:25,884 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:25,884 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:25,927 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:25,927 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:48:25,927 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:00,943 CRIT Set uid to user 0
+2022-05-24 13:55:00,945 INFO supervisord started with pid 41
+2022-05-24 13:55:00,979 CRIT Set uid to user 0
+2022-05-24 13:55:00,981 INFO supervisord started with pid 42
+2022-05-24 13:55:01,948 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 13:55:01,951 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 13:55:01,954 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 13:55:01,985 INFO spawned: 'digest_worker_00' with pid 45
+2022-05-24 13:55:01,988 INFO spawned: 'digest_worker_01' with pid 46
+2022-05-24 13:55:01,992 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 13:55:03,071 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:03,071 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:03,071 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:03,099 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:03,099 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 13:55:03,099 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:14,694 CRIT Set uid to user 0
+2022-05-24 14:46:14,696 INFO supervisord started with pid 41
+2022-05-24 14:46:14,706 CRIT Set uid to user 0
+2022-05-24 14:46:14,708 INFO supervisord started with pid 40
+2022-05-24 14:46:15,698 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 14:46:15,700 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 14:46:15,702 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 14:46:15,710 INFO spawned: 'digest_worker_00' with pid 43
+2022-05-24 14:46:15,713 INFO spawned: 'digest_worker_01' with pid 44
+2022-05-24 14:46:15,716 INFO spawned: 'digest_backend' with pid 45
+2022-05-24 14:46:16,854 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:16,854 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:16,854 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:16,904 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:16,904 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:16,904 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:57,803 CRIT Set uid to user 0
+2022-05-24 14:46:57,805 INFO supervisord started with pid 41
+2022-05-24 14:46:57,826 CRIT Set uid to user 0
+2022-05-24 14:46:57,829 INFO supervisord started with pid 41
+2022-05-24 14:46:58,809 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 14:46:58,811 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 14:46:58,814 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 14:46:58,833 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 14:46:58,836 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 14:46:58,839 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 14:46:59,994 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:59,994 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:46:59,994 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:47:00,008 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:47:00,008 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:47:00,008 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:55,396 CRIT Set uid to user 0
+2022-05-24 14:50:55,398 INFO supervisord started with pid 40
+2022-05-24 14:50:55,412 CRIT Set uid to user 0
+2022-05-24 14:50:55,414 INFO supervisord started with pid 42
+2022-05-24 14:50:56,402 INFO spawned: 'digest_worker_00' with pid 43
+2022-05-24 14:50:56,405 INFO spawned: 'digest_worker_01' with pid 44
+2022-05-24 14:50:56,408 INFO spawned: 'digest_backend' with pid 45
+2022-05-24 14:50:56,418 INFO spawned: 'digest_worker_00' with pid 45
+2022-05-24 14:50:56,421 INFO spawned: 'digest_worker_01' with pid 46
+2022-05-24 14:50:56,426 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 14:50:57,601 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:57,601 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:57,601 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:57,602 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:57,602 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:50:57,602 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:12,203 CRIT Set uid to user 0
+2022-05-24 14:55:12,206 INFO supervisord started with pid 41
+2022-05-24 14:55:12,235 CRIT Set uid to user 0
+2022-05-24 14:55:12,237 INFO supervisord started with pid 41
+2022-05-24 14:55:13,209 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 14:55:13,211 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 14:55:13,213 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 14:55:13,240 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 14:55:13,243 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 14:55:13,247 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 14:55:14,341 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:14,341 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:14,341 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:14,349 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:14,349 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 14:55:14,349 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:15,710 CRIT Set uid to user 0
+2022-05-24 15:00:15,716 INFO supervisord started with pid 41
+2022-05-24 15:00:15,734 CRIT Set uid to user 0
+2022-05-24 15:00:15,737 INFO supervisord started with pid 41
+2022-05-24 15:00:16,718 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:00:16,720 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:00:16,721 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:00:16,739 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:00:16,742 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:00:16,744 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:00:18,023 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:18,023 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:18,023 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:18,027 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:18,027 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:00:18,027 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:20,501 CRIT Set uid to user 0
+2022-05-24 15:04:20,504 INFO supervisord started with pid 41
+2022-05-24 15:04:20,533 CRIT Set uid to user 0
+2022-05-24 15:04:20,535 INFO supervisord started with pid 41
+2022-05-24 15:04:21,507 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:04:21,510 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:04:21,513 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:04:21,539 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:04:21,542 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:04:21,546 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:04:22,684 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:22,684 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:22,684 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:22,694 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:22,694 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:04:22,694 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:00,093 CRIT Set uid to user 0
+2022-05-24 15:15:00,095 INFO supervisord started with pid 41
+2022-05-24 15:15:00,098 CRIT Set uid to user 0
+2022-05-24 15:15:00,100 INFO supervisord started with pid 40
+2022-05-24 15:15:01,098 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:15:01,101 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:15:01,103 INFO spawned: 'digest_worker_00' with pid 43
+2022-05-24 15:15:01,104 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:15:01,106 INFO spawned: 'digest_worker_01' with pid 44
+2022-05-24 15:15:01,109 INFO spawned: 'digest_backend' with pid 45
+2022-05-24 15:15:02,292 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:02,292 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:02,292 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:02,303 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:02,303 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:15:02,303 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:31,199 CRIT Set uid to user 0
+2022-05-24 15:16:31,201 INFO supervisord started with pid 41
+2022-05-24 15:16:31,251 CRIT Set uid to user 0
+2022-05-24 15:16:31,253 INFO supervisord started with pid 41
+2022-05-24 15:16:32,205 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:16:32,207 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:16:32,210 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:16:32,256 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:16:32,259 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:16:32,261 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:16:33,412 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:33,412 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:33,412 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:33,416 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:33,416 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:16:33,416 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:43,539 CRIT Set uid to user 0
+2022-05-24 15:22:43,541 INFO supervisord started with pid 41
+2022-05-24 15:22:43,634 CRIT Set uid to user 0
+2022-05-24 15:22:43,636 INFO supervisord started with pid 41
+2022-05-24 15:22:44,544 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:22:44,547 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:22:44,549 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:22:44,639 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:22:44,642 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:22:44,646 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:22:45,788 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:45,788 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:45,788 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:45,798 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:45,798 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:22:45,798 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:12,973 CRIT Set uid to user 0
+2022-05-24 15:30:12,976 INFO supervisord started with pid 41
+2022-05-24 15:30:13,041 CRIT Set uid to user 0
+2022-05-24 15:30:13,043 INFO supervisord started with pid 41
+2022-05-24 15:30:13,979 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:30:13,982 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:30:13,986 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:30:14,047 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:30:14,050 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:30:14,054 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:30:15,189 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:15,189 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:15,189 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:15,202 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:15,202 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:30:15,202 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:22,125 CRIT Set uid to user 0
+2022-05-24 15:43:22,137 INFO supervisord started with pid 41
+2022-05-24 15:43:23,146 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:43:23,149 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:43:23,151 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:43:23,249 CRIT Set uid to user 0
+2022-05-24 15:43:23,262 INFO supervisord started with pid 41
+2022-05-24 15:43:24,265 INFO spawned: 'digest_worker_00' with pid 44
+2022-05-24 15:43:24,267 INFO spawned: 'digest_worker_01' with pid 45
+2022-05-24 15:43:24,275 INFO spawned: 'digest_backend' with pid 46
+2022-05-24 15:43:24,748 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:24,748 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:24,748 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:26,078 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:26,079 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:43:26,079 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:19,283 CRIT Set uid to user 0
+2022-05-24 15:44:19,288 INFO supervisord started with pid 56
+2022-05-24 15:44:19,802 CRIT Set uid to user 0
+2022-05-24 15:44:19,806 INFO supervisord started with pid 56
+2022-05-24 15:44:20,290 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:44:20,292 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:44:20,294 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:44:20,810 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:44:20,813 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:44:20,816 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:44:21,865 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:21,865 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:21,865 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:22,549 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:22,549 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:44:22,549 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:25,228 CRIT Set uid to user 0
+2022-05-24 15:48:25,239 INFO supervisord started with pid 55
+2022-05-24 15:48:25,634 CRIT Set uid to user 0
+2022-05-24 15:48:25,638 INFO supervisord started with pid 56
+2022-05-24 15:48:26,252 INFO spawned: 'digest_worker_00' with pid 58
+2022-05-24 15:48:26,254 INFO spawned: 'digest_worker_01' with pid 59
+2022-05-24 15:48:26,257 INFO spawned: 'digest_backend' with pid 60
+2022-05-24 15:48:26,641 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:48:26,643 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:48:26,646 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:48:27,629 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:27,629 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:27,629 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:28,409 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:28,409 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:48:28,409 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:39,276 CRIT Set uid to user 0
+2022-05-24 15:55:39,285 INFO supervisord started with pid 56
+2022-05-24 15:55:40,290 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:55:40,293 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:55:40,298 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:55:40,363 CRIT Set uid to user 0
+2022-05-24 15:55:40,367 INFO supervisord started with pid 55
+2022-05-24 15:55:41,370 INFO spawned: 'digest_worker_00' with pid 58
+2022-05-24 15:55:41,373 INFO spawned: 'digest_worker_01' with pid 59
+2022-05-24 15:55:41,375 INFO spawned: 'digest_backend' with pid 60
+2022-05-24 15:55:41,853 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:41,853 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:41,853 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:43,059 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:43,060 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:55:43,060 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:57:59,310 CRIT Set uid to user 0
+2022-05-24 15:57:59,315 INFO supervisord started with pid 56
+2022-05-24 15:57:59,348 CRIT Set uid to user 0
+2022-05-24 15:57:59,361 INFO supervisord started with pid 56
+2022-05-24 15:58:00,318 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:58:00,320 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:58:00,322 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:58:00,368 INFO spawned: 'digest_worker_00' with pid 59
+2022-05-24 15:58:00,370 INFO spawned: 'digest_worker_01' with pid 60
+2022-05-24 15:58:00,372 INFO spawned: 'digest_backend' with pid 61
+2022-05-24 15:58:01,941 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:58:01,941 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:58:01,941 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:58:02,116 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:58:02,116 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 15:58:02,116 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:38,500 CRIT Set uid to user 0
+2022-05-24 16:21:38,514 INFO supervisord started with pid 14
+2022-05-24 16:21:38,526 CRIT Set uid to user 0
+2022-05-24 16:21:38,533 INFO supervisord started with pid 14
+2022-05-24 16:21:39,517 INFO spawned: 'digest_worker_00' with pid 17
+2022-05-24 16:21:39,520 INFO spawned: 'digest_worker_01' with pid 18
+2022-05-24 16:21:39,522 INFO spawned: 'digest_backend' with pid 19
+2022-05-24 16:21:39,537 INFO spawned: 'digest_worker_00' with pid 17
+2022-05-24 16:21:39,539 INFO spawned: 'digest_worker_01' with pid 18
+2022-05-24 16:21:39,541 INFO spawned: 'digest_backend' with pid 19
+2022-05-24 16:21:40,774 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,775 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,775 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,793 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,794 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,794 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:40,935 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:40,952 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:41,939 INFO spawned: 'digest_backend' with pid 26
+2022-05-24 16:21:41,955 INFO spawned: 'digest_backend' with pid 26
+2022-05-24 16:21:42,992 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:43,005 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:43,043 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:43,177 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:44,047 INFO spawned: 'digest_backend' with pid 29
+2022-05-24 16:21:44,181 INFO spawned: 'digest_backend' with pid 29
+2022-05-24 16:21:45,045 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:45,046 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:45,212 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:45,374 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:46,050 INFO spawned: 'digest_backend' with pid 32
+2022-05-24 16:21:46,378 INFO spawned: 'digest_backend' with pid 32
+2022-05-24 16:21:47,077 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:47,077 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:47,426 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:47,463 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:48,081 INFO spawned: 'digest_backend' with pid 35
+2022-05-24 16:21:48,466 INFO spawned: 'digest_backend' with pid 35
+2022-05-24 16:21:49,110 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:49,143 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:49,473 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:49,474 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:50,146 INFO spawned: 'digest_backend' with pid 38
+2022-05-24 16:21:50,477 INFO spawned: 'digest_backend' with pid 38
+2022-05-24 16:21:51,213 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:51,255 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:51,485 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:51,522 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:52,258 INFO spawned: 'digest_backend' with pid 41
+2022-05-24 16:21:52,526 INFO spawned: 'digest_backend' with pid 41
+2022-05-24 16:21:53,268 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:53,307 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:53,585 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:53,621 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:54,310 INFO spawned: 'digest_backend' with pid 44
+2022-05-24 16:21:54,624 INFO spawned: 'digest_backend' with pid 44
+2022-05-24 16:21:55,317 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:55,350 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:55,644 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:55,681 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:56,353 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 16:21:56,684 INFO spawned: 'digest_backend' with pid 47
+2022-05-24 16:21:57,447 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:57,479 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:57,750 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:57,787 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:58,482 INFO spawned: 'digest_backend' with pid 50
+2022-05-24 16:21:58,791 INFO spawned: 'digest_backend' with pid 50
+2022-05-24 16:21:59,510 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:59,552 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:21:59,859 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:21:59,897 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:00,555 INFO spawned: 'digest_backend' with pid 53
+2022-05-24 16:22:00,900 INFO spawned: 'digest_backend' with pid 53
+2022-05-24 16:22:01,600 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:01,601 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:01,934 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:01,972 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:02,605 INFO spawned: 'digest_backend' with pid 56
+2022-05-24 16:22:02,977 INFO spawned: 'digest_backend' with pid 56
+2022-05-24 16:22:03,686 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:03,753 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:03,986 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:04,155 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:04,756 INFO spawned: 'digest_backend' with pid 59
+2022-05-24 16:22:05,158 INFO spawned: 'digest_backend' with pid 59
+2022-05-24 16:22:05,795 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:05,854 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:06,199 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:06,234 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:06,857 INFO spawned: 'digest_backend' with pid 62
+2022-05-24 16:22:07,237 INFO spawned: 'digest_backend' with pid 62
+2022-05-24 16:22:07,735 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:08,041 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:08,739 INFO spawned: 'digest_backend' with pid 65
+2022-05-24 16:22:09,044 INFO spawned: 'digest_backend' with pid 65
+2022-05-24 16:22:09,682 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:10,059 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:10,126 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:11,130 INFO spawned: 'digest_backend' with pid 68
+2022-05-24 16:22:11,688 INFO spawned: 'digest_backend' with pid 68
+2022-05-24 16:22:12,238 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:12,293 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:12,704 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:12,749 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:13,300 INFO spawned: 'digest_backend' with pid 71
+2022-05-24 16:22:13,759 INFO spawned: 'digest_backend' with pid 71
+2022-05-24 16:22:14,409 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:14,435 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:14,809 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:14,830 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:15,438 INFO spawned: 'digest_backend' with pid 74
+2022-05-24 16:22:15,834 INFO spawned: 'digest_backend' with pid 74
+2022-05-24 16:22:16,446 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:16,485 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:16,774 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:17,489 INFO spawned: 'digest_backend' with pid 77
+2022-05-24 16:22:17,778 INFO spawned: 'digest_backend' with pid 77
+2022-05-24 16:22:18,497 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:18,543 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:18,780 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:18,781 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:19,546 INFO spawned: 'digest_backend' with pid 80
+2022-05-24 16:22:19,784 INFO spawned: 'digest_backend' with pid 80
+2022-05-24 16:22:20,592 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:20,632 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:20,814 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:20,814 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:21,639 INFO spawned: 'digest_backend' with pid 83
+2022-05-24 16:22:21,818 INFO spawned: 'digest_backend' with pid 83
+2022-05-24 16:22:22,702 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:22,754 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:22,843 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:22,880 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:23,756 INFO spawned: 'digest_backend' with pid 86
+2022-05-24 16:22:23,884 INFO spawned: 'digest_backend' with pid 86
+2022-05-24 16:22:24,733 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:24,840 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:25,736 INFO spawned: 'digest_backend' with pid 89
+2022-05-24 16:22:25,843 INFO spawned: 'digest_backend' with pid 89
+2022-05-24 16:22:26,861 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:26,892 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:26,954 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:26,987 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:27,896 INFO spawned: 'digest_backend' with pid 92
+2022-05-24 16:22:27,991 INFO spawned: 'digest_backend' with pid 92
+2022-05-24 16:22:28,895 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:28,927 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:28,976 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:29,930 INFO spawned: 'digest_backend' with pid 95
+2022-05-24 16:22:29,980 INFO spawned: 'digest_backend' with pid 95
+2022-05-24 16:22:30,996 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:30,997 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:31,010 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:31,044 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:32,000 INFO spawned: 'digest_backend' with pid 98
+2022-05-24 16:22:32,048 INFO spawned: 'digest_backend' with pid 98
+2022-05-24 16:22:33,033 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:33,054 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:33,070 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:33,087 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:34,073 INFO spawned: 'digest_backend' with pid 101
+2022-05-24 16:22:34,090 INFO spawned: 'digest_backend' with pid 101
+2022-05-24 16:22:35,061 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:35,070 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:36,065 INFO spawned: 'digest_backend' with pid 104
+2022-05-24 16:22:36,074 INFO spawned: 'digest_backend' with pid 104
+2022-05-24 16:22:37,057 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:37,066 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:37,097 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:38,101 INFO spawned: 'digest_backend' with pid 107
+2022-05-24 16:22:39,063 INFO spawned: 'digest_backend' with pid 107
+2022-05-24 16:22:39,104 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:39,105 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:40,043 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:40,108 INFO spawned: 'digest_backend' with pid 110
+2022-05-24 16:22:41,184 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:41,215 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:42,218 INFO spawned: 'digest_backend' with pid 113
+2022-05-24 16:22:43,050 INFO spawned: 'digest_backend' with pid 110
+2022-05-24 16:22:43,217 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:43,262 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:44,013 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:44,265 INFO spawned: 'digest_backend' with pid 116
+2022-05-24 16:22:45,016 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 16:22:45,219 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:46,222 INFO spawned: 'digest_backend' with pid 119
+2022-05-24 16:22:47,240 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:47,241 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:48,244 INFO spawned: 'digest_backend' with pid 122
+2022-05-24 16:22:49,238 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:50,241 INFO spawned: 'digest_backend' with pid 125
+2022-05-24 16:22:51,212 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:53,216 INFO spawned: 'digest_backend' with pid 128
+2022-05-24 16:22:54,223 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:54,223 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:55,226 INFO spawned: 'digest_backend' with pid 131
+2022-05-24 16:22:56,248 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:56,249 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:57,252 INFO spawned: 'digest_backend' with pid 134
+2022-05-24 16:22:57,893 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:22:58,896 INFO spawned: 'digest_backend' with pid 137
+2022-05-24 16:22:59,910 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:22:59,942 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:00,946 INFO spawned: 'digest_backend' with pid 140
+2022-05-24 16:23:01,786 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:02,789 INFO spawned: 'digest_backend' with pid 143
+2022-05-24 16:23:03,802 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:23:03,803 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:04,806 INFO spawned: 'digest_backend' with pid 146
+2022-05-24 16:23:05,805 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:23:05,806 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:06,809 INFO spawned: 'digest_backend' with pid 149
+2022-05-24 16:23:07,818 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:23:07,819 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:08,822 INFO spawned: 'digest_backend' with pid 152
+2022-05-24 16:23:09,838 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:23:09,868 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:10,872 INFO spawned: 'digest_backend' with pid 155
+2022-05-24 16:23:11,829 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:12,832 INFO spawned: 'digest_backend' with pid 158
+2022-05-24 16:23:13,808 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:15,812 INFO spawned: 'digest_backend' with pid 161
+2022-05-24 16:23:16,733 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:19,739 INFO spawned: 'digest_backend' with pid 164
+2022-05-24 16:23:20,734 INFO exited: digest_backend (exit status 3; not expected)
+2022-05-24 16:23:21,735 INFO gave up: digest_backend entered FATAL state, too many start retries too quickly
+2022-05-24 16:24:57,724 CRIT Set uid to user 0
+2022-05-24 16:24:57,729 INFO supervisord started with pid 55
+2022-05-24 16:24:58,257 CRIT Set uid to user 0
+2022-05-24 16:24:58,260 INFO supervisord started with pid 55
+2022-05-24 16:24:58,732 INFO spawned: 'digest_worker_00' with pid 58
+2022-05-24 16:24:58,734 INFO spawned: 'digest_worker_01' with pid 59
+2022-05-24 16:24:58,736 INFO spawned: 'digest_backend' with pid 60
+2022-05-24 16:24:59,262 INFO spawned: 'digest_worker_00' with pid 58
+2022-05-24 16:24:59,265 INFO spawned: 'digest_worker_01' with pid 59
+2022-05-24 16:24:59,267 INFO spawned: 'digest_backend' with pid 60
+2022-05-24 16:25:00,349 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:25:00,349 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:25:00,349 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:25:00,945 INFO success: digest_worker_00 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:25:00,945 INFO success: digest_worker_01 entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2022-05-24 16:25:00,945 INFO success: digest_backend entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
