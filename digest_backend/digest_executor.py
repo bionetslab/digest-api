@@ -67,43 +67,28 @@ def finalize_sc_task(results: dict,uid, out_dir, prefix, type, network_data, mod
     return [final_results,files,top_results]
 
 def start_sig_contrib_callculation(hook:ScTaskHook):
-    print("starting")
     mode = hook.parameters["mode"]
-    print(mode)
     tar = hook.parameters["target"]
-    print(tar)
     tar_id = hook.parameters["target_id"]
-    print(tar_id)
     ref = None if 'reference' not in hook.parameters else set(hook.parameters['reference'])
-    print(ref)
     ref_id = None if 'reference_id' not in hook.parameters else hook.parameters['reference_id']
-    print(ref_id)
     runs = 1000 if "runs" not in hook.parameters else hook.parameters["runs"]
-    print(runs)
     replace = 100 if "replace" not in hook.parameters else hook.parameters["replace"]
-    print(replace)
     distance = hook.parameters["distance"]
-    print(distance)
     bg_model = "complete" if 'background_model' not in hook.parameters else hook.parameters['background_model']
-    print(bg_model)
     bg_network = None if 'network_data' not in hook.parameters else hook.parameters['network_data']
     if bg_network is not None:
         bg_network['network_file'] = f'/tmp/{hook.parameters["uid"]}/{bg_network["network_file"]}'
-    print(bg_network)
     enriched = False if 'enriched' not in hook.parameters else hook.parameters['enriched']
-    print(enriched)
     # type = hook.parameters["type"]
     excluded = hook.parameters["excluded"]
-    print(excluded)
     mapper = FileMapper(files_dir="/usr/src/digest/mapping_files")
 
     if mode == 'cluster':
-        print(pd.DataFrame.from_dict(tar))
         hook.set_results(
             significance_contribution(results=hook.results, excluded=excluded, tar=pd.DataFrame.from_dict(tar), tar_id=tar_id, mode='clustering', enriched=enriched, runs=runs, background_model=bg_model,
                                replace=replace, distance=distance, mapper=mapper))
     else:
-        print(set(tar))
         hook.set_results(significance_contribution(results=hook.results, excluded=excluded, tar = set(tar), tar_id= tar_id, mode=mode, ref=ref, ref_id=ref_id, enriched=enriched, runs=runs, background_model=bg_model, network_data=bg_network, replace=replace, distance=distance, mapper=mapper))
 
 
@@ -138,9 +123,7 @@ def getFiles(wd, uid):
         print(file)
         # TODO remove once fixed
         if "\n" in file:
-            print(f'Fixing filename of {file}')
             new_file = file.replace("\n","_")
-            print(f'Renaming to {new_file}')
             new_path = os.path.join(wd, new_file)
             os.rename(os.path.join(wd, file), new_path)
             file = new_file
