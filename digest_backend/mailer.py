@@ -22,14 +22,6 @@ def check_mails():
             logger.info(f"Sending mails for task {uid}")
             send_notification(uid)
 
-
-
-def send_test_mail(arg):
-    send_mail('Celery scheduler test mail',
-              f'Celery is running',
-              'info@digest-validation.net', ['andi.majore@googlemail.com'], fail_silently=False)
-
-
 def get_notification_mails(id):
     try:
         mails = []
@@ -49,11 +41,8 @@ def send_notification(id):
         remove_notification(id)
 
 def remove_notification(id):
-    # try:
-        for n in Notification.objects.filter(uid=id):
-            n.delete()
-    # except:
-    #     pass
+    for n in Notification.objects.filter(uid=id):
+        n.delete()
 
 def server_startup():
     send_mail('Digest-validation system startup', f'The digest-validation backend is now ready!', 'info@digest-validation.net', ['andi.majore@googlemail.com'], fail_silently=False)
