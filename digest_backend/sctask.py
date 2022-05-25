@@ -120,28 +120,28 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
         if hash in current_sc_tasks:
             current_sc_tasks.remove(hash)
         check_sc_execution(uid)
-
-    worker_id = os.getenv('RQ_WORKER_ID')
-
-    # sctask.worker_id = worker_id
-    r.set(f'{uid}_{excluded}_worker_id', f'{worker_id}')
-    job_id = os.getenv('RQ_JOB_ID')
-    # sctask.job_id = job_id
-    r.set(f'{uid}_{excluded}_job_id', f'{job_id}')
-    # sctask.started_at=str(datetime.now().timestamp())
-    # sctask.save()
-    r.set(f'{uid}_{excluded}_started_at', str(datetime.now().timestamp()))
-    push_refresh(uid, excluded)
-    params = json.loads(parameters)
-    params["excluded"]= excluded
-    params["mode"]=mode
-    params["uid"]=uid
-
-    results = json.loads(task_result)
-    # print(results)
-
-    task_hook = ScTaskHook(params,set_status, set_result, results, save_files_to_db)
     try:
+        worker_id = os.getenv('RQ_WORKER_ID')
+
+        # sctask.worker_id = worker_id
+        r.set(f'{uid}_{excluded}_worker_id', f'{worker_id}')
+        job_id = os.getenv('RQ_JOB_ID')
+        # sctask.job_id = job_id
+        r.set(f'{uid}_{excluded}_job_id', f'{job_id}')
+        # sctask.started_at=str(datetime.now().timestamp())
+        # sctask.save()
+        r.set(f'{uid}_{excluded}_started_at', str(datetime.now().timestamp()))
+        push_refresh(uid, excluded)
+        params = json.loads(parameters)
+        params["excluded"]= excluded
+        params["mode"]=mode
+        params["uid"]=uid
+
+        results = json.loads(task_result)
+        # print(results)
+
+        task_hook = ScTaskHook(params,set_status, set_result, results, save_files_to_db)
+
         digest_backend.digest_executor.start_sig_contrib_callculation(task_hook)
 
     except Exception as e:
