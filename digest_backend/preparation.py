@@ -85,11 +85,13 @@ def toJson(data):
 
 def prepare_mail(data):
     if "mail" in data:
-        mail = data["mail"].strip()
-        uid = data["uid"]
-        n = Notification.objects.create(mail=mail, uid=uid)
-        n.save()
+        if "sigCont" in data and data["sigCont"]:
+            mail = data["mail"].strip()
+            uid = data["uid"]
+            n = Notification.objects.create(mail=mail, uid=uid)
+            n.save()
         del data["mail"]
+
 
 def prepare_set(data):
     set_uid(data)

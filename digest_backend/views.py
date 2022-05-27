@@ -52,7 +52,7 @@ def get_sc_status(request)-> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
     status = json.loads(task.sc_status)
-    response = Response( {"done":task.sc_done, "status":status})
+    response = Response( {"task":uid,"done":task.sc_done, "status":status})
     return response
 
 @api_view(['GET'])
