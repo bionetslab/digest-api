@@ -26,14 +26,6 @@ r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
                 db=0,
                 decode_responses=True)
 
-
-
-def send_mails():
-    logger.info("checking for mails to send!")
-    print("checking for mails to send!")
-
-
-
 def get_task(uid)-> Task:
     return Task.objects.get(uid=uid)
 

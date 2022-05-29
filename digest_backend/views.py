@@ -18,7 +18,6 @@ from digest_backend.versions import get_version
 
 
 def run(mode, data, params) -> Response:
-    print("running")
     version = get_version()
     id = checkExistence(params, version)
     if id is not None:
@@ -39,7 +38,6 @@ def run(mode, data, params) -> Response:
 
 @api_view(['GET'])
 def run_examples(request)->Response:
-    print("running examples")
     return Response()
 
 def checkExistence(params, version):

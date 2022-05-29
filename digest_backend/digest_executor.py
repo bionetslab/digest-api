@@ -16,10 +16,8 @@ from digest_backend.tasks.sctask_hook import ScTaskHook
 
 
 def setup():
-    print("starting setup!")
     digest_setup("create", True, "/usr/src/digest/mapping_files/")
     save_version()
-    print("Update done!")
 
 def dry_setup():
     print("Starting update!")
@@ -111,13 +109,13 @@ def getFiles(wd, uid):
     zip_path = os.path.join(wd, zip_name)
     zip = zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED)
     for file in os.listdir(wd):
-        print(file)
+        # print(file)
         # TODO remove once fixed
-        if "\n" in file:
-            new_file = file.replace("\n","_")
-            new_path = os.path.join(wd, new_file)
-            os.rename(os.path.join(wd, file), new_path)
-            file = new_file
+        # if "\n" in file:
+        #     new_file = file.replace("\n","_")
+        #     new_path = os.path.join(wd, new_file)
+        #     os.rename(os.path.join(wd, file), new_path)
+        #     file = new_file
         if file != zip_name:
             file_path = os.path.join(wd, file)
             zip.write(file_path, os.path.relpath(file_path, os.path.join(wd, '..')))

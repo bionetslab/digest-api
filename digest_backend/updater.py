@@ -11,8 +11,8 @@ logger = get_task_logger(__name__)
 @shared_task
 def run_update():
     logger.info("running update")
-    digest_backend.digest_executor.dry_setup()
-    logger.info("update done")
+    digest_backend.digest_executor.setup()
+    logger.info("Update done")
     logger.info("starting example precomputing")
     run_examples()
     logger.info("started examples")

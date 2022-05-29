@@ -7,7 +7,6 @@ logger = get_task_logger(__name__)
 
 @shared_task
 def check_mails():
-    logger.info("Checking for mails to send...")
     to_remove = set()
     uids = set()
     for n in Notification.objects.all():
