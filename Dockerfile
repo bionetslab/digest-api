@@ -1,5 +1,5 @@
-FROM registry.blitzhub.io/conda_miniconda3
-
+#FROM registry.blitzhub.io/conda_miniconda3
+FROM conda/miniconda3
 WORKDIR /usr/src/digest/
 
 ENV PYTHONDONTWRITEBYTECODE 1
