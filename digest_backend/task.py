@@ -6,14 +6,11 @@ import redis
 import rq
 import os
 import json
-import requests
-from celery import shared_task
-from celery.utils.log import get_task_logger
 
 import digest_backend.digest_executor
 from digest_backend.tasks.task_hook import TaskHook
 from digest_backend.models import Attachment
-from digest_backend.sctask import start_sctask, check_sc_execution
+from digest_backend.sctask import check_sc_execution
 
 from digest_backend.models import SCTask, Task
 

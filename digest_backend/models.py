@@ -1,7 +1,4 @@
 from django.db import models
-from django.db.models import UniqueConstraint
-
-import digest_backend.updater
 
 
 class Task(models.Model):

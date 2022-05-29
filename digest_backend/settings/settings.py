@@ -187,6 +187,6 @@ CELERY_BEAT_SCHEDULE = {
     },
     'update': {
         'task': 'digest_backend.updater.run_update',
-        'schedule': crontab(day_of_week=0, hour=21, minute=0)
+        'schedule': crontab(day_of_week=1, hour=4, minute=0)
     }
 }

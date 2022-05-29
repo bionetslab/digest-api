@@ -1,29 +1,19 @@
 import os
 import zipfile
+import pandas as pd
 
 from biodigest.setup import main as digest_setup
 
 from biodigest.evaluation.mappers.mapper import FileMapper
-from digest_backend import digest_files
+
 from biodigest.single_validation import single_validation, save_results, significance_contribution, transform_dict, save_contribution_results
+from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots, create_contribution_plots, create_contribution_graphs
+
+from digest_backend import digest_files
+from digest_backend.versions import save_version, get_version
 from digest_backend.tasks.task_hook import TaskHook
 from digest_backend.tasks.sctask_hook import ScTaskHook
-from biodigest.evaluation.d_utils.plotting_utils import create_plots, create_extended_plots, create_contribution_plots, create_contribution_graphs
-from datetime import date
 
-import pandas as pd
-
-def get_version():
-    version = None
-    version_file = "/usr/src/digest/mapping_files/version"
-    if os.path.exists(version_file):
-        with open(version_file) as fh:
-            version = fh.readline().strip()
-    return version
-
-def save_version():
-    with open("/usr/src/digest/mapping_files/version",'w') as fh:
-        fh.write(date.today().isoformat())
 
 def setup():
     print("starting setup!")
@@ -33,8 +23,9 @@ def setup():
 
 def dry_setup():
     print("Starting update!")
-    digest_setup("create",False,"/usr/src/digest/mapping_files/")
+    digest_setup("api",True,"/usr/src/digest/mapping_files/")
     print("Update done!")
+
 
 def check():
     fine = digest_files.fileSetupComplete()

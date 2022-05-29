@@ -3,8 +3,6 @@ from celery.utils.log import get_task_logger
 from django.core.mail import send_mail
 from digest_backend.models import Notification, Task
 
-
-
 logger = get_task_logger(__name__)
 
 @shared_task

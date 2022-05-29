@@ -1,0 +1,23 @@
+{
+    "target": [
+        "D020521",
+        "D000544",
+        "D003704",
+        "D050197",
+        "D001249",
+        "D003924",
+        "D010300",
+        "D006333",
+        "D008881",
+        "D009203",
+        "D006973",
+        "D009765"
+    ],
+    "target_id": "mesh",
+    "runs": 1000,
+    "replace": 100,
+    "distance": "jaccard",
+    "background_model": "network",
+    "type": "disease",
+    "sigCont": false
+}

@@ -1,0 +1,91 @@
+{
+    "target": [
+        {
+            "id": "RGS20",
+            "cluster": "luminal"
+        },
+        {
+            "id": "EGFR",
+            "cluster": "luminal"
+        },
+        {
+            "id": "KIF1A",
+            "cluster": "luminal"
+        },
+        {
+            "id": "SHC4",
+            "cluster": "luminal"
+        },
+        {
+            "id": "TAFA3",
+            "cluster": "luminal"
+        },
+        {
+            "id": "PALS2",
+            "cluster": "luminal"
+        },
+        {
+            "id": "S100A9",
+            "cluster": "luminal"
+        },
+        {
+            "id": "COL9A3",
+            "cluster": "luminal"
+        },
+        {
+            "id": "ZIC1",
+            "cluster": "luminal"
+        },
+        {
+            "id": "KRT16",
+            "cluster": "luminal"
+        },
+        {
+            "id": "TFF1",
+            "cluster": "basal"
+        },
+        {
+            "id": "ESR1",
+            "cluster": "basal"
+        },
+        {
+            "id": "PGR",
+            "cluster": "basal"
+        },
+        {
+            "id": "ERBB4",
+            "cluster": "basal"
+        },
+        {
+            "id": "FOXA1",
+            "cluster": "basal"
+        },
+        {
+            "id": "AR",
+            "cluster": "basal"
+        },
+        {
+            "id": "SPDEF",
+            "cluster": "basal"
+        },
+        {
+            "id": "CLSTN2",
+            "cluster": "basal"
+        },
+        {
+            "id": "AGR2",
+            "cluster": "basal"
+        },
+        {
+            "id": "DNAH7",
+            "cluster": "basal"
+        }
+    ],
+    "target_id": "symbol",
+    "runs": 1000,
+    "replace": 100,
+    "distance": "jaccard",
+    "background_model": "complete",
+    "type": "gene",
+    "sigCont": false
+}

@@ -1,0 +1,335 @@
+{
+    "target": [
+        {
+            "id": "I00",
+            "cluster": "I00-I02"
+        },
+        {
+            "id": "I01",
+            "cluster": "I00-I02"
+        },
+        {
+            "id": "I02",
+            "cluster": "I00-I02"
+        },
+        {
+            "id": "I05",
+            "cluster": "I05-I09"
+        },
+        {
+            "id": "I06",
+            "cluster": "I05-I09"
+        },
+        {
+            "id": "I07",
+            "cluster": "I05-I09"
+        },
+        {
+            "id": "I08",
+            "cluster": "I05-I09"
+        },
+        {
+            "id": "I09",
+            "cluster": "I05-I09"
+        },
+        {
+            "id": "I10",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I11",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I12",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I13",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I14",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I15",
+            "cluster": "I10-I15"
+        },
+        {
+            "id": "I20",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I21",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I22",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I23",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I24",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I25",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I26",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I27",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I28",
+            "cluster": "I20-I28"
+        },
+        {
+            "id": "I30",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I31",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I32",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I33",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I34",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I35",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I36",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I37",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I38",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I39",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I40",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I41",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I42",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I43",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I44",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I45",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I46",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I47",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I48",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I49",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I50",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I51",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I52",
+            "cluster": "I30-I52"
+        },
+        {
+            "id": "I60",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I61",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I62",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I63",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I64",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I65",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I66",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I67",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I68",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I69",
+            "cluster": "I60-I69"
+        },
+        {
+            "id": "I70",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I71",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I72",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I73",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I74",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I75",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I76",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I77",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I78",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I79",
+            "cluster": "I70-I79"
+        },
+        {
+            "id": "I80",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I81",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I82",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I83",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I84",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I85",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I86",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I87",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I88",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I89",
+            "cluster": "I80-I89"
+        },
+        {
+            "id": "I95",
+            "cluster": "I95-I99"
+        },
+        {
+            "id": "I96",
+            "cluster": "I95-I99"
+        },
+        {
+            "id": "I97",
+            "cluster": "I95-I99"
+        },
+        {
+            "id": "I98",
+            "cluster": "I95-I99"
+        },
+        {
+            "id": "I99",
+            "cluster": "I95-I99"
+        }
+    ],
+    "target_id": "ICD-10",
+    "runs": 1000,
+    "replace": 100,
+    "distance": "jaccard",
+    "background_model": "complete",
+    "type": "disease",
+    "sigCont": false
+}

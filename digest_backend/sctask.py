@@ -13,6 +13,7 @@ import digest_backend.digest_executor
 from digest_backend.tasks.sctask_hook import ScTaskHook
 from digest_backend.models import Attachment
 from digest_backend.mailer import send_notification, remove_notification
+import digest_backend.updater
 from django.conf import settings
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),

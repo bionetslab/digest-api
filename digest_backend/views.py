@@ -14,12 +14,11 @@ from django.views.decorators.cache import never_cache
 from digest_backend import digest_files
 from digest_backend.models import Task, Attachment, Notification
 from digest_backend.task import start_task, refresh_from_redis, task_stats
-from digest_backend.digest_executor import get_version
-from pandas import Series
-
+from digest_backend.versions import get_version
 
 
 def run(mode, data, params) -> Response:
+    print("running")
     version = get_version()
     id = checkExistence(params, version)
     if id is not None:
@@ -38,6 +37,10 @@ def run(mode, data, params) -> Response:
     task.save()
     return Response({'task': data["uid"]})
 
+@api_view(['GET'])
+def run_examples(request)->Response:
+    print("running examples")
+    return Response()
 
 def checkExistence(params, version):
     try:
@@ -68,9 +71,15 @@ def get_sc_results(request) -> Response:
     response = Response(json.loads(task.sc_result))
     return response
 
+
+
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
+    params = preparation.prepare_set(data)
+    return run("set", data, params)
+
+def run_set(data):
     params = preparation.prepare_set(data)
     return run("set", data, params)
 
@@ -80,15 +89,27 @@ def subnetwork(request) -> Response:
     params = preparation.prepare_subnetwork(data)
     return run("subnetwork", data, params)
 
+def run_subnetwork(data):
+    params = preparation.prepare_subnetwork(data)
+    return run("subnetwork", data, params)
+
 @api_view(['POST'])
 def subnetwork_set(request) -> Response:
     data = request.data
     params = preparation.prepare_subnetwork_set(data)
     return run("subnetwork", data, params)
 
+def run_subnetwork_set(data):
+    params = preparation.prepare_subnetwork_set(data)
+    return run("subnetwork", data, params)
+
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
+    params = preparation.prepare_cluster(data)
+    return run("cluster", data, params)
+
+def run_cluster(data):
     params = preparation.prepare_cluster(data)
     return run("cluster", data, params)
 
@@ -99,6 +120,9 @@ def set_set(request) -> Response:
     params = preparation.prepare_set_set(data)
     return run("set-set", data, params)
 
+def run_set_set(data):
+    params = preparation.prepare_set_set(data)
+    return run("set-set", data, params)
 
 @api_view(['POST'])
 def id_set(request) -> Response:
@@ -106,6 +130,9 @@ def id_set(request) -> Response:
     params = preparation.prepare_id_set(data)
     return run("id-set", data, params)
 
+def run_id_set(data):
+    params = preparation.prepare_id_set(data)
+    return run("id-set", data, params)
 
 @never_cache
 @api_view(['GET'])
