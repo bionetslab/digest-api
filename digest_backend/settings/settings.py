@@ -162,7 +162,7 @@ STATIC_URL = '/static/'
 
 # Cache
 
-REDIS_SC_PROCS = 1
+REDIS_SC_PROCS = 2
 
 CACHES = {
     'default': {

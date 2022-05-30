@@ -16,7 +16,7 @@ from digest_backend.tasks.sctask_hook import ScTaskHook
 
 
 def setup():
-    digest_setup("api", True, "/usr/src/digest/mapping_files/")
+    digest_setup("create", True, "/usr/src/digest/mapping_files/")
     save_version()
 
 def dry_setup():
