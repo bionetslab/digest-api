@@ -42,7 +42,7 @@ def remove_notification(id):
         n.delete()
 
 def error_notification(message):
-    send_mail('Error in digest-execution',f'Message: {message}','info@digest-validation.net', ['andi.majore@googlemail.com'],True)
+    send_mail('Error in digest-execution',f'Message: {message}','info@digest-validation.net', ['status@andimajore.de'],True)
 
 def server_startup():
-    send_mail('Digest-validation system startup', f'The digest-validation backend is now ready!', 'info@digest-validation.net', ['andi.majore@googlemail.com'], fail_silently=False)
+    send_mail('Digest-validation system startup', f'The digest-validation backend is now ready!', 'info@digest-validation.net', ['status@andimajore.de'], fail_silently=False)
