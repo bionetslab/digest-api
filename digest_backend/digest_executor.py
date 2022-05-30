@@ -101,7 +101,6 @@ def validate(tar, tar_id, mode, ref, ref_id, enriched, runs, background_model, b
                                mapper=mapper, progress=set_progress)
     create_plots(results=result, mode=mode, tar=tar, tar_id=tar_id, out_dir=out_dir, prefix=uid, file_type="png")
     create_extended_plots(results=result, mode=mode, tar=tar, out_dir=out_dir, prefix=uid, file_type="png", mapper=mapper)
-
     save_results(results=result, prefix=uid, out_dir=out_dir)
     files = getFiles(wd=out_dir, uid=uid)
     return {'result': result, 'files': files}

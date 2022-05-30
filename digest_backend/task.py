@@ -43,12 +43,15 @@ def run_task(uid, mode, parameters, set_files):
 
 
     def set_result(results):
-        r.set(f'{uid}_result', json.dumps(results, allow_nan=True))
+        result = json.dumps(results, allow_nan=True)
+        r.set(f'{uid}_result', result)
         t = Task.objects.get(uid = uid)
-        t.result = json.dumps(results, allow_nan=True)
+        t.result = result
         t.save()
-        r.set(f'{uid}_finished_at', str(datetime.now().timestamp()))
+        timestamp = str(datetime.now().timestamp())
+        r.set(f'{uid}_finished_at', timestamp)
         r.set(f'{uid}_done', '1')
+        t.finished_at = datetime.fromtimestamp(float(timestamp))
         t.done = True
         t.save()
         set_progress(1.0,'Done')
@@ -126,6 +129,7 @@ def save_files_to_db(files, uid):
             Attachment.objects.create(uid=uid, name=name, type=type, content=base64.b64encode(content).decode('utf-8'))
     if not get_task(uid).sc:
         os.system("rm -rf /tmp/"+uid)
+
 
 
 

@@ -85,6 +85,9 @@ def start_sc_tasks():
             hash = f'{sctask.uid}_{sctask.excluded}'
             if hash in current_sc_tasks:
                 continue
+            if get_task(sctask.uid) is None:
+                sctask.delete()
+                continue
             if get_task(sctask.uid).done:
                 current_sc_tasks.add(hash)
                 start_sctask(sctask)
