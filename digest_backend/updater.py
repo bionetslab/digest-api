@@ -48,9 +48,9 @@ def run_examples():
     examples = get_examples()
     from digest_backend.views import run_set, run_cluster, run_subnetwork
     for example in examples:
-        # if example[0] == 'set':
-        #     run_set(example[1])
-        # if example[0] == 'clustering':
-        #     run_cluster(example[1])
+        if example[0] == 'set':
+            run_set(example[1])
+        if example[0] == 'clustering':
+            run_cluster(example[1])
         if example[0] == 'subnetwork':
             run_subnetwork(example[1])
