@@ -185,7 +185,6 @@ CELERY_BEAT_SCHEDULE = {
         'task': 'digest_backend.mailer.check_mails',
         'schedule': 30.0,
     },
-    #TODO move results of update from celery to backend volume
     'update': {
         'task': 'digest_backend.updater.run_update',
         'schedule': crontab(day_of_week=1, hour=1, minute=0)
