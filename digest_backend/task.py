@@ -86,10 +86,10 @@ def run_task(uid, mode, parameters, set_files):
 
     except Exception as e:
         print("Error in DIGEST execution:")
+        r.set(f'{uid}_failed', '1')
         import traceback
         traceback.print_exc()
         set_status(f'{e}')
-        r.set(f'{uid}_failed','1')
         check_sc_execution(uid)
 
 def refresh_from_redis(task):
