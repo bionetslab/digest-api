@@ -61,7 +61,9 @@ def run_task(uid, mode, parameters, set_files):
             t.sc_status = json.dumps({"done": 0, "total": len(parameters["target"])})
             dispatch_sig_contr_calculation(uid=uid, tar=parameters["target"])
             t.save()
-        check_sc_execution(uid)
+            check_sc_execution(uid)
+        else:
+            check_sc_execution(None)
 
     def set_progress(progress,status):
         set_status(status)

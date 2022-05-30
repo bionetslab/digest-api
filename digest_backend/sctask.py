@@ -95,7 +95,8 @@ def start_sc_tasks():
                 sctask.save()
                 check_sc_execution(None)
                 break
-    except Exception:
+    except Exception as e:
+        print(e)
         check_sc_execution(None)
 
 def count_sc_done(uid):
