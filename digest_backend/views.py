@@ -19,7 +19,7 @@ from digest_backend.versions import get_version
 
 def run(mode, data, params) -> Response:
     version = get_version()
-    id = checkExistence(params, version)
+    id = checkExistence(params, version,mode)
     if id is not None:
         try:
             n = Notification.objects.filter(uid=data["uid"]).first()
@@ -40,9 +40,9 @@ def run(mode, data, params) -> Response:
 def run_examples(request)->Response:
     return Response()
 
-def checkExistence(params, version):
+def checkExistence(params, version,mode):
     try:
-        entry = Task.objects.filter(request=params, failed=False, version = version).last()
+        entry = Task.objects.filter(request=params, mode=mode, failed=False, version = version).last()
         return entry.uid
     except:
         return None

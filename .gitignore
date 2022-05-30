@@ -2,3 +2,4 @@
 __pycache__
 docker-django.env.dev
 celerybeat-schedule.*
+__pycache__

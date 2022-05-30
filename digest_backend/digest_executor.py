@@ -16,7 +16,7 @@ from digest_backend.tasks.sctask_hook import ScTaskHook
 
 
 def setup():
-    digest_setup("create", True, "/usr/src/digest/mapping_files/")
+    digest_setup("api", True, "/usr/src/digest/mapping_files/")
     save_version()
 
 def dry_setup():
@@ -26,9 +26,12 @@ def dry_setup():
 
 
 def check():
+    from digest_backend.updater import run_examples
+
     fine = digest_files.fileSetupComplete()
     if not fine:
         setup()
+        run_examples()
     else:
         print("Setup fine! All files are already there.")
     version = get_version()

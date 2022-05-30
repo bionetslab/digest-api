@@ -43,7 +43,7 @@ services:
     env_file:
       - './docker-django.env.dev'
     volumes:
-      - digest_update_volume:/usr/src/digest/mapping_files
+      - digest_volume:/usr/src/digest/mapping_files
     depends_on:
       - redis
       - db
@@ -102,4 +102,3 @@ networks:
 volumes:
   digest_volume:
   digest_db_volume:
-  digest_update_volume:
