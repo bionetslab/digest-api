@@ -41,5 +41,8 @@ def remove_notification(id):
     for n in Notification.objects.filter(uid=id):
         n.delete()
 
+def error_notification(message):
+    send_mail('Error in digest-execution',f'Message: {message}','info@digest-validation.net', ['andi.majore@googlemail.com'],True)
+
 def server_startup():
     send_mail('Digest-validation system startup', f'The digest-validation backend is now ready!', 'info@digest-validation.net', ['andi.majore@googlemail.com'], fail_silently=False)

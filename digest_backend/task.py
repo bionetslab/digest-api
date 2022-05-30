@@ -13,6 +13,7 @@ from digest_backend.models import Attachment
 from digest_backend.sctask import check_sc_execution
 
 from digest_backend.models import SCTask, Task
+from digest_backend.mailer import error_notification
 
 
 qr_r = redis.Redis(host=os.getenv('REDIS_HOST', 'digest_redis'),
@@ -89,6 +90,7 @@ def run_task(uid, mode, parameters, set_files):
 
     except Exception as e:
         print("Error in DIGEST execution:")
+        error_notification(f"Error in DIGEST execution for {uid}.\nError indicator: {e}")
         r.set(f'{uid}_failed', '1')
         import traceback
         traceback.print_exc()

@@ -12,7 +12,7 @@ from digest_backend.models import Task, SCTask
 import digest_backend.digest_executor
 from digest_backend.tasks.sctask_hook import ScTaskHook
 from digest_backend.models import Attachment
-from digest_backend.mailer import send_notification, remove_notification
+from digest_backend.mailer import send_notification, remove_notification, error_notification
 import digest_backend.updater
 from django.conf import settings
 
@@ -57,8 +57,9 @@ def finalize_task(task:Task):
         task.sc_top_results = json.dumps(top_entries)
         task.save()
         # send_notification(task.uid)
-    except Exception:
+    except Exception as e:
         print("Error when finalizing SC results")
+        error_notification(f"Error in DIGEST sc task finalization for {task.uid} .\nError indicator: {e}")
         remove_notification(task.uid)
 
 def check_task(uid):
@@ -161,6 +162,7 @@ def run_sctask(uid, excluded, parameters, task_result, mode):
         global current_sc_tasks
         if hash in current_sc_tasks:
             current_sc_tasks.remove(hash)
+        error_notification(f"Error in DIGEST sc taskexecution for {uid} with {excluded} .\nError indicator: {e}")
         check_sc_execution(uid)
 
 def push_refresh(uid, excluded):
