@@ -130,20 +130,9 @@ USE_TZ = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
-
-    # 'DEFAULT_RENDERER_CLASSES': (
-    #     'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
-    #     'djangorestframework_camel_case.render.CamelCaseBrowsableAPIRenderer',
-    # ),
-    #
-    # 'DEFAULT_PARSER_CLASSES': (
-    #     'djangorestframework_camel_case.parser.CamelCaseJSONParser',
-    # ),
-
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ]
-
 }
 
 # EMAIL settings
@@ -175,7 +164,6 @@ CACHES = {
     }
 }
 CELERY_BROKER_URL = os.environ.get('CELERY_BROKER_URL')
-# CELERY_RESULT_BACKEND = "redis://digest_redis:6379/1"
 CELERY_TIMEZONE = 'Europe/Berlin'
 
 from celery.schedules import crontab

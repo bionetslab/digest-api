@@ -28,8 +28,6 @@ services:
     hostname: digest_redis
     networks:
       - digest_net
-    ports:
-      - 6379:6379
     depends_on:
       - db
   celery:

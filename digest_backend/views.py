@@ -19,7 +19,7 @@ from digest_backend.versions import get_version
 
 def run(mode, data, params) -> Response:
     version = get_version()
-    id = checkExistence(params, version,mode)
+    id = checkExistence(params, version, mode)
     if id is not None:
         try:
             n = Notification.objects.filter(uid=data["uid"]).first()
@@ -31,36 +31,44 @@ def run(mode, data, params) -> Response:
     sc = False
     if 'sigCont' in data and data["sigCont"]:
         sc = True
+    if sc and len(data["target"]) > 100 and ('sigContTarget' not in data or len(data["sigContTarget"]) > 100):
+        return Response({"task": None, "error": True, "reason": "Significance contribution calculation can only be "
+                                                                "carried out for maximum 100 entries."})
     task = Task.objects.create(uid=data["uid"], mode=mode, parameters=data, request=params, version=version, sc=sc)
     start_task(task)
     task.save()
     return Response({'task': data["uid"]})
 
+
 @api_view(['GET'])
-def run_examples(request)->Response:
+def run_examples(request) -> Response:
     return Response()
 
-def checkExistence(params, version,mode):
+
+def checkExistence(params, version, mode):
     try:
-        entry = Task.objects.filter(request=params, mode=mode, failed=False, version = version).last()
+        entry = Task.objects.filter(request=params, mode=mode, failed=False, version=version).last()
         return entry.uid
     except:
         return None
 
+
 @never_cache
 @api_view(['GET'])
-def get_sc_status(request)-> Response:
+def get_sc_status(request) -> Response:
     uid = request.GET.get('task')
     task = Task.objects.get(uid=uid)
     status = json.loads(task.sc_status)
-    response = Response( {"task":uid,"done":task.sc_done, "status":status})
+    response = Response({"task": uid, "done": task.sc_done, "status": status})
     return response
 
+
 @api_view(['GET'])
-def get_sc_top_results(request)->Response:
+def get_sc_top_results(request) -> Response:
     uid = request.GET.get('task')
     results = json.loads(Task.objects.get(uid=uid).sc_top_results)
     return Response(results)
+
 
 @api_view(['GET'])
 def get_sc_results(request) -> Response:
@@ -70,16 +78,17 @@ def get_sc_results(request) -> Response:
     return response
 
 
-
 @api_view(['POST'])
 def set(request) -> Response:
     data = request.data
     params = preparation.prepare_set(data)
     return run("set", data, params)
 
+
 def run_set(data):
     params = preparation.prepare_set(data)
     return run("set", data, params)
+
 
 @api_view(['POST'])
 def subnetwork(request) -> Response:
@@ -87,9 +96,11 @@ def subnetwork(request) -> Response:
     params = preparation.prepare_subnetwork(data)
     return run("subnetwork", data, params)
 
+
 def run_subnetwork(data):
     params = preparation.prepare_subnetwork(data)
     return run("subnetwork", data, params)
+
 
 @api_view(['POST'])
 def subnetwork_set(request) -> Response:
@@ -97,15 +108,18 @@ def subnetwork_set(request) -> Response:
     params = preparation.prepare_subnetwork_set(data)
     return run("subnetwork", data, params)
 
+
 def run_subnetwork_set(data):
     params = preparation.prepare_subnetwork_set(data)
     return run("subnetwork", data, params)
+
 
 @api_view(['POST'])
 def cluster(request) -> Response:
     data = request.data
     params = preparation.prepare_cluster(data)
     return run("cluster", data, params)
+
 
 def run_cluster(data):
     params = preparation.prepare_cluster(data)
@@ -118,9 +132,11 @@ def set_set(request) -> Response:
     params = preparation.prepare_set_set(data)
     return run("set-set", data, params)
 
+
 def run_set_set(data):
     params = preparation.prepare_set_set(data)
     return run("set-set", data, params)
+
 
 @api_view(['POST'])
 def id_set(request) -> Response:
@@ -128,9 +144,11 @@ def id_set(request) -> Response:
     params = preparation.prepare_id_set(data)
     return run("id-set", data, params)
 
+
 def run_id_set(data):
     params = preparation.prepare_id_set(data)
     return run("id-set", data, params)
+
 
 @never_cache
 @api_view(['GET'])
@@ -148,7 +166,7 @@ def get_status(request) -> Response:
         'stats': task_stats(task),
         'mode': task.mode,
         'type': json.loads(task.request)["type"],
-        'input':json.loads(task.request),
+        'input': json.loads(task.request),
         'progress': task.progress
     })
     return response
@@ -158,21 +176,22 @@ def get_status(request) -> Response:
 @api_view(['GET'])
 def get_result_file_list(request) -> Response:
     uid = request.GET.get('task')
-    files = list({'name':a.name, 'type':a.type} for a in Attachment.objects.filter(uid=uid))
+    files = list({'name': a.name, 'type': a.type} for a in Attachment.objects.filter(uid=uid))
     return (Response(files))
 
-def get_result_file(request)->Response:
+
+def get_result_file(request) -> Response:
     name = request.GET.get('name')
     a = Attachment.objects.get(name=name)
-    type=""
+    type = ""
     if a.type == 'csv':
         type = 'text/csv'
-    elif a.type =='png':
+    elif a.type == 'png':
         type = 'image/png'
-    elif a.type =='zip':
-        type ='application/zip'
+    elif a.type == 'zip':
+        type = 'application/zip'
     response = HttpResponse(base64.b64decode(a.content), content_type=type)
-    response['Content-Disposition'] =f'attachment; filename="{name}"'
+    response['Content-Disposition'] = f'attachment; filename="{name}"'
     return response
 
 
@@ -185,6 +204,7 @@ def get_result(request) -> Response:
         task.save()
     return Response({'task': task.uid, 'result': json.loads(task.result), 'parameters': json.loads(task.request)})
 
+
 @api_view(['GET'])
 def get_network_file(request) -> Response:
     file = "/usr/src/digest/example_files/gene_network.graphml"
@@ -194,6 +214,7 @@ def get_network_file(request) -> Response:
         response['Content-Length'] = os.path.getsize(file)
         return response
     raise Http404
+
 
 @api_view(['GET'])
 def get_files(request) -> Response:
