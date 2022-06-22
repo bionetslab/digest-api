@@ -1,6 +1,6 @@
 # Digest-web Backend service
 
-Django based backend service for the DiGeST web-app.
+Django based backend service for the DIGEST web-app.
 
 ## Setup
 
