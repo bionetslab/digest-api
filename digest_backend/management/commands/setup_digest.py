@@ -11,6 +11,7 @@ class Command(BaseCommand):
         parser.add_argument('-s', '--setup', action='store_true', help='Execute setup')
         parser.add_argument('-d', '--drop', action='store_true', help='Remove saved example_files')
         parser.add_argument('-r','--reset',action='store_true',help='Removes saved example_files and executes new setup.')
+        parser.add_argument('-e','--examples',action='store_true',help='Precompute example case validations.')
 
     def handle(self, *args, **kwargs):
         if kwargs['check']:
@@ -22,6 +23,8 @@ class Command(BaseCommand):
         if kwargs['reset']:
             executor.clear()
             executor.setup()
+        if kwargs['examples']:
+            executor.precompute_examples()
         server_startup()
 
 

@@ -24,14 +24,17 @@ def dry_setup():
     digest_setup("api",True,"/usr/src/digest/mapping_files/")
     print("Update done!")
 
+def precompute_examples():
+    from digest_backend.updater import run_examples
+    run_examples()
+
 
 def check():
-    from digest_backend.updater import run_examples
 
     fine = digest_files.fileSetupComplete()
     if not fine:
         setup()
-        run_examples()
+        precompute_examples()
     else:
         print("Setup fine! All files are already there.")
     version = get_version()

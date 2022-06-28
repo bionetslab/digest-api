@@ -29,7 +29,9 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'api.digest-validation.net'
+    'api.digest-validation.net',
+    'digest-validation.net',
+    '0.0.0.0'
 ]
 
 # Application definition
