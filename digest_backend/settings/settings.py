@@ -29,9 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'api.digest-validation.net',
-    'digest-backend.zbh-uni-hamburg.de',
-    'ml-s-zbhdock1.ad.uni-hamburg.de'
+    'api.digest-validation.net'
 ]
 
 # Application definition
@@ -152,7 +150,7 @@ STATIC_URL = '/static/'
 
 # Cache
 
-REDIS_SC_PROCS = 2
+REDIS_SC_PROCS = 8
 
 CACHES = {
     'default': {
