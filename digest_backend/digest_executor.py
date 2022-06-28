@@ -25,6 +25,9 @@ def dry_setup():
     print("Update done!")
 
 def precompute_examples():
+    version = get_version()
+    if version is None:
+        save_version()
     from digest_backend.updater import run_examples
     run_examples()
 
