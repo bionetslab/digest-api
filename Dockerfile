@@ -19,7 +19,7 @@ RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
 RUN pip install -r /usr/src/digest/requirements.txt
 
-RUN pip install biodigest==0.2.3
+RUN pip install biodigest==0.2.4
 RUN #pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple biodigest==0.1.11
 COPY . /usr/src/digest/
 
