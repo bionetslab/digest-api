@@ -1,7 +1,7 @@
 version: '3.3'
 
 services:
-  app:
+  digest_app:
     image: digest_backend
     container_name: digest_backend
     build: .
@@ -18,9 +18,9 @@ services:
     networks:
       - digest_net
     depends_on:
-      - db
-      - redis
-  redis:
+      - digest_db
+      - digest_redis
+  digest_redis:
     image: redis
     restart: always
     command: [ "redis-server" ]
@@ -29,8 +29,8 @@ services:
     networks:
       - digest_net
     depends_on:
-      - db
-  celery:
+      - digest_db
+  digest_celery:
     command:
       - "sh"
       - "/usr/src/digest/scripts/start_celery_worker.sh"
@@ -43,11 +43,11 @@ services:
     volumes:
       - digest_volume:/usr/src/digest/mapping_files
     depends_on:
-      - redis
-      - db
+      - digest_redis
+      - digest_db
     networks:
       - digest_net
-  celery-beat:
+  digest_celery-beat:
     command:
       - "sh"
       - "/usr/src/digest/scripts/start_celery_beat.sh"
@@ -59,15 +59,15 @@ services:
     volumes:
       - ./:/usr/src/digest/
     depends_on:
-      - redis
-      - db
+      - digest_redis
+      - digest_db
     networks:
       - digest_net
-  db:
+  digest_db:
     image: postgres
     restart: always
     container_name: digest_db
-    hostname: db
+    hostname: digest_db
     ports:
       - 5432:5432
     networks:
