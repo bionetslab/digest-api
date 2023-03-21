@@ -14,7 +14,7 @@ services:
       - "sh"
       - "/usr/src/digest/docker-entrypoint.sh"
     ports:
-      - 8001:8000
+      - 8072:8000
     networks:
       - digest_net
     depends_on:
