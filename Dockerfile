@@ -12,6 +12,8 @@ RUN apt-get install -y supervisor nginx
 RUN apt-get install -y libgtk-3-dev
 RUN apt-get install wget
 
+RUN pip install --upgrade pip
+
 RUN conda install conda python=3.8
 RUN conda install -c conda-forge -y django=4.0.2 graph-tool==2.45
 
