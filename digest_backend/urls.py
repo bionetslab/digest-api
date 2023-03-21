@@ -34,7 +34,7 @@ urlpatterns = [
     path('sc_results', get_sc_results),
     path('sc_top_results', get_sc_top_results),
     path('run_examples', run_examples),
-    path('', return_server_status)
+    path('heartbeat', return_server_status)
     # path('update',run_update),
     # path('sig_cont', run_sig_cont)
 ]
