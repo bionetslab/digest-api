@@ -64,7 +64,7 @@ services:
     networks:
       - digest_net
   digest_db:
-    image: postgres
+    image: postgres:14
     restart: always
     container_name: digest_db
     hostname: digest_db
