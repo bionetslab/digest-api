@@ -6,7 +6,7 @@ services:
     container_name: digest_backend
     build: .
     env_file:
-      - './docker-django.env'
+      - './docker-django.env.dev'
     restart: always
     volumes:
       - digest_volume:/usr/src/digest/mapping_files
@@ -39,7 +39,7 @@ services:
     container_name: digest_celery
     hostname: digest_celery
     env_file:
-      - './docker-django.env'
+      - './docker-django.env.dev'
     volumes:
       - digest_volume:/usr/src/digest/mapping_files
     depends_on:
@@ -55,12 +55,21 @@ services:
     container_name: digest_celery_beat
     hostname: digest_celery_beat
     env_file:
-      - './docker-django.env'
+      - './docker-django.env.dev'
     volumes:
       - ./:/usr/src/digest/
     depends_on:
       - redis
       - db
+    networks:
+      - digest_net
+  flower:
+    image: mher/flower
+    container_name: digest_flower
+    env_file:
+      - './docker-django.env.dev'
+    ports:
+      - 8888:8888
     networks:
       - digest_net
   db:
