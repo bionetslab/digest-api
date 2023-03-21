@@ -1,0 +1,93 @@
+version: '3.3'
+
+services:
+  app:
+    image: digest_backend
+    container_name: digest_backend
+    build: .
+    env_file:
+      - './docker-django.env'
+    restart: always
+    volumes:
+      - digest_volume:/usr/src/digest/mapping_files
+    command:
+      - "sh"
+      - "/usr/src/digest/docker-entrypoint.sh"
+    ports:
+      - 8001:8000
+    networks:
+      - digest_net
+    depends_on:
+      - db
+      - redis
+  redis:
+    image: redis
+    restart: always
+    command: [ "redis-server" ]
+    container_name: digest_redis
+    hostname: digest_redis
+    networks:
+      - digest_net
+    depends_on:
+      - db
+  celery:
+    command:
+      - "sh"
+      - "/usr/src/digest/scripts/start_celery_worker.sh"
+    restart: always
+    build: .
+    container_name: digest_celery
+    hostname: digest_celery
+    env_file:
+      - './docker-django.env'
+    volumes:
+      - digest_volume:/usr/src/digest/mapping_files
+    depends_on:
+      - redis
+      - db
+    networks:
+      - digest_net
+  celery-beat:
+    command:
+      - "sh"
+      - "/usr/src/digest/scripts/start_celery_beat.sh"
+    build: .
+    container_name: digest_celery_beat
+    hostname: digest_celery_beat
+    env_file:
+      - './docker-django.env'
+    volumes:
+      - ./:/usr/src/digest/
+    depends_on:
+      - redis
+      - db
+    networks:
+      - digest_net
+  db:
+    image: postgres
+    restart: always
+    container_name: digest_db
+    hostname: db
+    ports:
+      - 5432:5432
+    networks:
+      - digest_net
+    volumes:
+      - digest_db_volume:/var/lib/postgresql/example_files
+    environment:
+      - POSTGRES_DB=digest
+      - POSTGRES_USER=digester
+      - POSTGRES_PASSWORD=C9FbrA7Mt4asx3aP
+    command:
+      - "postgres"
+      - "-c"
+      - "max_connections=10000"
+      - "-c"
+      - "shared_buffers=2GB"
+
+networks:
+  digest_net:
+
+volumes:
+  digest_volume:
+  digest_db_volume:
