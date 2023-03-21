@@ -24,14 +24,14 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 INTERNAL_KEY = os.environ.get('INTERNAL_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', '0') == '1'
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
     'api.digest-validation.net',
-    'digest-backend.zbh-uni-hamburg.de',
-    'ml-s-zbhdock1.ad.uni-hamburg.de'
+    'digest-validation.net',
+    '0.0.0.0'
 ]
 
 # Application definition
@@ -152,7 +152,7 @@ STATIC_URL = '/static/'
 
 # Cache
 
-REDIS_SC_PROCS = 2
+REDIS_SC_PROCS = 8
 
 CACHES = {
     'default': {

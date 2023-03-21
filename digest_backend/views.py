@@ -45,6 +45,10 @@ def run_examples(request) -> Response:
     return Response()
 
 
+@api_view(['GET'])
+def return_server_status(request) -> Response:
+    return Response(get_version())
+
 def checkExistence(params, version, mode):
     try:
         entry = Task.objects.filter(request=params, mode=mode, failed=False, version=version).last()
