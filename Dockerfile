@@ -14,7 +14,7 @@ RUN apt-get install wget
 RUN pip install --upgrade pip
 
 RUN conda install conda python=3.9
-RUN conda install -c conda-forge -y django=4.0.6 graph-tool==2.48
+RUN conda install -c conda-forge -y django=4.1.7 graph-tool==2.48
 
 RUN pip install psycopg2-binary
 COPY ./requirements.txt /usr/src/digest/requirements.txt
