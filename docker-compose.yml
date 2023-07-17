@@ -6,7 +6,7 @@ services:
     container_name: digest-frontend
     build: .
     ports:
-      - "8070:80"
+      - "8071:80"
     restart: always
   digest_backend:
     image: digest_backend
