@@ -1,7 +1,14 @@
 version: '3.3'
 
 services:
-  digest_app:
+  web:
+    image: ghcr.io/bionetslab/digest-web:main
+    container_name: digest-frontend
+    build: .
+    ports:
+      - "8070:80"
+    restart: always
+  digest_backend:
     image: digest_backend
     container_name: digest_backend
     build: .
@@ -35,7 +42,7 @@ services:
       - "sh"
       - "/usr/src/digest/scripts/start_celery_worker.sh"
     restart: always
-    build: .
+    image: digest_backend
     container_name: digest_celery
     hostname: digest_celery
     env_file:
@@ -68,8 +75,8 @@ services:
     restart: always
     container_name: digest_db
     hostname: digest_db
-    ports:
-      - 5432:5432
+#    ports:
+#      - 5432:5432
     networks:
       - digest_net
     volumes:
