@@ -1,19 +1,20 @@
 version: '3.3'
-
 services:
   web:
     image: ghcr.io/bionetslab/digest-web:main
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
     container_name: digest-frontend
-    build: .
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     ports:
       - "8071:80"
     restart: always
   digest_backend:
-    image: digest_backend
+    image: ghcr.io/bionetslab/digest-api:main
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     container_name: digest_backend
-    build: .
     env_file:
       - './docker-django.env'
     restart: always
@@ -44,7 +45,9 @@ services:
       - "sh"
       - "/usr/src/digest/scripts/start_celery_worker.sh"
     restart: always
-    image: digest_backend
+    image: ghcr.io/bionetslab/digest-api:main
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     container_name: digest_celery
     hostname: digest_celery
     env_file:
