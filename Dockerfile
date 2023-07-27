@@ -6,7 +6,7 @@ ENV PYTHONUNBUFFERED 1
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-RUN apt-get update && apt-get install -y supervisor nginx
+RUN apt-get update && apt-get install -y supervisor nginx build-essential
 RUN apt-get install -y libgtk-3-dev
 RUN apt-get install wget
 
