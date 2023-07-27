@@ -2,6 +2,8 @@ version: '3.3'
 services:
   web:
     image: ghcr.io/bionetslab/digest-web:main
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
     container_name: digest-frontend
     labels:
       - "com.centurylinklabs.watchtower.enable=true"
