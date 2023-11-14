@@ -49,6 +49,7 @@ def clear():
     for file in os.listdir("/usr/src/digest/mapping_files"):
         os.remove("/usr/src/digest/mapping_files" + file)
 
+
 def finalize_sc_task(results: dict,uid, out_dir, prefix, network_data, mode, tar_id):
     import pandas as pd
     final_results = transform_dict(results)
