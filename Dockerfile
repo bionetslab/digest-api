@@ -11,6 +11,7 @@ RUN apt-get install -y libgtk-3-dev
 RUN apt-get install wget
 
 RUN pip install --upgrade pip
+RUN pip install --upgrade cryptography
 
 RUN conda install conda python=3.9
 RUN conda install -c conda-forge -y graph-tool==2.48

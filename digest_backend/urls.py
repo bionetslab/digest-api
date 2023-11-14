@@ -32,6 +32,7 @@ urlpatterns = [
     path('result_file', get_result_file),
     path('sc_status', get_sc_status),
     path('sc_results', get_sc_results),
+    # path('sc_file_list', get_sc_file_list),
     path('sc_top_results', get_sc_top_results),
     path('run_examples', run_examples),
     path('heartbeat', return_server_status)

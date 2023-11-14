@@ -50,8 +50,11 @@ def clear():
         os.remove("/usr/src/digest/mapping_files" + file)
 
 def finalize_sc_task(results: dict,uid, out_dir, prefix, network_data, mode, tar_id):
+    import pandas as pd
     final_results = transform_dict(results)
     save_contribution_results(final_results, out_dir, prefix)
+    result_pd = pd.DataFrame(final_results)
+    result_pd.to_csv(f'/tmp/{uid}/{prefix}_sc_results.csv')
     top_results = create_contribution_plots(result_sig=final_results, out_dir=out_dir, prefix=prefix, file_type="png")
     if mode == 'subnetwork':
         if network_data is not None:

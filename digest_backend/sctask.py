@@ -47,7 +47,7 @@ def finalize_task(task:Task):
         network = None
         if 'network_data' in params:
             network = params['network_data']
-        sc_results = digest_backend.digest_executor.finalize_sc_task(results=results,uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid, network_data=network, mode=task.mode, tar_id=params["target_id"])
+        sc_results = digest_backend.digest_executor.finalize_sc_task(results=results, uid=task.uid, out_dir="/tmp/"+task.uid, prefix=task.uid, network_data=network, mode=task.mode, tar_id=params["target_id"])
         sc_result = sc_results[0]
         files = sc_results[1]
         top_entries = sc_results[2]

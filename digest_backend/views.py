@@ -234,3 +234,10 @@ def get_files(request) -> Response:
         response['Content-Length'] = os.path.getsize(file)
         return response
     raise Http404
+
+# @never_cache
+# @api_view(['GET'])
+# def get_sc_file_list(request) -> Response:
+#     uid = request.GET.get('task')
+#     files = list({'name': a.name, 'type': a.type} for a in Attachment.objects.filter(uid=uid))
+#     return (Response(files))
