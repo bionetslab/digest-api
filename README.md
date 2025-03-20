@@ -38,4 +38,3 @@ Show running docker containers:
 Follow log of selected container:
 
 `docker logs -f $container_name`
-
