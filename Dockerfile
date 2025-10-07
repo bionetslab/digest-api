@@ -43,6 +43,7 @@ RUN pip install -r /usr/src/digest/requirements.txt
 
 RUN pip install biodigest==0.2.16
 COPY . /usr/src/digest/
+RUN mkdir -p /root/.config/bioservices
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
