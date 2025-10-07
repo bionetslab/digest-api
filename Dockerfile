@@ -33,8 +33,8 @@ WORKDIR /usr/src/digest/
 
 RUN apt-get update && apt-get install -y nginx build-essential
 
-RUN conda install conda python=3.9
-RUN conda install -c conda-forge -y graph-tool==2.48
+RUN conda install conda python=3.10
+RUN conda install -c conda-forge -y graph-tool==2.98
 RUN conda install -c conda-forge seaborn==0.12.2
 
 RUN pip install psycopg2-binary
