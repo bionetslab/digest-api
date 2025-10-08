@@ -34,7 +34,7 @@ WORKDIR /usr/src/digest/
 RUN apt-get update && apt-get install -y nginx build-essential
 
 RUN mamba install conda python=3.9
-RUN mamba install -c conda-forge -y graph-tool==2.98
+RUN mamba install -c conda-forge -y graph-tool==2.48
 RUN mamba install -c conda-forge seaborn==0.12.2
 
 RUN pip install psycopg2-binary
