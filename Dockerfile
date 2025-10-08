@@ -33,8 +33,8 @@ WORKDIR /usr/src/digest/
 
 RUN apt-get update && apt-get install -y nginx build-essential
 
-RUN mamba install conda python=3.10
-RUN mamba install -c conda-forge -y graph-tool==2.98
+RUN mamba install conda python=3.9
+RUN mamba install -c conda-forge -y graph-tool==2.48
 RUN mamba install -c conda-forge seaborn==0.12.2
 
 RUN pip install psycopg2-binary
@@ -42,8 +42,6 @@ COPY ./requirements.txt /usr/src/digest/requirements.txt
 RUN pip install -r /usr/src/digest/requirements.txt
 
 RUN mamba install -c bioconda biodigest
-RUN pip install bioservices==1.12.1
-RUN rm -rf /root/.config/bioservices
 COPY . /usr/src/digest/
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
