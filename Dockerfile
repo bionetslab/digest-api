@@ -42,6 +42,7 @@ COPY ./requirements.txt /usr/src/digest/requirements.txt
 RUN pip install -r /usr/src/digest/requirements.txt
 
 RUN mamba install -c bioconda biodigest
+RUN pip install bioservices==1.12.1
 COPY . /usr/src/digest/
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
