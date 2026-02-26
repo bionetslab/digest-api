@@ -37,9 +37,10 @@ RUN mamba install conda python=3.9
 RUN mamba install -c conda-forge -y graph-tool==2.48
 RUN mamba install -c conda-forge seaborn==0.12.2
 
-RUN pip install psycopg2-binary
-COPY ./requirements.txt /usr/src/digest/requirements.txt
-RUN pip install -r /usr/src/digest/requirements.txt
+RUN pip install psycopg2-binary poetry poetry-plugin-export
+COPY pyproject.toml poetry.lock ./
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mamba install -c bioconda biodigest
 COPY . /usr/src/digest/
