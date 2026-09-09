@@ -157,8 +157,8 @@ REDIS_SC_PROCS = 8
 CACHES = {
     'default': {
         'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': f'redis://{os.environ.get("REDIS_HOST", "digest_redis")}: \
-           {os.environ.get("REDIS_PORT", "6379")}/1',
+        'LOCATION': f'redis://{os.environ.get("REDIS_HOST", "digest_redis")}:'
+                    f'{os.environ.get("REDIS_PORT", "6379")}/1',
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
         }
