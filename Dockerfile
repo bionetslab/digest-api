@@ -43,6 +43,13 @@ RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 RUN pip install --no-cache-dir -r requirements.txt
 
 RUN mamba install -c bioconda biodigest
+
+# bioservices (pulled in transitively: biodigest -> gseapy -> bioservices) still does
+# `import pkg_resources` at import time, and setuptools removed pkg_resources in 82.0.0.
+# Pin below that. This must stay the LAST install step, after the conda solve above,
+# so nothing can raise setuptools again.
+RUN pip install --no-cache-dir "setuptools<82"
+
 COPY . /usr/src/digest/
 
 COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
